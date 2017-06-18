@@ -56,6 +56,27 @@ def simulate(num_states, q, alpha, num_trajectories = 100, max_length = 100):
             
     return trajectories,states
 
+def infer_model(trajectories,states,alpha,q):
+    N = defaultdict(partial(np.zeros,len(states)))
+    Ntot = defaultdict(int)
+    J = len(trajectories)
+    for j,trajectory in enumerate(trajectories):
+        traj = "".join(['0']*(q) ) +trajectory
+        for l in range(q,len(trajectory)):
+            if q==0: x = ''
+            else:
+                x = trajectory[(l-q):(l)]
+                if x[-1] == '0': continue
+            m = states.index(trajectory[l])
+            Ntot[x] += 1
+            N[x][m] += 1
+            
+    probs = defaultdict(partial(np.zeros,len(states)))
+    for key, val in N.items():
+        probs[key] = (N[key]+alpha)/(Ntot[key] + alpha*len(states))
+        
+    return probs, N
+
 def evaluate_models(trajectories,states, alpha=1, qbounds = (1,8)):
     WAIC1 = {}
     WAIC2 = {}
@@ -76,7 +97,7 @@ def evaluate_models(trajectories,states, alpha=1, qbounds = (1,8)):
     N = {}
     N2 = {}
 
-    for q in range(qbounds[0],qbounds[1]):
+    for q in range(qbounds[0],qbounds[1]+1):
         #print(f"Fitting models of {q} states of hysteresis")
         N[q] = defaultdict(partial(np.zeros,len(states)))
         N2[q] = defaultdict(partial(np.zeros,len(states))) # sums for the first half of trajectories
@@ -91,8 +112,10 @@ def evaluate_models(trajectories,states, alpha=1, qbounds = (1,8)):
         for j,trajectory in enumerate(trajectories):
             trajectory = "".join(['0']*(q) ) +trajectory
             for l in range(q,len(trajectory)):
-                x = trajectory[(l-q):(l)]
-                if x[-1] == '0': continue
+                if q==0: x = ''
+                else:
+                    x = trajectory[(l-q):(l)]
+                    if x[-1] == '0': continue
                 m = states.index(trajectory[l])
                 N[q][x][m] += 1
                 if j<J/2:
@@ -102,8 +125,10 @@ def evaluate_models(trajectories,states, alpha=1, qbounds = (1,8)):
             trajectory = "".join(['0']*(q) ) +trajectory
             Nj = defaultdict(partial(np.zeros,len(states)))
             for l in range(q,len(trajectory)):
-                x = trajectory[(l-q):(l)]
-                if x[-1] == '0': continue
+                if q==0: x = ''
+                else:
+                    x = trajectory[(l-q):(l)]
+                    if x[-1] == '0': continue
                 Nj[x][states.index(trajectory[l])] += 1
 
             thiscountmatrix = []
