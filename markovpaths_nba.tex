@@ -36,7 +36,7 @@
 \date{\today}                       
 
 \begin{abstract}
-Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a Bayesian framework under the principle of predictive accuracy to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. Through simulations, prediction error of several model selection criteria, each provided in closed form, is evaluated. 
+Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a Bayesian framework under the principle of predictive accuracy to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the prediction error of these criteria. 
 
 %The general recommendation is to use leave-one-out cross validation, using an easily-computable formula that is provided in closed form. Importantly, Bayes factors using flat model priors are biased in favor of too-complex a model (more memory) when a large amount of data is present and the Akaike information criterion (AIC) is biased in favor of too-sparse a model (less memory) when few data are present. This method is applied to the trajectory of the basketball in Game 6 of the Spurs Warriors 2015 playoff series.
 \pacs{02.30.Zz, 02.50.Tt, 07.05.Kf}
@@ -147,7 +147,7 @@ two-fold cross validation (LPPDCV$_2$) and leave-one-out cross validation (LOO).
 \end{figure*}
 
 
-To compare these methods, we evaluated them  using simulations. Closed-form formulae for computing each model selection criterion are available as \textsc{Supplemental material}. Our test system is composed of $M=8$ states, with designated start and absorbing states.  For each given value of $h$, we generated for each $\bx\in \mathbf{X}_h$ a single set of true transition probabilities drawn from Dirichlet($\mathbf{1}$) distributions. For each of these random networks of a fixed $h$, we randomly sampled trajectories of a given sample size $J$ $10^4$ times, determining from each sample of $J$ the degree of $h$ to use as chosen by each of the methods.
+To e these methods, we evaluated them  using simulations. Closed-form formulae for computing each model selection criterion are available as \textsc{Supplemental material}. Our test system is composed of $M=8$ states, with designated start and absorbing states.  For each given value of $h$, we generated for each $\bx\in \mathbf{X}_h$ a single set of true transition probabilities drawn from Dirichlet($\mathbf{1}$) distributions. For each of these random networks of a fixed $h$, we randomly sampled trajectories of a given sample size $J$ $10^4$ times, determining from each sample of $J$ the degree of $h$ to use as chosen by each of the methods.
 
 \begin{figure}
 \includegraphics[width=\linewidth]{fig3}
@@ -166,6 +166,8 @@ As a result of these tests, this Letter recommends the leave-one-out cross valid
 \label{eq:loo}
 \end{equation}
 where $B$ is the multivariate Beta function. LOO performed slightly better than WAIC$_2$ in the included tests, while being somewhat simpler to compute. Eq.~\ref{eq:loo} decomposes completely into a sum of logarithms of Gamma functions, and is hence easy to implement in standard scientific software packages.
+
+A simple real-world application of this method is the evaluation of ``hot-hand phenomenon'' in the context of basketball.   In the 2017 NBA playoffs, the Cleveland Cavaliers played a total of 18 games. In these games, LeBron James attempted $96$ three pointers, making $42$ of them ($44\%$). Taking the outcome of each shot as a state in the set $\{$made, missed$\}$, and the shots in each game as a trajectory, we evaluated memory effects in James' three-point shooting.
 
 This Letter has shown that LOO and WAIC$_2$ can learn from data the physical reality of the 
 degree of memory in a system. It is important to comment on the uncertainty in such determinations. Regardless of the selection criterion used, the determination of $h$ is not truly certain except in an asymptotic sense where one has an unlimited amount of data available. However, one may use a simulation procedure like the one used in this Letter in order to estimate the degree of uncertainty.  

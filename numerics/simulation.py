@@ -62,12 +62,12 @@ def infer_model(trajectories,states,alpha,q):
     J = len(trajectories)
     for j,trajectory in enumerate(trajectories):
         traj = "".join(['0']*(q) ) +trajectory
-        for l in range(q,len(trajectory)):
+        for l in range(q,len(traj)):
             if q==0: x = ''
             else:
-                x = trajectory[(l-q):(l)]
-                if x[-1] == '0': continue
-            m = states.index(trajectory[l])
+                x = traj[(l-q):(l)]
+                if x[-1] == '0' and len(x)>1: continue
+            m = states.index(traj[l])
             Ntot[x] += 1
             N[x][m] += 1
             
@@ -115,7 +115,7 @@ def evaluate_models(trajectories,states, alpha=1, qbounds = (1,8)):
                 if q==0: x = ''
                 else:
                     x = trajectory[(l-q):(l)]
-                    if x[-1] == '0': continue
+                    if x[-1] == '0' and len(x)>1: continue
                 m = states.index(trajectory[l])
                 N[q][x][m] += 1
                 if j<J/2:
@@ -162,6 +162,7 @@ def evaluate_models(trajectories,states, alpha=1, qbounds = (1,8)):
                 this_row_sums = np.sum(thiscountmatrix+globalcountmatrix+alpha, axis = 1) # total number of times a history is seen locally
             except BaseException as e:
                 pass
+            
             global_row_sums = np.sum(globalcountmatrix+alpha, axis = 1) # total number of times a history is seen globally
             global_row_sums_loo = np.sum(globalcountmatrix_loo + alpha, axis=1)
 
