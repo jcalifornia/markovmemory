@@ -66,7 +66,7 @@ def infer_model(trajectories,states,alpha,q):
             if q==0: x = ''
             else:
                 x = traj[(l-q):(l)]
-                if x[-1] == '0' and len(x)>1: continue
+                #if x[-1] == '0' and len(x)>1: continue
             m = states.index(traj[l])
             Ntot[x] += 1
             N[x][m] += 1
@@ -115,7 +115,7 @@ def evaluate_models(trajectories,states, alpha=1, qbounds = (1,8)):
                 if q==0: x = ''
                 else:
                     x = trajectory[(l-q):(l)]
-                    if x[-1] == '0' and len(x)>1: continue
+                    #if x[-1] == '0' and len(x)>1: continue
                 m = states.index(trajectory[l])
                 N[q][x][m] += 1
                 if j<J/2:
@@ -128,7 +128,7 @@ def evaluate_models(trajectories,states, alpha=1, qbounds = (1,8)):
                 if q==0: x = ''
                 else:
                     x = trajectory[(l-q):(l)]
-                    if x[-1] == '0': continue
+                    #if x[-1] == '0' and len(x)>1: continue
                 Nj[x][states.index(trajectory[l])] += 1
 
             thiscountmatrix = []
