@@ -1,0 +1,410 @@
+TIME	TEAM	PLAY	SCORE
+12:00		Andre Drummond vs. Tristan Thompson (Reggie Jackson gains possession)	0 - 0	
+11:41		Marcus Morris makes 19-foot jumper (Reggie Jackson assists)	2 - 0	
+11:27		Kyrie Irving misses 15-foot jumper	2 - 0	
+11:26		Tristan Thompson offensive rebound	2 - 0	
+11:22		Kevin Love makes three point jumper (LeBron James assists)	2 - 3	
+11:07		Tobias Harris misses three point jumper	2 - 3	
+11:06		LeBron James defensive rebound	2 - 3	
+10:41		J.R. Smith misses three point jumper	2 - 3	
+10:41		Marcus Morris defensive rebound	2 - 3	
+10:36		Reggie Jackson lost ball turnover (Kyrie Irving steals)	2 - 3	
+10:30		LeBron James makes two point shot	2 - 5	
+10:06		Andre Drummond misses 13-foot jump bank shot	2 - 5	
+10:04		Kevin Love defensive rebound	2 - 5	
+9:57		Kyrie Irving misses 21-foot jumper	2 - 5	
+9:56		Reggie Jackson defensive rebound	2 - 5	
+9:51		Kentavious Caldwell-Pope misses 25-foot three point jumper	2 - 5	
+9:48		Tobias Harris makes tip shot	4 - 5	
+9:48		Tobias Harris offensive rebound	2 - 5	
+9:26		Kevin Love makes 17-foot two point shot (J.R. Smith assists)	4 - 7	
+9:03		Marcus Morris makes two point shot (Reggie Jackson assists)	6 - 7	
+8:45		Kevin Love misses 14-foot two point shot	6 - 7	
+8:44		Tobias Harris defensive rebound	6 - 7	
+8:37		Tobias Harris bad pass (J.R. Smith steals)	6 - 7	
+8:30		LeBron James makes two point shot (Tristan Thompson assists)	6 - 9	
+8:12		Marcus Morris makes jumper	8 - 9	
+7:50		Kyrie Irving misses 25-foot three point jumper	8 - 9	
+7:50		Andre Drummond defensive rebound	8 - 9	
+7:35		Reggie Jackson makes 25-foot three point jumper (Tobias Harris assists)	11 - 9	
+7:13		LeBron James makes driving layup (Kyrie Irving assists)	11 - 11	
+7:00		Reggie Jackson bad pass (Kevin Love steals)	11 - 11	
+6:50		Kevin Love misses 25-foot three point jumper	11 - 11	
+6:50		Kyrie Irving offensive rebound	11 - 11	
+6:46		Kevin Love bad pass (Tobias Harris steals)	11 - 11	
+6:37		Kentavious Caldwell-Pope makes jumper (Marcus Morris assists)	13 - 11	
+6:37		Cavaliers Full timeout	13 - 11	
+6:24		LeBron James misses two point shot	13 - 11	
+6:24		Tristan Thompson offensive rebound	13 - 11	
+5:58		Kyrie Irving misses 17-foot jumper	13 - 11	
+5:58		Tobias Harris defensive rebound	13 - 11	
+5:43		J.R. Smith kicked ball violation	13 - 11	
+5:31		Kentavious Caldwell-Pope makes 27-foot three point jumper (Reggie Jackson assists)	16 - 11	
+5:05		J.R. Smith misses 27-foot three point jumper	16 - 11	
+5:05		Kentavious Caldwell-Pope defensive rebound	16 - 11	
+4:56		Kentavious Caldwell-Pope makes 9-foot two point shot	18 - 11	
+4:37		Kyrie Irving makes 24-foot three point jumper (LeBron James assists)	18 - 14	
+4:11		Marcus Morris misses three point jumper	18 - 14	
+4:09		Kyrie Irving defensive rebound	18 - 14	
+4:01		LeBron James makes two point shot (Kyrie Irving assists)	18 - 16	
+3:41		Reggie Jackson makes driving layup	20 - 16	
+3:20		Tobias Harris personal foul (Kevin Love draws the foul)	20 - 16	
+3:20		Matthew Dellavedova enters the game for Kyrie Irving	20 - 16	
+3:20		Stanley Johnson enters the game for Tobias Harris	20 - 16	
+3:08		Matthew Dellavedova makes 7-foot two point shot (LeBron James assists)	20 - 18	
+2:42		Marcus Morris misses 13-foot two point shot	20 - 18	
+2:42		Tristan Thompson defensive rebound	20 - 18	
+2:28		Reggie Jackson personal foul (LeBron James draws the foul)	20 - 18	
+2:28		Pistons Full timeout	20 - 18	
+2:28		Steve Blake enters the game for Reggie Jackson	20 - 18	
+2:28		Iman Shumpert enters the game for Kevin Love	20 - 18	
+2:17		J.R. Smith makes 25-foot three point jumper (LeBron James assists)	20 - 21	
+2:00		Kentavious Caldwell-Pope misses 17-foot jumper	20 - 21	
+2:00		J.R. Smith defensive rebound	20 - 21	
+1:45		LeBron James misses 8-foot two point shot	20 - 21	
+1:43		Stanley Johnson defensive rebound	20 - 21	
+1:37		Kentavious Caldwell-Pope makes 26-foot three point jumper (Steve Blake assists)	23 - 21	
+1:23		Stanley Johnson personal foul (LeBron James draws the foul)	23 - 21	
+1:23		Richard Jefferson enters the game for J.R. Smith	23 - 21	
+1:15		Matthew Dellavedova makes 8-foot two point shot	23 - 23	
+1:01		Richard Jefferson personal foul (Andre Drummond draws the foul)	23 - 23	
+1:01		Kyrie Irving enters the game for LeBron James	23 - 23	
+0:46		Kentavious Caldwell-Pope misses 27-foot three point jumper	23 - 23	
+0:45		Iman Shumpert defensive rebound	23 - 23	
+0:35		Kyrie Irving makes 18-foot jumper (Tristan Thompson assists)	23 - 25	
+0:26		Richard Jefferson personal foul (Marcus Morris draws the foul)	23 - 25	
+0:26		Marcus Morris makes free throw 1 of 2	24 - 25	
+0:26		Marcus Morris makes free throw 2 of 2	25 - 25	
+0:01		Kyrie Irving misses driving layup	25 - 25	
+0:01		Cavaliers offensive team rebound	25 - 25	
+0:01		LeBron James enters the game for Richard Jefferson	25 - 25	
+0:01		J.R. Smith enters the game for Iman Shumpert	25 - 25	
+0:00		LeBron James makes layup (Kyrie Irving assists)	25 - 27	
+0:00		End of the 1st Quarter	25 - 27	
+2nd Quarter
+TIME	TEAM	PLAY	SCORE
+11:44		Kyrie Irving misses 10-foot jump bank shot	25 - 27	
+11:41		Tobias Harris defensive rebound	25 - 27	
+11:30		Tobias Harris misses 26-foot three point jumper	25 - 27	
+11:29		Kyrie Irving defensive rebound	25 - 27	
+11:11		Iman Shumpert misses three point jumper	25 - 27	
+11:11		Kyrie Irving offensive rebound	25 - 27	
+11:07		Matthew Dellavedova misses 24-foot three point jumper	25 - 27	
+11:07		Stanley Johnson defensive rebound	25 - 27	
+10:57		Reggie Bullock makes 22-foot jumper (Steve Blake assists)	27 - 27	
+10:41		Kyrie Irving makes three point jumper	27 - 30	
+10:18		Stanley Johnson makes 25-foot three point jumper (Reggie Bullock assists)	30 - 30	
+10:03		Kyrie Irving misses two point shot	30 - 30	
+10:02		Stanley Johnson defensive rebound	30 - 30	
+9:59		Aron Baynes makes layup (Steve Blake assists)	32 - 30	
+9:59		Timofey Mozgov shooting foul (Aron Baynes draws the foul)	32 - 30	
+9:59		Aron Baynes makes free throw 1 of 1	33 - 30	
+9:38		Richard Jefferson misses driving layup	33 - 30	
+9:37		Tobias Harris defensive rebound	33 - 30	
+9:34		Steve Blake Out-of-Bounds Bad Pass Turnover	33 - 30	
+9:21		Kyrie Irving makes driving layup	33 - 32	
+9:21		Steve Blake shooting foul (Kyrie Irving draws the foul)	33 - 32	
+9:21		Kyrie Irving makes free throw 1 of 1	33 - 33	
+9:08		Timofey Mozgov blocks Tobias Harris's layup	33 - 33	
+9:08		Cavaliers defensive team rebound	33 - 33	
+8:51		Kyrie Irving misses 7-foot two point shot	33 - 33	
+8:51		Stanley Johnson defensive rebound	33 - 33	
+8:32		Reggie Bullock makes 23-foot three point jumper (Steve Blake assists)	36 - 33	
+8:12		Timofey Mozgov misses jumper	36 - 33	
+8:12		Steve Blake defensive rebound	36 - 33	
+8:02		Stanley Johnson makes 24-foot three point jumper (Steve Blake assists)	39 - 33	
+8:02		Cavaliers Full timeout	39 - 33	
+8:02		Kevin Love enters the game for Iman Shumpert	39 - 33	
+8:02		LeBron James enters the game for Richard Jefferson	39 - 33	
+7:37		LeBron James misses 30-foot three point jumper	39 - 33	
+7:35		Cavaliers offensive team rebound	39 - 33	
+7:26		Kevin Love makes 14-foot two point shot	39 - 35	
+7:26		Reggie Bullock shooting foul (Kevin Love draws the foul)	39 - 35	
+7:26		J.R. Smith enters the game for Matthew Dellavedova	39 - 35	
+7:26		Marcus Morris enters the game for Stanley Johnson	39 - 35	
+7:26		Reggie Jackson enters the game for Steve Blake	39 - 35	
+7:26		Tristan Thompson enters the game for Timofey Mozgov	39 - 35	
+7:26		Kevin Love makes free throw 1 of 1	39 - 36	
+7:07		Marcus Morris misses 16-foot jumper	39 - 36	
+7:05		LeBron James defensive rebound	39 - 36	
+6:48		Kevin Love misses layup	39 - 36	
+6:47		Kevin Love makes tip shot	39 - 38	
+6:47		Kevin Love offensive rebound	39 - 36	
+6:24		Tobias Harris lost ball turnover (LeBron James steals)	39 - 38	
+6:16		Kyrie Irving makes 26-foot three point jumper (J.R. Smith assists)	39 - 41	
+6:07		Pistons Full timeout	39 - 41	
+6:07		Andre Drummond enters the game for Reggie Bullock	39 - 41	
+6:07		Kentavious Caldwell-Pope enters the game for Aron Baynes	39 - 41	
+5:54		Marcus Morris makes 25-foot three point jumper (Kentavious Caldwell-Pope assists)	42 - 41	
+5:43		Reggie Jackson shooting foul (Kevin Love draws the foul)	42 - 41	
+5:43		Kevin Love makes free throw 1 of 2	42 - 42	
+5:43		Kevin Love makes free throw 2 of 2	42 - 43	
+5:22		Andre Drummond makes 7-foot two point shot	44 - 43	
+4:56		Kevin Love misses layup	44 - 43	
+4:56		Cavaliers offensive team rebound	44 - 43	
+4:56		Andre Drummond loose ball foul (Tristan Thompson draws the foul)	44 - 43	
+4:50		Tobias Harris blocks Kevin Love 's 3-foot layup	44 - 43	
+4:48		Kevin Love offensive rebound	44 - 43	
+4:47		Kevin Love makes two point shot	44 - 45	
+4:37		Tristan Thompson personal foul (Reggie Jackson draws the foul)	44 - 45	
+4:37		Matthew Dellavedova enters the game for Kyrie Irving	44 - 45	
+4:26		Marcus Morris makes 25-foot three point jumper	47 - 45	
+4:03		LeBron James makes layup (Matthew Dellavedova assists)	47 - 47	
+3:51		Matthew Dellavedova personal foul (Reggie Jackson draws the foul)	47 - 47	
+3:39		Reggie Jackson misses 27-foot three point jumper	47 - 47	
+3:38		Andre Drummond offensive rebound	47 - 47	
+3:34		Andre Drummond misses shot	47 - 47	
+3:31		Kevin Love defensive rebound	47 - 47	
+3:23		LeBron James misses finger roll layup	47 - 47	
+3:20		Tobias Harris defensive rebound	47 - 47	
+3:12		Andre Drummond misses 11-foot hook shot	47 - 47	
+3:10		Kevin Love defensive rebound	47 - 47	
+3:03		Kevin Love misses three point jumper	47 - 47	
+3:03		Tristan Thompson offensive rebound	47 - 47	
+2:53		LeBron James misses jumper	47 - 47	
+2:51		Andre Drummond defensive rebound	47 - 47	
+2:44		Marcus Morris makes 24-foot three point jumper (Reggie Jackson assists)	50 - 47	
+2:15		Kevin Love makes 26-foot three point jumper (LeBron James assists)	50 - 50	
+2:00		Matthew Dellavedova personal foul (Tobias Harris draws the foul)	50 - 50	
+2:00		Official timeout	50 - 50	
+2:00		Steve Blake enters the game for Reggie Jackson	50 - 50	
+2:00		Kyrie Irving enters the game for Tristan Thompson	50 - 50	
+2:00		Iman Shumpert enters the game for Matthew Dellavedova	50 - 50	
+2:00		LeBron James in bound foul (Marcus Morris draws the foul)	51 - 50	
+2:00		Marcus Morris makes free throw 1 of 2	51 - 50	
+2:00		Marcus Morris makes free throw 2 of 2	52 - 50	
+1:49		J.R. Smith makes layup (LeBron James assists)	52 - 52	
+1:39		Kyrie Irving personal foul (Steve Blake draws the foul)	52 - 52	
+1:39		Steve Blake misses free throw 1 of 2	52 - 52	
+1:39		Pistons offensive team rebound	52 - 52	
+1:39		Steve Blake makes free throw 2 of 2	53 - 52	
+1:21		Kevin Love misses jumper	53 - 52	
+1:21		Iman Shumpert offensive rebound	53 - 52	
+1:12		Marcus Morris personal foul (Kevin Love draws the foul)	53 - 52	
+1:12		Kevin Love makes free throw 1 of 2	53 - 53	
+1:12		Kevin Love misses free throw 2 of 2	53 - 53	
+1:10		Steve Blake defensive rebound	53 - 53	
+0:54		Tobias Harris makes driving layup (Marcus Morris assists)	55 - 53	
+0:49		Cavaliers 20 Sec. timeout	55 - 53	
+0:40		Kevin Love misses 22-foot jumper	55 - 53	
+0:40		Andre Drummond defensive rebound	55 - 53	
+0:30		Kentavious Caldwell-Pope makes three point jumper (Marcus Morris assists)	58 - 53	
+0:06		J.R. Smith misses three point jumper	58 - 53	
+0:06		Cavaliers offensive team rebound	58 - 53	
+0:06		shot clock turnover	58 - 53	
+0:00		Steve Blake lost ball turnover (Kyrie Irving steals)	58 - 53	
+0:00		End of the 2nd Quarter	58 - 53	
+3rd Quarter
+TIME	TEAM	PLAY	SCORE
+11:44		Kyrie Irving makes 25-foot three point jumper (LeBron James assists)	58 - 56	
+11:25		Andre Drummond misses 11-foot hook shot	58 - 56	
+11:22		Kevin Love defensive rebound	58 - 56	
+11:15		Kyrie Irving makes 14-foot two point shot	58 - 58	
+11:03		Tobias Harris bad pass (LeBron James steals)	58 - 58	
+10:56		Kyrie Irving makes 23-foot three point jumper (LeBron James assists)	58 - 61	
+10:42		J.R. Smith personal foul (Andre Drummond draws the foul)	58 - 61	
+10:26		Tobias Harris makes 25-foot three point jumper (Kentavious Caldwell-Pope assists)	61 - 61	
+10:08		Kyrie Irving bad pass (Marcus Morris steals)	61 - 61	
+9:56		Marcus Morris misses 23-foot three point jumper	61 - 61	
+9:56		Kevin Love defensive rebound	61 - 61	
+9:32		J.R. Smith misses 29-foot three point jumper	61 - 61	
+9:32		Kevin Love offensive rebound	61 - 61	
+9:26		Kevin Love makes 5-foot two point shot	61 - 63	
+9:11		Reggie Jackson makes 14-foot two point shot	63 - 63	
+9:11		Andre Drummond loose ball foul (LeBron James draws the foul)	63 - 63	
+8:57		LeBron James makes 19-foot jumper (J.R. Smith assists)	63 - 65	
+8:38		Tobias Harris misses 24-foot three point jumper	63 - 65	
+8:38		Tristan Thompson defensive rebound	63 - 65	
+8:26		Kyrie Irving misses 24-foot three point jumper	63 - 65	
+8:26		Andre Drummond defensive rebound	63 - 65	
+8:11		Kentavious Caldwell-Pope misses	63 - 65	
+8:08		Andre Drummond makes tip shot	65 - 65	
+8:08		Andre Drummond offensive rebound	63 - 65	
+7:41		J.R. Smith misses 25-foot three point jumper	65 - 65	
+7:39		Tobias Harris defensive rebound	65 - 65	
+7:31		Andre Drummond makes two point shot (Reggie Jackson assists)	67 - 65	
+7:13		LeBron James misses 25-foot three point jumper	67 - 65	
+7:13		Andre Drummond defensive rebound	67 - 65	
+6:50		shot clock turnover	67 - 65	
+6:50		Cavaliers Full timeout	67 - 65	
+6:37		Kevin Love makes two point shot (LeBron James assists)	67 - 67	
+6:22		Marcus Morris misses 15-foot jumper	67 - 67	
+6:22		Kevin Love defensive rebound	67 - 67	
+6:03		Kyrie Irving makes 10-foot two point shot	67 - 69	
+5:33		Andre Drummond misses 7-foot jumper	67 - 69	
+5:33		LeBron James defensive rebound	67 - 69	
+5:16		J.R. Smith makes three point jumper (Kyrie Irving assists)	67 - 72	
+5:01		Andre Drummond makes 11-foot two point shot (Reggie Jackson assists)	69 - 72	
+4:47		Marcus Morris personal foul (J.R. Smith draws the foul)	69 - 72	
+4:47		Stanley Johnson enters the game for Tobias Harris	69 - 72	
+4:41		J.R. Smith misses 20-foot jumper	69 - 72	
+4:39		Stanley Johnson defensive rebound	69 - 72	
+4:28		Kentavious Caldwell-Pope makes 17-foot jumper	71 - 72	
+3:59		Kyrie Irving misses driving layup	71 - 72	
+3:56		Tristan Thompson makes dunk	71 - 74	
+3:56		Tristan Thompson offensive rebound	71 - 72	
+3:36		Stanley Johnson makes 23-foot three point jumper (Marcus Morris assists)	74 - 74	
+3:12		Andre Drummond blocks Kevin Love 's 6-foot shot	74 - 74	
+3:09		Andre Drummond defensive rebound	74 - 74	
+3:03		Stanley Johnson misses 9-foot jump bank shot	74 - 74	
+3:03		Andre Drummond offensive rebound	74 - 74	
+2:53		Reggie Jackson lost ball turnover (J.R. Smith steals)	74 - 74	
+2:45		Kyrie Irving misses three point jumper	74 - 74	
+2:43		Kentavious Caldwell-Pope defensive rebound	74 - 74	
+2:40		Kentavious Caldwell-Pope misses two point shot	74 - 74	
+2:40		Cavaliers defensive team rebound	74 - 74	
+2:40		Stanley Johnson loose ball foul (J.R. Smith draws the foul)	74 - 74	
+2:40		Pistons Full timeout	74 - 74	
+2:40		Steve Blake enters the game for Reggie Jackson	74 - 74	
+2:40		Matthew Dellavedova enters the game for Kevin Love	74 - 74	
+2:29		Matthew Dellavedova misses 25-foot three point jumper	74 - 74	
+2:28		Andre Drummond defensive rebound	74 - 74	
+2:15		Andre Drummond makes 10-foot two point shot (Kentavious Caldwell-Pope assists)	76 - 74	
+1:52		LeBron James misses three point jumper	76 - 74	
+1:52		Stanley Johnson defensive rebound	76 - 74	
+1:39		Andre Drummond misses 11-foot two point shot	76 - 74	
+1:39		Matthew Dellavedova defensive rebound	76 - 74	
+1:21		Kyrie Irving misses 25-foot three point jumper	76 - 74	
+1:21		Stanley Johnson defensive rebound	76 - 74	
+1:15		Marcus Morris offensive foul (J.R. Smith draws the foul)	76 - 74	
+1:15		Marcus Morris turnover	76 - 74	
+1:15		Iman Shumpert enters the game for LeBron James	76 - 74	
+0:54		Iman Shumpert makes 21-foot two point shot (Kyrie Irving assists)	76 - 76	
+0:37		Matthew Dellavedova personal foul (Andre Drummond draws the foul)	76 - 76	
+0:35		Iman Shumpert personal foul (Andre Drummond draws the foul)	76 - 76	
+0:35		Andre Drummond misses free throw 1 of 2	76 - 76	
+0:35		Pistons offensive team rebound	76 - 76	
+0:35		Andre Drummond makes free throw 2 of 2	77 - 76	
+0:28		Kyrie Irving misses driving layup	77 - 76	
+0:28		Pistons defensive team rebound	77 - 76	
+0:28		Tristan Thompson loose ball foul (Kentavious Caldwell-Pope draws the foul)	77 - 76	
+0:28		Kentavious Caldwell-Pope makes free throw 1 of 2	78 - 76	
+0:28		Kentavious Caldwell-Pope misses free throw 2 of 2	78 - 76	
+0:26		Matthew Dellavedova defensive rebound	78 - 76	
+0:08		Steve Blake personal foul (Matthew Dellavedova draws the foul)	78 - 76	
+0:01		Matthew Dellavedova misses 26-foot three point jumper	78 - 76	
+0:00		Andre Drummond defensive rebound	78 - 76	
+0:00		Andre Drummond misses 82-foot three point jumper	78 - 76	
+0:00		Pistons offensive team rebound	78 - 76	
+0:00		End of the 3rd Quarter	78 - 76	
+4th Quarter
+TIME	TEAM	PLAY	SCORE
+11:37		Tobias Harris makes two point shot	80 - 76	
+11:11		Kevin Love misses shot	80 - 76	
+11:08		Stanley Johnson defensive rebound	80 - 76	
+11:03		Reggie Bullock makes 26-foot three point jumper (Steve Blake assists)	83 - 76	
+11:03		Cavaliers Full timeout	83 - 76	
+11:03		LeBron James enters the game for Tristan Thompson	83 - 76	
+10:52		Richard Jefferson makes 23-foot three point jumper (Kevin Love assists)	83 - 79	
+10:30		Tobias Harris misses 9-foot hook shot	83 - 79	
+10:30		LeBron James defensive rebound	83 - 79	
+10:06		Matthew Dellavedova makes 23-foot jumper (Richard Jefferson assists)	83 - 81	
+9:45		Steve Blake traveling	83 - 81	
+9:32		Stanley Johnson personal foul (LeBron James draws the foul)	83 - 81	
+9:22		Matthew Dellavedova misses 3-foot jumper	83 - 81	
+9:22		LeBron James makes tip shot	83 - 83	
+9:22		LeBron James offensive rebound	83 - 81	
+9:22		Pistons Full timeout	83 - 83	
+9:22		Andre Drummond enters the game for Steve Blake	83 - 83	
+9:22		Reggie Jackson enters the game for Aron Baynes	83 - 83	
+9:04		Reggie Jackson misses 25-foot three point jumper	83 - 83	
+9:04		Pistons offensive team rebound	83 - 83	
+9:04		Kevin Love loose ball foul (Andre Drummond draws the foul)	83 - 83	
+8:55		Andre Drummond makes jumper (Reggie Jackson assists)	85 - 83	
+8:34		Stanley Johnson shooting foul (Matthew Dellavedova draws the foul)	85 - 83	
+8:34		Matthew Dellavedova misses free throw 1 of 2	85 - 83	
+8:34		Cavaliers offensive team rebound	85 - 83	
+8:34		Matthew Dellavedova makes free throw 2 of 2	85 - 84	
+8:18		LeBron James blocks Reggie Jackson 's 1-foot shot	85 - 84	
+8:17		Kevin Love defensive rebound	85 - 84	
+8:15		Reggie Bullock shooting foul (LeBron James draws the foul)	85 - 84	
+8:15		LeBron James makes free throw 1 of 2	85 - 85	
+8:15		Kentavious Caldwell-Pope enters the game for Stanley Johnson	85 - 85	
+8:15		Marcus Morris enters the game for Reggie Bullock	85 - 85	
+8:15		LeBron James makes free throw 2 of 2	85 - 86	
+7:52		LeBron James blocks Tobias Harris 's 10-foot jumper	85 - 86	
+7:50		Richard Jefferson defensive rebound	85 - 86	
+7:39		Richard Jefferson makes jumper (LeBron James assists)	85 - 88	
+7:15		Marcus Morris misses jumper	85 - 88	
+7:13		Kevin Love defensive rebound	85 - 88	
+7:05		Matthew Dellavedova misses 25-foot three point jumper	85 - 88	
+7:05		Tobias Harris defensive rebound	85 - 88	
+6:47		Kentavious Caldwell-Pope misses 24-foot three point jumper	85 - 88	
+6:45		LeBron James defensive rebound	85 - 88	
+6:37		Richard Jefferson misses 25-foot three point jumper	85 - 88	
+6:35		Tobias Harris defensive rebound	85 - 88	
+6:28		Reggie Jackson makes 26-foot three point jumper	88 - 88	
+6:28		Cavaliers Full timeout	88 - 88	
+6:28		Kyrie Irving enters the game for Matthew Dellavedova	88 - 88	
+6:11		LeBron James bad pass (Reggie Jackson steals)	88 - 88	
+6:03		Marcus Morris misses three point jumper	88 - 88	
+6:01		Marcus Morris offensive rebound	88 - 88	
+5:50		Andre Drummond misses 6-foot jumper	88 - 88	
+5:50		Kevin Love defensive rebound	88 - 88	
+5:39		Kevin Love makes 25-foot three point jumper (Kyrie Irving assists)	88 - 91	
+5:20		J.R. Smith enters the game for Richard Jefferson	88 - 91	
+5:16		Reggie Jackson makes two point shot (Marcus Morris assists)	90 - 91	
+4:48		Kevin Love makes three point jumper (LeBron James assists)	90 - 94	
+4:31		Kyrie Irving shooting foul (Kentavious Caldwell-Pope draws the foul)	90 - 94	
+4:31		Kentavious Caldwell-Pope makes free throw 1 of 2	91 - 94	
+4:31		Kentavious Caldwell-Pope makes free throw 2 of 2	92 - 94	
+4:16		Kyrie Irving misses 25-foot three point jumper	92 - 94	
+4:16		J.R. Smith offensive rebound	92 - 94	
+4:11		Kevin Love bad pass (Tobias Harris steals)	92 - 94	
+4:03		Kyrie Irving blocks Tobias Harris 's 1-foot layup	92 - 94	
+4:01		Iman Shumpert defensive rebound	92 - 94	
+4:00		Kentavious Caldwell-Pope shooting foul (LeBron James draws the foul)	92 - 96	
+4:00		LeBron James makes free throw 1 of 2	92 - 95	
+4:00		LeBron James makes free throw 2 of 2	92 - 96	
+3:49		LeBron James personal foul (Marcus Morris draws the foul)	92 - 96	
+3:38		Kevin Love personal foul (Andre Drummond draws the foul)	92 - 96	
+3:24		Reggie Jackson misses 13-foot two point jumper	92 - 96	
+3:24		Kyrie Irving defensive rebound	92 - 96	
+3:24		Reggie Jackson technical foul(1st technical foul)	92 - 96	
+3:24		Kyrie Irving makes technical free throw	92 - 97	
+3:12		Kevin Love misses 24-foot three point jumper	92 - 97	
+3:12		Cavaliers offensive team rebound	92 - 97	
+2:58		Andre Drummond shooting foul (Kyrie Irving draws the foul)	92 - 97	
+2:58		Kyrie Irving misses free throw 1 of 2	92 - 97	
+2:58		Cavaliers offensive team rebound	92 - 97	
+2:58		Aron Baynes enters the game for Andre Drummond	92 - 97	
+2:58		Kyrie Irving makes free throw 2 of 2	92 - 98	
+2:49		Reggie Jackson makes driving layup	94 - 98	
+2:49		Iman Shumpert shooting foul (Reggie Jackson draws the foul)	94 - 98	
+2:49		Reggie Jackson makes free throw 1 of 1	95 - 98	
+2:34		Kyrie Irving makes driving layup	95 - 100	
+2:34		Pistons 20 Sec. timeout	95 - 100	
+2:27		LeBron James personal foul (Marcus Morris draws the foul)	95 - 100	
+2:27		Marcus Morris misses free throw 1 of 2	95 - 100	
+2:27		Pistons offensive team rebound	95 - 100	
+2:27		Marcus Morris makes free throw 2 of 2	96 - 100	
+2:02		Kevin Love misses 27-foot shot	96 - 100	
+2:00		Reggie Jackson defensive rebound	96 - 100	
+1:43		Marcus Morris misses 24-foot three point jumper	96 - 100	
+1:42		Kevin Love defensive rebound	96 - 100	
+1:23		LeBron James makes 5-foot two point shot	96 - 102	
+1:00		shot clock turnover	96 - 102	
+0:36		LeBron James misses 13-foot two point shot	96 - 102	
+0:35		Tobias Harris defensive rebound	96 - 102	
+0:35		Pistons Full timeout	96 - 102	
+0:35		Matthew Dellavedova enters the game for Kevin Love	96 - 102	
+0:26		Reggie Jackson misses two point shot	96 - 102	
+0:24		Iman Shumpert defensive rebound	96 - 102	
+0:21		Reggie Jackson personal foul (Kyrie Irving draws the foul)	96 - 102	
+0:21		Kyrie Irving makes free throw 1 of 2	96 - 103	
+0:21		Kyrie Irving makes free throw 2 of 2	96 - 104	
+0:12		Kentavious Caldwell-Pope misses 27-foot three point jumper	96 - 104	
+0:11		J.R. Smith defensive rebound	96 - 104	
+0:11		Marcus Morris personal foul (J.R. Smith draws the foul)	96 - 104	
+0:11		J.R. Smith misses free throw 1 of 2	96 - 104	
+0:11		Cavaliers offensive team rebound	96 - 104	
+0:11		J.R. Smith makes free throw 2 of 2	96 - 105	
+0:11		Pistons 20 Sec. timeout	96 - 105	
+0:05		Kentavious Caldwell-Pope makes 25-foot three point jumper (Tobias Harris assists)	99 - 105	
+0:05		Kentavious Caldwell-Pope personal foul (Kyrie Irving draws the foul)	99 - 105	
+0:05		Kyrie Irving misses free throw 1 of 2	99 - 105	
+0:05		Cavaliers offensive team rebound	99 - 105	
+0:05		Kyrie Irving makes free throw 2 of 2	99 - 106	
+0:00		Reggie Jackson makes driving layup	101 - 106	
+0:00		End of the 4th Quarter	101 - 106	
+0:00		End of Game	101 - 106

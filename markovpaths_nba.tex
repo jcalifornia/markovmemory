@@ -29,14 +29,14 @@
 \graphicspath{{figures/}}
 
 \begin{document}
-\title[Memory determination in finite-state random walks]{Bayesian predictive selection of memory for multistep Markov chains: LeBron James' three point shooting in the 2017 NBA playoffs}
+\title[Memory determination in finite-state random walks]{Bayesian predictive selection of memory for multistep Markov chains: LeBron James may be more likely to make a free throw after missing the previous one}
 \author{Joshua C. Chang}
 \email{joshchang@ucla.edu}
 \affiliation{Clinical Center, National Institutes of Health, Bethesda MD 20892}
 \date{\today}                       
 
 \begin{abstract}
-Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a Bayesian framework under the principle of predictive accuracy to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the prediction error of these criteria. 
+Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a Bayesian framework under the principle of predictive accuracy to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the prediction error of these criteria. These methods, when applied to data from the 2016--2017 NBA season, show some possible evidence of statistical dependencies in LeBron James' free throw shooting. In particular, a model where LeBron James is more likely to make a free throw after missing the previous free throw is approximately as predictive as a model in which all free throws have independent outcomes.
 
 %The general recommendation is to use leave-one-out cross validation, using an easily-computable formula that is provided in closed form. Importantly, Bayes factors using flat model priors are biased in favor of too-complex a model (more memory) when a large amount of data is present and the Akaike information criterion (AIC) is biased in favor of too-sparse a model (less memory) when few data are present. This method is applied to the trajectory of the basketball in Game 6 of the Spurs Warriors 2015 playoff series.
 \pacs{02.30.Zz, 02.50.Tt, 07.05.Kf}
@@ -57,7 +57,7 @@ Consider the problem of modeling memory for discrete-state random walks using hi
 \label{eq:factorize}
 \end{equation}
 %
-where $p_{x_{l-h},x_{l-h+1},\cdots,x_l} =  \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}, \ldots, \xi_{l-h} = x_{l-h} ),$ and $h\in\mathbb{Z}^+$ represents the number of states worth of history needed to predict the next state, with appropriate boundary conditions for the beginning of the trajectory. In the case of absolutely no memory ($h=0$), the path probability is simply the product of the probabilities of being in each of the separate states in a path, $p_{x_1}p_{x_2},\ldots p_{x_L},$ and there are essentially $M$ parameters that determine the evolution of the system, where $M$ is the number of states. If $h=1$, the system is single-step Markovian in that only the current state is relevant in determining the next state. These systems involve $M^2$ parameters to understand their evolution. In general, if $h$ states of history are required, then the system is $h$-step Markovian, and $M^{h+1}$ parameters are needed (see Fig~\ref{fig:fig1}). Hence, the size of the parameter space grows exponentially with memory. Our objective is to determine, based on observational evidence, an appropriate value for $h$. 
+where $p_{x_{l-h},x_{l-h+1},\cdots,x_l} =  \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}, \ldots, \xi_{l-h} = x_{l-h} ),$ and $h\in\mathbb{Z}^+$ represents the number of states worth of history needed to predict the next state, with appropriate boundary conditions for the beginning of the trajectory. In the case of absolutely no memory ($h=0$), the path probability is simply the product of the probabilities of being in each of the separate states in a path, $p_{x_1}p_{x_2},\ldots p_{x_L},$ and there are essentially $M-1$ free parameters that determine the evolution of the system, where $M$ is the number of states. If $h=1$, the system is single-step Markovian in that only the current state is relevant in determining the next state. These systems involve $(M-1)^2$ parameters to specify their evolution. In general, if $h$ states of history are required, then the system is $h$-step Markovian, and $(M-1)^{h+1}$ parameters are needed (see Fig~\ref{fig:fig1}). Hence, the size of the parameter space grows exponentially with memory. Our objective is to determine, based on observational evidence, an appropriate value for $h$. 
 
  
 % \begin{figure}
@@ -167,7 +167,9 @@ As a result of these tests, this Letter recommends the leave-one-out cross valid
 \end{equation}
 where $B$ is the multivariate Beta function. LOO performed slightly better than WAIC$_2$ in the included tests, while being somewhat simpler to compute. Eq.~\ref{eq:loo} decomposes completely into a sum of logarithms of Gamma functions, and is hence easy to implement in standard scientific software packages.
 
-A simple real-world application of this method is the evaluation of ``hot-hand phenomenon'' in the context of basketball jump-shooting.   In the 2017 NBA playoffs, the Cleveland Cavaliers played a total of 18 games. In these games, LeBron James attempted $96$ three pointers, making $42$ of them ($44\%$). Taking the outcome of each shot as a state in the set $\{$made, missed$\}$, and the shots in each game as a trajectory, one may evaluate memory effects in James' three-point shooting.
+A simple real-world application of this method is the evaluation of ``hot-hand phenomenon'' (or fallacy) in the context of basketball free-throw shooting. This phenomenon is controversial. In 1985, 
+
+  During the 2016-2017 season, through $100$ games, LeBron James of the Cleveland Cavaliers attempted $693$ total free throws, hitting $471$ of them for $68.0\%$ accuracy.
 
 This Letter has shown that LOO and WAIC$_2$ can learn from data the physical reality of the 
 degree of memory in a system. It is important to comment on the uncertainty in such determinations. Regardless of the selection criterion used, the determination of $h$ is not truly certain except in an asymptotic sense where one has an unlimited amount of data available. However, one may use a simulation procedure like the one used in this Letter in order to estimate the degree of uncertainty.  

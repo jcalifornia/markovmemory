@@ -223,7 +223,7 @@ def evaluate_models(trajectories,states, alpha=1, qbounds = (1,8)):
         DIC2[q] = -2*Nlogp2 +2*kDIC2[q]
         WAIC1[q] = -2*(cumulative_lppd - kWAIC1[q])
         WAIC2[q] = -2*(cumulative_lppd - kWAIC2[q])
-        kAIC = totalcountmatrix.shape[0]*totalcountmatrix.shape[1]
+        kAIC = totalcountmatrix.shape[0]*(totalcountmatrix.shape[1]-1)
         AIC[q] = -2*Nlogp_MLE + 2*kAIC
         LPPD[q] = -2*(cumulative_lppd)
         LOO[q] = -2*(cumulative_loo)
