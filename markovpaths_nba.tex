@@ -29,7 +29,8 @@
 \graphicspath{{figures/}}
 
 \begin{document}
-\title[Memory determination in finite-state random walks]{Bayesian predictive selection of memory for multistep Markov chains: LeBron James may be more likely to make a free throw after missing the previous one}
+%\title[Memory determination in finite-state random walks]{Bayesian predictive selection of memory for multistep Markov chains: LeBron James may be more likely to make a free throw after missing the previous one}
+\title[Memory determination in finite-state random walks]{A critical look at the hot hands fallacy using Bayesian predictive memory selection for multistep Markov Chains}
 \author{Joshua C. Chang}
 \email{joshchang@ucla.edu}
 \affiliation{Clinical Center, National Institutes of Health, Bethesda MD 20892}
@@ -141,7 +142,7 @@ two-fold cross validation (LPPDCV$_2$) and leave-one-out cross validation (LOO).
   %%%%%%%%%%%%%%%%%%%
 
 \begin{figure*}[!ht]
-\includegraphics[width=\textwidth]{fig2}
+\includegraphics[width=\textwidth]{fig2a}
 \caption{\textbf{Chosen degree of memory $h$} in simulations for varying true degrees of memory  $h_{\textrm{true}}$ and number of observed trajectories $J$. Rows correspond to model selection under a given degree of memory. Columns correspond to the number of trajectories. Depicted are the percent of simulations in which each degree of memory is selected using the different model evaluation criteria (percents of at least $20$ are labeled). Colors coded based on degree of memory: ({\color{Set1_5_red} 1: red}, {\color{Set1_5_blue} 2: blue}, {\color{Set1_5_green}3: green}, {\color{Set1_5_purple}4: purple}, {\color{Set1_5_orange}5: orange}). \emph{Example:} For $h_{\textrm{true}}=1$ and $J=4$, the WAIC$_1$ criteria selected $h=1$ approximately $65\%$ of the time. }
 \label{fig:fig2}
 \end{figure*}
@@ -166,6 +167,10 @@ As a result of these tests, this Letter recommends the leave-one-out cross valid
 \label{eq:loo}
 \end{equation}
 where $B$ is the multivariate Beta function. LOO performed slightly better than WAIC$_2$ in the included tests, while being somewhat simpler to compute. Eq.~\ref{eq:loo} decomposes completely into a sum of logarithms of Gamma functions, and is hence easy to implement in standard scientific software packages.
+
+\begin{figure}
+\includegraphics[width=\linewidth]{fig4}
+\end{figure}
 
 A simple real-world application of this method is the evaluation of ``hot-hand phenomenon'' (or fallacy) in the context of basketball free-throw shooting. This phenomenon is controversial. In 1985, 
 
