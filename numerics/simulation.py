@@ -10,6 +10,9 @@ from string import ascii_uppercase
 from collections import defaultdict
 from functools import partial
 from scipy.special import gammaln, polygamma
+from scipy.stats import gamma
+
+
 import numpy as np
 from numpy import log 
 from numpy import inf
@@ -55,6 +58,27 @@ def simulate(num_states, q, alpha, num_trajectories = 100, max_length = 100):
         trajectories[j] = trajectories[j][(q-1):]
             
     return trajectories,states
+
+def simulate_freethrows(model, L_gamma_parms, n_games):
+
+    X0 = [k for k in model[0].keys()]
+    q = len(X0[0])
+    shape, loc, scale = L_gamma_parms
+    L = gamma.rvs(n_games,shape, loc, scale )
+    trajectories = []
+    for n in range(n_games):
+        L =
+        trajectories += ["".join(["0"] * (q - 1) + ["A"])]
+        current_state = "A"
+        while not current_state == states[-1] and len(trajectories[j]) < max_length + q - 1:
+            subchain = trajectories[j][-q:]
+            r = choice(states, size=1, p=p[X.index(subchain)])
+            trajectories[j] += r[0]
+            current_state = r[0]
+        # de-pad the trajectories
+        trajectories[j] = trajectories[j][(q - 1):]
+
+    return trajectories, states
 
 def infer_model(trajectories,states,alpha,q):
     N = defaultdict(partial(np.zeros,len(states)))
