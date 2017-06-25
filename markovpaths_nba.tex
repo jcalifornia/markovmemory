@@ -30,14 +30,14 @@
 
 \begin{document}
 %\title[Memory determination in finite-state random walks]{Bayesian predictive selection of memory for multistep Markov chains: LeBron James may be more likely to make a free throw after missing the previous one}
-\title[Memory determination in finite-state random walks]{Evaluating hot hands in LeBron James' free throw shooting using predictive memory selection for multistep Markov Chains}
+\title[Memory determination in finite-state random walks]{Evaluating the hot hand phenomenon using predictive memory selection for multistep Markov Chains}
 \author{Joshua C. Chang}
 \email{joshchang@ucla.edu}
 \affiliation{Clinical Center, National Institutes of Health, Bethesda MD 20892}
 \date{\today}                       
 
 \begin{abstract}
-Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a general Bayesian framework under the principle of minimizing prediction error to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the statistical power of these criteria. These methods, when applied to data from the 2016--2017 NBA season, demonstrate evidence of statistical dependencies in LeBron James' free throw shooting. In particular, a model depending on the prior shot outcome (single-step Markovian) is approximately as predictive as a model with independent outcomes. A hybrid jagged model of two parameters, where LeBron shoots a higher percentage a missed free throw than otherwise, performs better than either model.
+Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a general Bayesian framework under the principle of minimizing prediction error to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the statistical power of these criteria. These methods, when applied to data from the 2016--2017 NBA season, demonstrate evidence of statistical dependencies in LeBron James' free throw shooting. In particular, a model depending on the prior shot outcome (single-step Markovian) is approximately as predictive as a model with independent outcomes. A hybrid jagged model of two parameters, where James shoots a higher percentage after a missed free throw than otherwise, is more predictive than either model.
 
 
 \pacs{02.30.Zz, 02.50.Tt, 07.05.Kf}
@@ -46,7 +46,7 @@ Consider the problem of modeling memory for discrete-state random walks using hi
 \maketitle
 
 %\section{Introduction}
- Our objective is finding factorized probability representations for stochastic paths, determining observationally whether and how transitions  are  dependent on memory. Assume that a trajectory $\xi$ consists of steps $\xi_l$, where each step takes  a value $x_l$ taken from the set $\{1,2,\ldots,M\}.$ We are interested in representations for the trajectory probability of the  form
+This Letter infers factorized probability representations for discrete-state stochastic paths, determining observationally whether and how transitions  are  dependent on memory. Assume that a trajectory $\xi$ consists of steps $\xi_l$, where each step takes  a value $x_l$ taken from the set $\{1,2,\ldots,M\}.$ We are interested in representations for the trajectory probability of the  form
 %\begin{align}
 %\Pr(\xi) &=\prod_{l=1}^L \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}, \ldots, \xi_{l-h} = x_{l-h} )  \nonumber\\
 %&= \prod_{l}^L p_{x_{l-h},x_{l-h+1},\cdots,x_l}, 
@@ -106,7 +106,7 @@ Following this approach, the Akaike Information Criterion (AIC,~\cite{akaike1974
 This approach has limitations. The AIC is inaccurate for for small samples. A modification of the AIC known as the AICc exists~\cite{hurvich1989regression}, however, its exact form is problem specific~\cite{burnham2003model}. Fundamentally,
 the maximum likelihood estimator precludes the existence of unobserved transitions -- a property that is problematic if  the sample size $J$ is small.
 It is desirable to regularize the problem by allowing a nonzero probability that
-transitions that have not yet been observed will occur. Our approach to rectifying these issues is Bayesian.
+transitions that have not yet been observed will occur. This Letter's approach to rectifying these issues is Bayesian.
 
 %Bayesian inference provides a natural way of instilling this property into the problem. Furthermore,
 %after laying the Bayesian fundamentals, one has available a suite of theoretical tools. Most relevantly, Bayesian model comparison provides alternatives to the AIC that one may consider in finding the optimal degree of memory $h$. 
@@ -134,7 +134,7 @@ In effect, one is assigning a probability of $\alpha/(M\alpha+N_{\bx})$ to any u
 
 As pertains to Bayesian model selection,  Bayes factors are often used~\cite{lavine1999bayes,posada2004model}. If using non-informative model priors, they consist of the likelihood of the data, averaged over the posterior distribution of model parameters. The logarithm of this quantity is known as the log predictive density (LPD). Related to the LPD is the log point-wise predictive density (LPPD), where the same expectation is taken separately for each datapoint and logarithms of these expectations are summed. The LPPD features in alternatives to Bayes factors and the AIC~\cite{gelman2014understanding}.
 
-The Widely Applicable Information Criterion~\cite{watanabe2010asymptotic,watanabe2013widely} (WAIC) is a Bayesian information criterion with two variants, each featuring the LPPD but differing in how they compute model complexity.  The WAIC, unlike the AIC, is applicable to singular statistical models and is asymptotically equivalent to Bayesian cross-validation~\cite{watanabe2010asymptotic}. The commonly used Deviance Information Criterion (DIC) also resembles the WAIC,  consisting of two variants. Both variants use point estimates of the posterior parameters rather than expectations as used in the WAIC.
+The Widely Applicable Information Criterion~\cite{watanabe2010asymptotic,watanabe2013widely} (WAIC) is a Bayesian information criterion with two variants, each featuring the LPPD but differing in how they compute model complexity.  The WAIC, unlike the AIC, is applicable to singular statistical models and is asymptotically equivalent to Bayesian leave-one-out cross-validation~\cite{watanabe2010asymptotic}. The commonly used Deviance Information Criterion (DIC) also resembles the WAIC,  consisting of two variants. Both variants use point estimates of the posterior parameters rather than expectations as used in the WAIC.
 However, the BIC~\cite{narlikar2013one} does not involve predictive model fit for new data~\cite{gelman2014understanding}.
 
 Finally Bayesian variants of cross-validation have recently been proposed as alternatives to information criterion~\cite{gelman2014understanding}. It is of note that the WAIC provides an asymptotic approximation of cross-validation (CV). In our problem, $k$-fold CV, where data is divided into $k$ partitions, can be evaluated in closed form without repeated model fitting. Using $-2\times \textrm{LPPD}$ as a metric, this Letter also evaluates two variants of $k$-fold CV:
@@ -147,8 +147,8 @@ two-fold cross validation (LPPDCV$_2$) and leave-one-out cross validation (LOO).
 \label{fig:fig2}
 \end{figure*}
 
-
-We evaluated these methods using simulations. Our test system is composed of $M=8$ states, with designated start and absorbing states.  For each given value of $h$, we generated for each $\bx\in \mathbf{X}_h$ a single set of true transition probabilities drawn from Dirichlet($\mathbf{1}$) distributions. For each of these random networks of a fixed $h$, we randomly sampled trajectories of a given sample size $J$ $10^4$ times, determining from each sample of $J$ the degree of $h$ to use as chosen by each of the methods.
+Simulations provided tests of these methods.
+The test system is composed of $M=8$ states, with designated start and absorbing states.  For each given value of $h$, I generated for each $\bx\in \mathbf{X}_h$ a single set of true transition probabilities drawn from Dirichlet($\mathbf{1}$) distributions. For each of these random networks of a fixed $h$, I randomly sampled trajectories of a given sample size $J$ $10^4$ times, determining from each sample of $J$ the degree of $h$ to use as chosen by each of the methods.
 
 \begin{figure}
 \includegraphics[width=\linewidth]{fig3}
@@ -170,7 +170,7 @@ where $B$ is the multivariate Beta function. LOO performed slightly better than 
 
 \begin{figure}
 \includegraphics[width=\linewidth]{fig4}
-\caption{\textbf{LeBron James' free throw accuracy for the 2016-2017 season} and evaluation of the hot hands phenomenon. \emph{Model selection} for degree $h\in\{0,1,2,3\}$ based on four criteria compared. The degree $h$ that has the lowest criteria value is favored. \emph{Simulated power analysis} showing the frequency that each value $h$ is chosen based on different true models matching the observed free throw accuracy. }
+\caption{\textbf{LeBron James' free throw accuracy for the 2016-2017 season} and evaluation of the hot hands phenomenon. \emph{Model selection} for degree $h\in\{0,1,2,3\}$ based on four criteria compared. The degree $h$ that has the lowest criteria value is favored. \emph{Simulated power analysis} showing the frequency that each value $h$ is chosen based on evaluating simulated free throw trajectories matching the overall observed free throw accuracy. }
 \label{fig:freethrows}
 \end{figure}
 
@@ -180,24 +180,24 @@ A simple real-world application of this method is the evaluation of ``hot-hand p
   
   \cite{burns2001hot}\cite{miller2016surprised}\cite{bocskocsky2014hot}\cite{arkes2010revisiting}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
-\caption{\textbf{Hybrid jagged model}} 
+\includegraphics[width=\linewidth]{fig5}
+
+\caption{\textbf{Hybrid jagged model} for free throw outcome where outcomes are independent except immediately after a missed free throw. AIC: $869.40$, WAIC$_1: 869.45$ , WAIC$_2: 869.52$ , LOO: $869.52$} 
 \label{fig:fig5}
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-This Letter has shown that LOO and WAIC$_2$ can learn from data the physical reality of the 
-degree of memory in a system. It is important to comment on the uncertainty in such determinations. Regardless of the selection criterion used, the determination of $h$ is not truly certain except in an asymptotic sense where one has an unlimited amount of data available. However, one may use a simulation procedure like the one used in this Letter in order to estimate the degree of uncertainty.  
+This Letter has shown that LOO and WAIC can learn from data the physical reality of the 
+degree of memory in a system. Regardless of the selection criterion used, the determination of $h$ is not truly certain except asymptotically when an unlimited amount of data are available. However, one may use a simulation procedure like the one used in this Letter in order to estimate the degree of uncertainty.  
 
 Importantly,   both the AIC and LPD (Bayes factors) are biased, in opposite directions. The AIC tends to sparsity, which runs counter to the typical situation in linear regression problems where the AIC can favor complexity with too few data, a situation ameliorated by the more-stringent AICc~\cite{claeskens2008model}. Bayes factors with flat model  priors as investigated here, on the other hand, are known to automatically penalize complexity indirectly through increased posterior entropy. Yet, when enough data are present, posterior entropy is low while many model parameters may be highly concentrated about zero and the Bayes factor is happy to select the more-complex model even if it is inconsistent with physical truth.
 %
 Notably, alternative Bayes factors methods for selecting the degree of memory also include model-level priors that behave like the penalty term in the AIC~\cite{strelioff2007inferring,singer2014detecting}. Since the upper bound of the LPD is the logarithm of the likelihood found from the MLE procedure, this selection method is more stringent in the low sample-size regime than the pure AIC and hence will suffer from the same bias towards less memory.
 
 
-Models of structure similar to Eq.~\ref{eq:factorize} have appeared in limitless contexts such as in text analysis~\cite{melnyk2006memory}, analysis of human digital trails~\cite{singer2014detecting}, DNA sequence analysis, protein folding~\cite{yuan1999prediction}, and biology~\cite{bettenbuhl2012bayesian}. As we have seen, many methods tend to asymptotically select the correct model. However, studies are seldom in the asymptotic regime and the use of the methods mentioned in this Letter to reanalyze data from prior studies may prove fruitful in uncovering previously overlooked physics. The general method mentioned in this Letter can also be extended to model averaging in order to generate jagged models with no single fixed degree of memory.
-
-
-
+Models of structure similar to Eq.~\ref{eq:factorize} have appeared in limitless contexts such as in text analysis~\cite{melnyk2006memory}, analysis of human digital trails~\cite{singer2014detecting}, DNA sequence analysis, protein folding~\cite{yuan1999prediction}, and biology~\cite{bettenbuhl2012bayesian}. As we have seen, many methods tend to asymptotically select the correct model. However, studies are seldom in the asymptotic regime and the use of the methods mentioned in this Letter to reanalyze data from prior studies may prove fruitful in uncovering previously overlooked physics. 
 
 
 \emph{Acknowledgements} I thank the United States Social Security Administration and the Intramural Research Program at the NIH Clinical Center for funding. Additionally, I thank members of the Biostatistics and Rehabilitation Section in the Rehabilitation Medicine Department at NIH, John P. Collins in particular, and also Carson Chow at NIDDK for helpful discussions.
