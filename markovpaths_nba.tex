@@ -30,14 +30,14 @@
 
 \begin{document}
 %\title[Memory determination in finite-state random walks]{Bayesian predictive selection of memory for multistep Markov chains: LeBron James may be more likely to make a free throw after missing the previous one}
-\title[Memory determination in finite-state random walks]{Phenomenon or fallacy? A look at hot hands in LeBron James' free throw shooting using predictive memory selection for multistep Markov Chains}
+\title[Memory determination in finite-state random walks]{Evaluating hot hands in LeBron James' free throw shooting using predictive memory selection for multistep Markov Chains}
 \author{Joshua C. Chang}
 \email{joshchang@ucla.edu}
 \affiliation{Clinical Center, National Institutes of Health, Bethesda MD 20892}
 \date{\today}                       
 
 \begin{abstract}
-Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a general Bayesian framework under the principle of predictive accuracy to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the prediction error of these criteria. These methods, when applied to data from the 2016--2017 NBA season, show evidence of statistical dependencies in LeBron James' free throw shooting. In particular, a model depending on the prior shot outcome is approximately as predictive as a model with independent outcomes.
+Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a general Bayesian framework under the principle of minimizing prediction error to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the statistical power of these criteria. These methods, when applied to data from the 2016--2017 NBA season, demonstrate evidence of statistical dependencies in LeBron James' free throw shooting. In particular, a model depending on the prior shot outcome (single-step Markovian) is approximately as predictive as a model with independent outcomes. A hybrid jagged model of two parameters, where LeBron shoots a higher percentage a missed free throw than otherwise, performs better than either model.
 
 
 \pacs{02.30.Zz, 02.50.Tt, 07.05.Kf}
@@ -46,7 +46,7 @@ Consider the problem of modeling memory for discrete-state random walks using hi
 \maketitle
 
 %\section{Introduction}
- Our objective is finding factorized probability representations for stochastic paths, determining observationally how transitions  are  dependent on memory. Assume that a trajectory $\xi$ consists of steps $\xi_l$, where each step takes  a value $x_l$ taken from the set $\{1,2,\ldots,M\}.$ We are interested in representations for the trajectory probability of the  form
+ Our objective is finding factorized probability representations for stochastic paths, determining observationally whether and how transitions  are  dependent on memory. Assume that a trajectory $\xi$ consists of steps $\xi_l$, where each step takes  a value $x_l$ taken from the set $\{1,2,\ldots,M\}.$ We are interested in representations for the trajectory probability of the  form
 %\begin{align}
 %\Pr(\xi) &=\prod_{l=1}^L \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}, \ldots, \xi_{l-h} = x_{l-h} )  \nonumber\\
 %&= \prod_{l}^L p_{x_{l-h},x_{l-h+1},\cdots,x_l}, 
@@ -58,7 +58,7 @@ Consider the problem of modeling memory for discrete-state random walks using hi
 \label{eq:factorize}
 \end{equation}
 %
-where $p_{x_{l-h},x_{l-h+1},\cdots,x_l} =  \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}, \ldots, \xi_{l-h} = x_{l-h} ),$ and $h\in\mathbb{Z}^+$ represents the number of states worth of history needed to predict the next state, with appropriate boundary conditions for the beginning of the trajectory. In the case of absolutely no memory ($h=0$), the path probability is simply the product of the probabilities of being in each of the separate states in a path, $p_{x_1}p_{x_2},\ldots p_{x_L},$ and there are essentially $M-1$ free parameters that determine the evolution of the system, where $M$ is the number of states. If $h=1$, the system is single-step Markovian in that only the current state is relevant in determining the next state. These systems involve $M(M-1)$ parameters to specify their evolution. In general, if $h$ states of history are required, then the system is $h$-step Markovian, and $M^h(M-1)$ parameters are needed (see Fig~\ref{fig:fig1}). Hence, the size of the parameter space grows exponentially with memory. Our objective is to determine, based on observational evidence, an appropriate value for $h$. 
+where $p_{x_{l-h},x_{l-h+1},\cdots,x_l} =  \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}, \ldots, \xi_{l-h} = x_{l-h} ),$ and $h\in\mathbb{Z}^+$ represents the number of states worth of history needed to predict the next state, with appropriate boundary conditions for the beginning of the trajectory. In the case of absolutely no memory ($h=0$), the path probability is simply the product of the probabilities of being in each of the separate states in a path, $p_{x_1}p_{x_2},\ldots p_{x_L},$ and there are essentially $M-1$ free parameters that determine the evolution of the system, where $M$ is the number of states. If $h=1$, the system is single-step Markovian in that only the current state is relevant in determining the next state. These systems involve $M(M-1)$ parameters to specify their evolution. Generally, if $h$ states of history are required, then the system is $h$-step Markovian, and $M^h(M-1)$ parameters are needed (see Fig~\ref{fig:fig1}). Hence, the size of the parameter space grows exponentially with memory. Our objective is to determine, based on observational evidence, an appropriate value for $h$. 
 
  
 % \begin{figure}
@@ -69,8 +69,8 @@ where $p_{x_{l-h},x_{l-h+1},\cdots,x_l} =  \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}
  
   \begin{figure}
  \includegraphics[width=\linewidth]{fig1b}
- \caption{\bf{Multi-step Markovian processes}  by degree of memory $h$, demonstrated on a three-state network. For $h=1$, the statistics of the next transition depend solely on the current state, and transition probabilities are indexed by  $2$-tuple. For $h\geq2$, the statistics depend on the history. For $h=2$, transition probabilities depend on the
- current state and the previous state, and all transition probabilities are indexed by $3$-tuples.  Shown are the possible single-step transitions from state \bf{b} to state \bf{c}.  } \label{fig:fig1}
+ \caption{\bf{Multi-step Markovian processes}  by degree of memory $h$, demonstrated on a three-state network. For $h=1$, the statistics of the next transition depend solely on the current state, and transition probabilities are indexed by  $2$-tuple. For $h\geq2$, statistics depend on history. For $h=2$, transitions depend on the
+ current state and the previous state, and all probabilities are indexed by $3$-tuples.  Shown:  possible single-step transitions from state \bf{b} to state \bf{c}.  } \label{fig:fig1}
  \end{figure}
 
 There is a trade-off between complexity and fitting error that is inherent when varying $h$. From a statistical viewpoint, complexity results in less-precise determination of network parameters, leading to larger prediction errors. This undesirable consequence of complexity is known as \emph{overfitting}. Conversely, a simple model may not capture the true probability space where paths reside, and fail to catch patterns in the real process.
@@ -81,7 +81,7 @@ We wish to choose the value of $h$ that yields a model that best predicts new un
  For a fixed degree of memory $h$,
 we may look at possible history vectors $\bx = [x_1,x_2,\ldots,x_h]$ of length $h$ taken from the set $\mathbf{X}_h = \{1,2,\ldots,M \}^h$. For each $\bx$, denote the vector $\mathbf{p}_{\bx} = [p_{\bx,1},p_{\bx,2},\ldots{p}_{\bx,M}],$ where $p_{\bx,m}$ is the probability that a trajectory goes next to state $m$ given that $\bx$ represents its most recent history. For convenience, we denote the collection of all $\bp_\bx$ as $\mathbf{p}$.  
 
-Generally one has available  $J$ trajectories. Assuming independence, one may write the joint probability, or likelihood, of observing these trajectories as
+Generally one has available  $J\in\mathbb{N}$ trajectories. Assuming independence, one may write the joint probability, or likelihood, of observing these trajectories as
 %\begin{align}
 %\lefteqn{\Pr(\{\xi^{(j)} \}_{j=1}^J \vert \bp) = \prod_{j=1}^J \Pr(\xi^{(j)}\vert \bp)  } \nonumber\\
 %&= \prod_{j=1}^J \prod_{\bx\in\mathbf{X}_h} \prod_{m=1}^M p_{\bx,m}^{N^{(j)}_{\bx,m}} = \prod_{\bx\in\mathbf{X}_h} \prod_{m=1}^M p_{\bx,m}^{N_{\bx,m}} ,
@@ -156,12 +156,12 @@ We evaluated these methods using simulations. Our test system is composed of $M=
 \label{fig:fig3}
 \end{figure}
 
-Fig.~\ref{fig:fig2} provides the frequency that each of five models ($h=1,\ldots,5$) was chosen based on the selection criteria compared. Each row corresponds to a given true degree of memory $h_{\textrm{true}}$ and the columns represent increasing sample sizes when viewed from left to right. Generally, it is seen that as the number of samples increases, all selection criteria except for the LPD (Bayes factors) improve in their ability to select the true model.  In general, the AIC does well if the true memory is small, but requires more data than many of the competing methods in order to resolve larger degrees of memory. 
+Fig.~\ref{fig:fig2} provides the frequency that each of five models ($h=1,\ldots,5$) was chosen based on the selection criteria compared. Each row corresponds to a given true degree of memory $h_{\textrm{true}}\in\{1,2,3\}$ and sample sizes increase along columns when viewed from left to right. Generally, as the number of samples increases, all selection criteria except for the LPD (Bayes factors) improve in their ability to select the true model. The LPD consistently selects a more-complex (higher-$h$) model. The AIC does well if $h_{\textrm{true}}$ is small, but requires more data than many of the competing methods in order to resolve larger degrees of memory. 
 
-The two variants of the WAIC, LOO, and DIC$_1$ perform roughly on par. Since each criterion selects the model with the lowest value, it is desirable that $\Delta\textrm{Criterion}(h)=\textrm{Criterion}(h)-\textrm{Criterion}(h_{\textrm{true}})>0$, for $h\neq h_{\textrm{true}}$. Fig.~\ref{fig:fig3} explores the distributions of these quantities in the case where $h_{\textrm{true}}=2$.  As sample size $J$ increases, there is clearer separation of the masses of these quantities from zero. By $J=64$, for instance, no models where $h=1$ are selected using any of the criteria. The WAIC$_2$ and LOO criteria perform about the same whereas the WAIC$_1$ criteria and the DIC$_1$ criteria lag behind in separating themselves from zero.
+LOO, the two variants of the WAIC,  and DIC$_1$ perform roughly on par. Since each criterion selects the model with the lowest value, it is desirable that $\Delta\textrm{Criterion}(h)=\textrm{Criterion}(h)-\textrm{Criterion}(h_{\textrm{true}})>0$, for $h\neq h_{\textrm{true}}$. Fig.~\ref{fig:fig3} explores the distributions of these quantities in the case where $h_{\textrm{true}}=2$.  As sample size $J$ increases, there is clearer separation of these quantities from zero. By $J=64$, no models where $h=1$ are selected using any of the criteria. The WAIC$_2$ and LOO criteria perform about the same whereas the WAIC$_1$ criteria and the DIC$_1$ criteria lag behind in separating themselves from zero.
 
 
-As a result of these tests, this Letter recommends the leave-one-out cross validation criterion:
+As a result of these tests, this Letter recommends the LOO criterion:
 \begin{equation}
 \textrm{LOO} = -2\sum_j \sum_{\bx}  \log\left(  \frac{B(\bN_\bx  +\balpha)}{B(\bN_\bx -\bN_{\bx}^{(j)} +\balpha)} \right),
 \label{eq:loo}
@@ -194,7 +194,7 @@ Models of structure similar to Eq.~\ref{eq:factorize} have appeared in limitless
 
 
 
-\emph{Acknowledgements} The author thanks the United States Social Security Administration and the Intramural Research Program at the NIH Clinical Center for funding this research. Additionally, the author is thankful for helpful comments from members of the Biostatistics and Rehabilitation Section in the Rehabilitation Medicine Department at NIH, John P. Collins in particular, and also Carson Chow at NIDDK.
+\emph{Acknowledgements} I thank the United States Social Security Administration and the Intramural Research Program at the NIH Clinical Center for funding. Additionally, I thank members of the Biostatistics and Rehabilitation Section in the Rehabilitation Medicine Department at NIH, John P. Collins in particular, and also Carson Chow at NIDDK for helpful discussions.
 
 \bibliographystyle{plain}
 \bibliography{markovpaths}
