@@ -30,14 +30,14 @@
 
 \begin{document}
 %\title[Memory determination in finite-state random walks]{Bayesian predictive selection of memory for multistep Markov chains: LeBron James may be more likely to make a free throw after missing the previous one}
-\title[Memory determination in finite-state random walks]{A critical look at the hot hands fallacy using  predictive memory selection for multistep Markov Chains}
+\title[Memory determination in finite-state random walks]{Phenomenon or fallacy? A look at hot hands in LeBron James' free throw shooting using predictive memory selection for multistep Markov Chains}
 \author{Joshua C. Chang}
 \email{joshchang@ucla.edu}
 \affiliation{Clinical Center, National Institutes of Health, Bethesda MD 20892}
 \date{\today}                       
 
 \begin{abstract}
-Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a Bayesian framework under the principle of predictive accuracy to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the prediction error of these criteria. These methods, when applied to data from the 2016--2017 NBA season, show some possible evidence of statistical dependencies in LeBron James' free throw shooting. In particular, a model where LeBron James is more likely to make a free throw after missing the previous free throw than average is approximately as predictive as a model in which all free throws have independent outcomes.
+Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a general Bayesian framework under the principle of predictive accuracy to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the prediction error of these criteria. These methods, when applied to data from the 2016--2017 NBA season, show some possible evidence of statistical dependencies in LeBron James' free throw shooting. In particular, a model where LeBron James is more likely to make a free throw after missing the previous free throw than average is approximately as predictive as a model in which all free throws have independent outcomes.
 
 
 \pacs{02.30.Zz, 02.50.Tt, 07.05.Kf}
@@ -138,7 +138,7 @@ The Widely Applicable Information Criterion~\cite{watanabe2010asymptotic,watanab
 However, unlike the WAIC and cross-valdation, Bayes factors, DIC, and other methods using the BIC~\cite{narlikar2013one} do not have as their objective the maximization of predictive model fit onto new data~\cite{gelman2014understanding}.
 
 Finally Bayesian variants of cross-validation have recently been proposed as alternatives to information criterion~\cite{gelman2014understanding}. It is of note that the WAIC provides an asymptotic approximation of cross-validation (CV). In our problem, $k$-fold CV, where data is divided into $k$ partitions, can be evaluated in closed form without repeated model fitting. Using $-2\times \textrm{LPPD}$ as a metric, this Letter also evaluates two variants of $k$-fold CV:
-two-fold cross validation (LPPDCV$_2$) and leave-one-out cross validation (LOO).
+two-fold cross validation (LPPDCV$_2$) and leave-one-out cross validation (LOO).  Closed-form formulae for computing each model selection criterion are available as \textsc{Supplemental material}. 
   %%%%%%%%%%%%%%%%%%%
 
 \begin{figure*}[!ht]
@@ -148,7 +148,7 @@ two-fold cross validation (LPPDCV$_2$) and leave-one-out cross validation (LOO).
 \end{figure*}
 
 
-To e these methods, we evaluated them  using simulations. Closed-form formulae for computing each model selection criterion are available as \textsc{Supplemental material}. Our test system is composed of $M=8$ states, with designated start and absorbing states.  For each given value of $h$, we generated for each $\bx\in \mathbf{X}_h$ a single set of true transition probabilities drawn from Dirichlet($\mathbf{1}$) distributions. For each of these random networks of a fixed $h$, we randomly sampled trajectories of a given sample size $J$ $10^4$ times, determining from each sample of $J$ the degree of $h$ to use as chosen by each of the methods.
+We evaluated these methods using simulations. Our test system is composed of $M=8$ states, with designated start and absorbing states.  For each given value of $h$, we generated for each $\bx\in \mathbf{X}_h$ a single set of true transition probabilities drawn from Dirichlet($\mathbf{1}$) distributions. For each of these random networks of a fixed $h$, we randomly sampled trajectories of a given sample size $J$ $10^4$ times, determining from each sample of $J$ the degree of $h$ to use as chosen by each of the methods.
 
 \begin{figure}
 \includegraphics[width=\linewidth]{fig3}
