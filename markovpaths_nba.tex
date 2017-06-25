@@ -37,7 +37,7 @@
 \date{\today}                       
 
 \begin{abstract}
-Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a general Bayesian framework under the principle of predictive accuracy to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the prediction error of these criteria. These methods, when applied to data from the 2016--2017 NBA season, show some possible evidence of statistical dependencies in LeBron James' free throw shooting. In particular, a model where LeBron James is more likely to make a free throw after missing the previous free throw than average is approximately as predictive as a model in which all free throws have independent outcomes.
+Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a general Bayesian framework under the principle of predictive accuracy to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the prediction error of these criteria. These methods, when applied to data from the 2016--2017 NBA season, show evidence of statistical dependencies in LeBron James' free throw shooting. In particular, a model depending on the prior shot outcome is approximately as predictive as a model with independent outcomes.
 
 
 \pacs{02.30.Zz, 02.50.Tt, 07.05.Kf}
@@ -142,7 +142,7 @@ two-fold cross validation (LPPDCV$_2$) and leave-one-out cross validation (LOO).
   %%%%%%%%%%%%%%%%%%%
 
 \begin{figure*}[!ht]
-\includegraphics[width=\textwidth]{fig2a}
+\includegraphics[width=\textwidth]{fig2b}
 \caption{\textbf{Chosen degree of memory $h$} in simulations for varying true degrees of memory  $h_{\textrm{true}}$ and number of observed trajectories $J$. Rows correspond to model selection under a given degree of memory. Columns correspond to the number of trajectories. Depicted are the percent of simulations in which each degree of memory is selected using the different model evaluation criteria (percents of at least $20$ are labeled). Colors coded based on degree of memory: ({\color{Set1_5_red} 1: red}, {\color{Set1_5_blue} 2: blue}, {\color{Set1_5_green}3: green}, {\color{Set1_5_purple}4: purple}, {\color{Set1_5_orange}5: orange}). \emph{Example:} For $h_{\textrm{true}}=1$ and $J=4$, the WAIC$_1$ criteria selected $h=1$ approximately $65\%$ of the time. }
 \label{fig:fig2}
 \end{figure*}
