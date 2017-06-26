@@ -30,14 +30,14 @@
 
 \begin{document}
 %\title[Memory determination in finite-state random walks]{Bayesian predictive selection of memory for multistep Markov chains: LeBron James may be more likely to make a free throw after missing the previous one}
-\title[Memory determination in finite-state random walks]{Evaluating the hot hand phenomenon using predictive memory selection for multistep Markov Chains}
+\title[Memory determination in finite-state random walks]{Evaluating the hot hand phenomenon using predictive memory selection for multistep Markov Chains: LeBron James' error correcting free throws}
 \author{Joshua C. Chang}
 \email{joshchang@ucla.edu}
 \affiliation{Clinical Center, National Institutes of Health, Bethesda MD 20892}
 \date{\today}                       
 
 \begin{abstract}
-Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a general Bayesian framework under the principle of minimizing prediction error to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the statistical power of these criteria. These methods, when applied to data from the 2016--2017 NBA season, demonstrate evidence of statistical dependencies in LeBron James' free throw shooting. In particular, a model depending on the prior shot outcome (single-step Markovian) is approximately as predictive as a model with independent outcomes. A hybrid jagged model of two parameters, where James shoots a higher percentage after a missed free throw than otherwise, is more predictive than either model.
+Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a general Bayesian framework under the principle of minimizing prediction error to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the statistical power of these criteria. These methods, when applied to data from the 2016--2017 NBA season, demonstrate evidence of statistical dependencies in LeBron James' free throw shooting. In particular, a model depending on the previous shot (single-step Markovian) is approximately as predictive as a model with independent outcomes. A hybrid jagged model of two parameters, where James shoots a higher percentage after a missed free throw than otherwise, is more predictive than either model.
 
 
 \pacs{02.30.Zz, 02.50.Tt, 07.05.Kf}
@@ -73,10 +73,10 @@ where $p_{x_{l-h},x_{l-h+1},\cdots,x_l} =  \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}
  current state and the previous state, and all probabilities are indexed by $3$-tuples.  Shown:  possible single-step transitions from state \bf{b} to state \bf{c}.  } \label{fig:fig1}
  \end{figure}
 
-There is a trade-off between complexity and fitting error that is inherent when varying $h$. From a statistical viewpoint, complexity results in less-precise determination of network parameters, leading to larger prediction errors. This undesirable consequence of complexity is known as \emph{overfitting}. Conversely, a simple model may not capture the true probability space where paths reside, and fail to catch patterns in the real process.
+The parameter $h$ controls the trade-off between complexity and fitting error. From a statistical viewpoint, complexity results in less-precise determination of model parameters, leading to larger prediction errors (overfitting). Conversely, a simple model may not capture the true probability space where paths reside, and fail to catch patterns in the real process (underfit).
 
-This Letter evaluates several statistical criteria for selecting the number of states worth of memory to retain in the factorization of Eq.~\ref{eq:factorize}, viewing the problem in terms of prediction accuracy. 
-We wish to choose the value of $h$ that yields a model that best predicts new unobserved trajectories~\cite{claeskens2008model}. 
+This Letter evaluates several statistical criteria for selecting the number of states $h$ worth of memory to retain in the factorization of Eq.~\ref{eq:factorize}, viewing the problem in terms of prediction accuracy. 
+A value $h$ that yields a model that can best predict new unobserved trajectories~\cite{claeskens2008model} is chosen. Using these methods, I evaluate the hot hands phenomenon.
 
  For a fixed degree of memory $h$,
 we may look at possible history vectors $\bx = [x_1,x_2,\ldots,x_h]$ of length $h$ taken from the set $\mathbf{X}_h = \{1,2,\ldots,M \}^h$. For each $\bx$, denote the vector $\mathbf{p}_{\bx} = [p_{\bx,1},p_{\bx,2},\ldots{p}_{\bx,M}],$ where $p_{\bx,m}$ is the probability that a trajectory goes next to state $m$ given that $\bx$ represents its most recent history. For convenience, we denote the collection of all $\bp_\bx$ as $\mathbf{p}$.  
@@ -168,36 +168,43 @@ As a result of these tests, this Letter recommends the LOO criterion:
 \end{equation}
 where $B$ is the multivariate Beta function. LOO performed slightly better than WAIC$_2$ in the included tests, while being somewhat simpler to compute. Eq.~\ref{eq:loo} decomposes completely into a sum of logarithms of Gamma functions, and is hence easy to implement in standard scientific software packages.
 
+%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 \includegraphics[width=\linewidth]{fig4}
-\caption{\textbf{LeBron James' free throw accuracy for the 2016-2017 season} and evaluation of the hot hands phenomenon. \emph{Model selection} for degree $h\in\{0,1,2,3\}$ based on four criteria compared. The degree $h$ that has the lowest criteria value is favored. \emph{Simulated power analysis} showing the frequency that each value $h$ is chosen based on evaluating simulated free throw trajectories matching the overall observed free throw accuracy. }
+\caption{\textbf{LeBron James' free throw accuracy for the 2016-2017 season} and evaluation of the hot hands phenomenon. \emph{Model selection criteria} for degree $h\in\{0,1,2,3\}$ based on four criteria compared. Lower is better and $h=0$ is slightly favored over $h=1$ using all criteria. \emph{Simulated power analysis} showing the frequency that each value $h$ is chosen based on evaluating simulated free throw trajectories matching the overall observed free throw accuracy. }
 \label{fig:freethrows}
 \end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-A simple real-world application of this method is the evaluation of ``hot-hand phenomenon'' (or fallacy) in the context of basketball free-throw shooting. This phenomenon is controversial. In 1985, the first systematic examination of the phenomenon in basketball yielded negative results~\cite{gilovich1985hot}.
+\textbf{The hot-hand phenomenon:} 
+A  real-world application of these methods is the evaluation of ``hot-hand phenomenon'' (or fallacy) in the context of basketball free-throw shooting. This controversial phenomenon pertains to the belief that recent success (or failure) predicts immediate future success (or failure).  In 1985, the first systematic examination of the phenomenon in basketball yielded negative results~\cite{gilovich1985hot}.
 
-  During the 2016-2017 season, the Cleveland Cavaliers played $100$ games. In $91$ of these games, LeBron James attempted at least a single free throw. Overall, he attempted $693$ total free throws, hitting $471$ of them for $68.0\%$ accuracy. Fig.~\ref{fig:freethrows} presents a breakdown of the free throw percentage conditional on the outcome of the previous in-game free throw. LeBron James shot a higher percentage on free throws after a missed free throw than otherwise.
-  
   \cite{burns2001hot}\cite{miller2016surprised}\cite{bocskocsky2014hot}\cite{arkes2010revisiting}
+
+
+  During the 2016-2017 season (regular season plus playoffs), the Cleveland Cavaliers played $100$ games. In $91$ of these games, LeBron James attempted at least a single free throw, hitting $471$ of $693$ overall (Fig.~\ref{fig:freethrows}).  Conditioning the hit probabilities by the outcome of the preceding free throw in the same game, James shot a slightly better percentage after missing a free throw than otherwise. However, the $h=0$ model is favored slightly over $h=1$ as it appears that the dataset is underpowered for the selection of $h=1$. In simulations of free throw trajectories, where the number of free throws per game was drawn from a Poisson distribution that approximated the number distribution in the dataset, and outcomes were drawn for the fitted $h=1$ model, $h=1$ was chosen slightly under half the time (Fig.~\ref{fig:freethrows}).
+  
+  However, examining the model parameters in the case of $h=1$, one sees that the hitting probabilities are similar in all cases except after a miss (Fig.~\ref{fig:freethrows}). This observation suggests  a  model with jagged memory: independence of outcome except after a miss. Having one fewer parameter than the full $h=1$ model, this jagged model is selected 
+  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
 \includegraphics[width=\linewidth]{fig5}
 
-\caption{\textbf{Hybrid jagged model} for free throw outcome where outcomes are independent except immediately after a missed free throw. AIC: $869.40$, WAIC$_1: 869.45$ , WAIC$_2: 869.52$ , LOO: $869.52$} 
+\caption{\textbf{Hybrid jagged memory model} for free throw outcome where shots are independent except immediately after a miss. AIC: $869.40$, WAIC$_1$: $869.45,$ WAIC$_2$: $869.52,$ LOO: $869.52.$ For reference, all selection criteria for the fully independent ($h=0$) model are approximately $871$ (Fig.~\ref{fig:freethrows}).} 
 \label{fig:fig5}
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-This Letter has shown that LOO and WAIC can learn from data the physical reality of the 
+This Letter has shown that LOO and its approximation, the WAIC, can learn from data the physical reality of the 
 degree of memory in a system. Regardless of the selection criterion used, the determination of $h$ is not truly certain except asymptotically when an unlimited amount of data are available. However, one may use a simulation procedure like the one used in this Letter in order to estimate the degree of uncertainty.  
 
-Importantly,   both the AIC and LPD (Bayes factors) are biased, in opposite directions. The AIC tends to sparsity, which runs counter to the typical situation in linear regression problems where the AIC can favor complexity with too few data, a situation ameliorated by the more-stringent AICc~\cite{claeskens2008model}. Bayes factors with flat model  priors as investigated here, on the other hand, are known to automatically penalize complexity indirectly through increased posterior entropy. Yet, when enough data are present, posterior entropy is low while many model parameters may be highly concentrated about zero and the Bayes factor is happy to select the more-complex model even if it is inconsistent with physical truth.
+Importantly,   both the AIC and LPD (Bayes factors) are biased in opposite situations, in opposite directions. For small datasets, the AIC tends to sparsity, which runs counter to the typical situation in linear regression problems where the AIC can favor complexity with too few data, a situation ameliorated by the more-stringent AICc~\cite{claeskens2008model}. Bayes factors with flat model  priors as investigated here, on the other hand, consistently select a higher value of $h$ given more data.
 %
 Notably, alternative Bayes factors methods for selecting the degree of memory also include model-level priors that behave like the penalty term in the AIC~\cite{strelioff2007inferring,singer2014detecting}. Since the upper bound of the LPD is the logarithm of the likelihood found from the MLE procedure, this selection method is more stringent in the low sample-size regime than the pure AIC and hence will suffer from the same bias towards less memory.
 
 
-Models of structure similar to Eq.~\ref{eq:factorize} have appeared in limitless contexts such as in text analysis~\cite{melnyk2006memory}, analysis of human digital trails~\cite{singer2014detecting}, DNA sequence analysis, protein folding~\cite{yuan1999prediction}, and biology~\cite{bettenbuhl2012bayesian}. As we have seen, many methods tend to asymptotically select the correct model. However, studies are seldom in the asymptotic regime and the use of the methods mentioned in this Letter to reanalyze data from prior studies may prove fruitful in uncovering previously overlooked physics. 
+Models of structure similar to Eq.~\ref{eq:factorize} have appeared in limitless contexts such as in text analysis~\cite{melnyk2006memory}, analysis of human digital trails~\cite{singer2014detecting}, DNA sequence analysis, protein folding~\cite{yuan1999prediction}, and biology~\cite{bettenbuhl2012bayesian}. As we have seen, many methods tend to asymptotically select the correct model. However, studies are seldom in the asymptotic regime and using these methods  to reanalyze data from prior studies may prove fruitful in uncovering previously overlooked memory effects, particularly in systems of a large number of states. 
 
 
 \emph{Acknowledgements} I thank the United States Social Security Administration and the Intramural Research Program at the NIH Clinical Center for funding. Additionally, I thank members of the Biostatistics and Rehabilitation Section in the Rehabilitation Medicine Department at NIH, John P. Collins in particular, and also Carson Chow at NIDDK for helpful discussions.
