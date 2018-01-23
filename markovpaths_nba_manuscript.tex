@@ -58,6 +58,8 @@ Consider the problem of modeling memory for discrete-state random walks using hi
 
 \section{Introduction}
 
+Write about the utility of this model and the use of it in basketball
+
 \section{Modeling}
 This Letter concerns selection of factorized probability models for discrete-state stochastic paths, determining observationally whether and how transitions  are  dependent on memory. Assume that a trajectory $\xi$ consists of steps $\xi_l$, where each step takes  a value $x_l$ taken from the set $\{1,2,\ldots,M\}.$ We are interested in representations for the trajectory probability of the  form
 %\begin{align}
@@ -88,7 +90,9 @@ where $p_{x_{l-h},x_{l-h+1},\cdots,x_l} =  \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}
 
 The parameter $h$ controls the trade-off between complexity and fitting error. From a statistical viewpoint, complexity results in less-precise determination of model parameters, leading to larger prediction errors (overfitting). Conversely, a simple model may not capture the true probability space where paths reside, and fail to catch patterns in the real process (underfit).
 
-\section{Model selection}
+\section{Model selection criterion}
+
+There are many information criterion in common use for solving the model selection problem within the framework of minimization of prediction loss.
 
 This Letter evaluates several statistical criteria for selecting the number of states $h$ worth of memory to retain in the factorization of Eq.~\ref{eq:factorize}, viewing the problem in terms of prediction accuracy. 
 A value $h$ that yields a model that can best predict new unobserved trajectories~\cite{claeskens2008model} is chosen. Using these methods, I evaluate the hot hands phenomenon.
@@ -156,82 +160,11 @@ two-fold cross validation (LPPDCV$_2$) and leave-one-out cross validation (LOO).
   %%%%%%%%%%%%%%%%%%%
 
 \begin{figure*}[!ht]
-\includegraphics[width=\textwidth]{fig2b}
+\includegraphics[width=\textwidth]{fig2}
 \caption{\textbf{Chosen degree of memory $h$} in simulations for varying true degrees of memory  $h_{\textrm{true}}$ and number of observed trajectories $J$. Rows correspond to model selection under a given degree of memory. Columns correspond to the number of trajectories. Depicted are the percent of simulations in which each degree of memory is selected using the different model evaluation criteria (percents of at least $20$ are labeled). Colors coded based on degree of memory: ({\color{Set1_5_red} 1: red}, {\color{Set1_5_blue} 2: blue}, {\color{Set1_5_green}3: green}, {\color{Set1_5_purple}4: purple}, {\color{Set1_5_orange}5: orange}). \emph{Example:} For $h_{\textrm{true}}=1$ and $J=4$, the WAIC$_1$ criteria selected $h=1$ approximately $65\%$ of the time. }
 \label{fig:fig2}
 \end{figure*}
 
-\section{Results}
-
-Simulations provided tests of these methods.
-The test system is composed of $M=8$ states, with designated start and absorbing states.  For each given value of $h$, I generated for each $\bx\in \mathbf{X}_h$ a single set of true transition probabilities drawn from Dirichlet($\mathbf{1}$) distributions. For each of these random networks of a fixed $h$, I randomly sampled trajectories of a given sample size $J$ $10^4$ times, determining from each sample of $J$ trajectories the degree of $h$ chosen by each of the methods.
-
-\begin{figure}
-\includegraphics[width=\linewidth]{fig3}
-\caption{\textbf{Distributions of computed selection criteria relative to a true model ($h_{\textrm{true}}=2$)}, $\Delta\textrm{Criterion}(h)=\textrm{Criterion}(h)-\textrm{Criterion}(h_{\textrm{true}})$.  Density plots with minimum, maximum, and mean of the selection criteria for each model relative to that of the true model are shown at various sample sizes $J$. Values above zero mean that the true model is favored over a particular model. Ideally, mass should be above zero for accurate selection of the true model (zero drawn as dashed line).}
-\label{fig:fig3}
-\end{figure}
-
-Fig.~\ref{fig:fig2} provides the frequency that each of five models ($h=1,\ldots,5$) was chosen based on the selection criteria compared. Each row corresponds to a given true degree of memory $h_{\textrm{true}}\in\{1,2,3\}$ and sample sizes increase along columns when viewed from left to right. Generally, as the number of samples increases, all selection criteria except for the LPD (Bayes factors) improve in their ability to select the true model. The LPD consistently selects a more-complex (higher-$h$) model. The AIC does well if $h_{\textrm{true}}$ is small, but requires more data than many of the competing methods in order to resolve larger degrees of memory. 
-
-LOO, the two variants of the WAIC,  and DIC$_1$ perform roughly on par. Since each criterion selects the model with the lowest value, it is desirable that $\Delta\textrm{Criterion}(h)=\textrm{Criterion}(h)-\textrm{Criterion}(h_{\textrm{true}})>0$, for $h\neq h_{\textrm{true}}$. Fig.~\ref{fig:fig3} explores the distributions of these quantities in the case where $h_{\textrm{true}}=2$.  As sample size $J$ increases, there is clearer separation of these quantities from zero. By $J=64$, no models where $h=1$ are selected using any of the criteria. The WAIC$_2$ and LOO criteria perform about the same whereas the WAIC$_1$ criteria and the DIC$_1$ criteria lag behind in separating themselves from zero.
-
-
-Informed by these tests, this Letter recommends the LOO criterion:
-\begin{equation}
-\textrm{LOO} = -2\sum_j \sum_{\bx}  \log\left(  \frac{B(\bN_\bx  +\balpha)}{B(\bN_\bx -\bN_{\bx}^{(j)} +\balpha)} \right),
-\label{eq:loo}
-\end{equation}
-where $B$ is the multivariate Beta function. LOO performed slightly better than WAIC$_2$ in the included tests, while being somewhat simpler to compute. Eq.~\ref{eq:loo} decomposes completely into a sum of logarithms of Gamma functions, and is hence easy to implement in standard scientific software packages.
-
-%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}
-\includegraphics[width=\linewidth]{fig4}
-\caption{\textbf{LeBron James' free throw accuracy for the 2016-2017 season} and evaluation of the hot hands phenomenon. \emph{Model selection criteria} for degree $h\in\{0,1,2,3\}$ based on four criteria compared. Lower is better and $h=0$ is slightly favored over $h=1$ using all criteria. \emph{Simulated power analysis} showing the frequency that each value $h$ is chosen for simulated sets of free throw trajectories. }
-\label{fig:freethrows}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\textbf{The hot-hand phenomenon:} 
-A  real-world application of these methods is the evaluation of ``hot-hand phenomenon'' (or fallacy) in the context of basketball free-throw shooting. This controversial phenomenon pertains to the belief that recent success (or failure) predicts immediate future success (or failure).  In 1985, the first systematic examination of the phenomenon in basketball based on analysis of shooting streaks yielded negative results~\cite{gilovich1985hot}. Follow-up studies have examined the effects of belief in this phenomenon under the supposition that it is a fallacy~\cite{burns2001hot}. However, recent analyses, using multivariate methods that can account for factors such as shot difficulty~\cite{bocskocsky2014hot,miller2016surprised}, have supported the phenomenon, finding the original study to be underpowered~\cite{arkes2010revisiting,miller2016surprised}.
-
-The methodology of this Letter can be used to evaluate this phenomenon in the controlled context of free throws.
-  During the 2016-2017 season, in $91$ games, LeBron James attempted at least a single free throw, hitting $471$ of $693$ overall (Fig.~\ref{fig:freethrows}).  Conditioning the hit probabilities by the outcome of the preceding free throw in the same game, James shot a slightly better percentage after missing a free throw than otherwise. However, the $h=0$ model is favored slightly over $h=1$ as it appears that the dataset is underpowered for the selection of $h=1$. In simulations of free throw trajectories, where the number of free throws per game was drawn from a Poisson distribution that approximated the number distribution in the dataset, and outcomes were drawn for the fitted $h=1$ model, $h=1$ was chosen slightly under half the time (Fig.~\ref{fig:freethrows}).
-  
-  However, examining the model parameters in the case of $h=1$, one sees that the hitting probabilities are similar in all cases except after a miss (Fig.~\ref{fig:freethrows}). This observation suggests  a  model with jagged memory: independence of outcome except after a miss. Having one fewer parameter than the full $h=1$ model, this jagged model is favorable to both the $h=0$ and $h=1$ models (Fig.~\ref{fig:fig5}). Hence, at least for this season, the most predictive model of  James' free throw shooting tells a story of error correction rather than a story of hot hands.
-  
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{figure}
-\includegraphics[width=\linewidth]{fig5}
-
-\caption{\textbf{Hybrid jagged memory model} for free throw outcome where shots are independent except immediately after a miss. AIC: $869.40$, WAIC$_1$: $869.45,$ WAIC$_2$: $869.52,$ LOO: $869.52.$ For reference, all selection criteria for the fully independent ($h=0$) model are approximately $871$ (Fig.~\ref{fig:freethrows}).} 
-\label{fig:fig5}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-This Letter has shown that LOO and its approximation, the WAIC, can learn from data the physical reality of the 
-degree of memory in a system. Regardless of the selection criterion used, the determination of $h$ is not truly certain except asymptotically when an unlimited amount of data are available. However, one may use a simulation procedure like the one used in this Letter in order to estimate the degree of uncertainty.  
-
-Importantly,   both the AIC and LPD (Bayes factors) are biased in opposite situations, in opposite directions. For small datasets, the AIC tends to sparsity, which runs counter to the typical situation in linear regression problems where the AIC can favor complexity with too few data, a situation ameliorated by the more-stringent AICc~\cite{claeskens2008model}. Bayes factors with flat model  priors as investigated here, on the other hand, consistently select a higher value of $h$ given more data.
-%
-Notably, alternative Bayes factors methods for selecting the degree of memory also include model-level priors that behave like the penalty term in the AIC~\cite{strelioff2007inferring,singer2014detecting}. Since the upper bound of the LPD is the logarithm of the likelihood found from the MLE procedure, this selection method is more stringent in the low sample-size regime than the pure AIC and hence will suffer from the same bias towards selecting models with less memory.
-
-
-Models of structure similar to Eq.~\ref{eq:factorize} have appeared in limitless contexts such as analysis of text~\cite{melnyk2006memory}, human digital trails~\cite{singer2014detecting}, DNA sequences, protein folding~\cite{yuan1999prediction}, and eye movements~\cite{bettenbuhl2012bayesian}. As we have seen, many methods tend to asymptotically select the correct model. However, studies are seldom in the asymptotic regime and using these methods  to reanalyze data from prior studies may prove fruitful in uncovering previously overlooked memory effects, particularly in systems of a large number of states. 
-
-
-\textbf{Acknowledgements:} I thank the United States Social Security Administration and the Intramural Research Program at the NIH Clinical Center for funding. Additionally, I thank members of the Biostatistics and Rehabilitation Section in the Rehabilitation Medicine Department at NIH, John P. Collins in particular, and also Carson Chow at NIDDK for helpful discussions.
-
-\bibliographystyle{plain}
-\bibliography{markovpaths}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\clearpage
-\newpage
-\appendix
-
-\section{Supplemental Material: Computation of alternate model validation criteria}
 
 
 The Akaike information criterion (AIC) is defined through the formula $\textrm{AIC}  = -2 \sum_{\bx}\log \Pr(\bN_\bx \vert \hat{\bp}_{\textrm{MLE}}) + 2k$ and can be computed exactly as
@@ -315,5 +248,71 @@ The leave-one-out version of cross validation is a specific case of $k$-fold cro
 & -2 \sum_{j=J/2}^{J} \sum_{\bx} \log\left(  \frac{B( \bN^-_\bx +\bN_{\bx}^{(j)} +\balpha)}{B( \bN^-_\bx +\balpha)} \right),
 \end{align}
 where $\bN^\pm_\bx$ constitute the transition counts of the last $J/2$ trajectories or the first $J/2$ trajectories respectively, so that $\bN^-_\bx + \bN^+_\bx = \bN_\bx$.
+
+\section{Results}
+
+Simulations provided tests of these methods.
+The test system is composed of $M=8$ states, with designated start and absorbing states.  For each given value of $h$, I generated for each $\bx\in \mathbf{X}_h$ a single set of true transition probabilities drawn from Dirichlet($\mathbf{1}$) distributions. For each of these random networks of a fixed $h$, I randomly sampled trajectories of a given sample size $J$ $10^4$ times, determining from each sample of $J$ trajectories the degree of $h$ chosen by each of the methods.
+
+\begin{figure}
+\includegraphics[width=\linewidth]{fig3}
+\caption{\textbf{Distributions of computed selection criteria relative to a true model ($h_{\textrm{true}}=2$)}, $\Delta\textrm{Criterion}(h)=\textrm{Criterion}(h)-\textrm{Criterion}(h_{\textrm{true}})$.  Density plots with minimum, maximum, and mean of the selection criteria for each model relative to that of the true model are shown at various sample sizes $J$. Values above zero mean that the true model is favored over a particular model. Ideally, mass should be above zero for accurate selection of the true model (zero drawn as dashed line).}
+\label{fig:fig3}
+\end{figure}
+
+Fig.~\ref{fig:fig2} provides the frequency that each of five models ($h=1,\ldots,5$) was chosen based on the selection criteria compared. Each row corresponds to a given true degree of memory $h_{\textrm{true}}\in\{1,2,3\}$ and sample sizes increase along columns when viewed from left to right. Generally, as the number of samples increases, all selection criteria except for the LPD (Bayes factors) improve in their ability to select the true model. The LPD consistently selects a more-complex (higher-$h$) model. The AIC does well if $h_{\textrm{true}}$ is small, but requires more data than many of the competing methods in order to resolve larger degrees of memory. 
+
+LOO, the two variants of the WAIC,  and DIC$_1$ perform roughly on par. Since each criterion selects the model with the lowest value, it is desirable that $\Delta\textrm{Criterion}(h)=\textrm{Criterion}(h)-\textrm{Criterion}(h_{\textrm{true}})>0$, for $h\neq h_{\textrm{true}}$. Fig.~\ref{fig:fig3} explores the distributions of these quantities in the case where $h_{\textrm{true}}=2$.  As sample size $J$ increases, there is clearer separation of these quantities from zero. By $J=64$, no models where $h=1$ are selected using any of the criteria. The WAIC$_2$ and LOO criteria perform about the same whereas the WAIC$_1$ criteria and the DIC$_1$ criteria lag behind in separating themselves from zero.
+
+
+Informed by these tests, this Letter recommends the LOO criterion:
+\begin{equation}
+\textrm{LOO} = -2\sum_j \sum_{\bx}  \log\left(  \frac{B(\bN_\bx  +\balpha)}{B(\bN_\bx -\bN_{\bx}^{(j)} +\balpha)} \right),
+\label{eq:loo}
+\end{equation}
+where $B$ is the multivariate Beta function. LOO performed slightly better than WAIC$_2$ in the included tests, while being somewhat simpler to compute. Eq.~\ref{eq:loo} decomposes completely into a sum of logarithms of Gamma functions, and is hence easy to implement in standard scientific software packages.
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+\includegraphics[width=\linewidth]{fig4}
+\caption{\textbf{LeBron James' free throw accuracy for the 2016-2017 season} and evaluation of the hot hands phenomenon. \emph{Model selection criteria} for degree $h\in\{0,1,2,3\}$ based on four criteria compared. Lower is better and $h=0$ is slightly favored over $h=1$ using all criteria. \emph{Simulated power analysis} showing the frequency that each value $h$ is chosen for simulated sets of free throw trajectories. }
+\label{fig:freethrows}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{The hot-hand phenomenon:} 
+A  real-world application of these methods is the evaluation of ``hot-hand phenomenon'' (or fallacy) in the context of basketball free-throw shooting. This controversial phenomenon pertains to the belief that recent success (or failure) predicts immediate future success (or failure).  In 1985, the first systematic examination of the phenomenon in basketball based on analysis of shooting streaks yielded negative results~\cite{gilovich1985hot}. Follow-up studies have examined the effects of belief in this phenomenon under the supposition that it is a fallacy~\cite{burns2001hot}. However, recent analyses, using multivariate methods that can account for factors such as shot difficulty~\cite{bocskocsky2014hot,miller2016surprised}, have supported the phenomenon, finding the original study to be underpowered~\cite{arkes2010revisiting,miller2016surprised}.
+
+The methodology of this Letter can be used to evaluate this phenomenon in the controlled context of free throws.
+  During the 2016-2017 season, in $91$ games, LeBron James attempted at least a single free throw, hitting $471$ of $693$ overall (Fig.~\ref{fig:freethrows}).  Conditioning the hit probabilities by the outcome of the preceding free throw in the same game, James shot a slightly better percentage after missing a free throw than otherwise. However, the $h=0$ model is favored slightly over $h=1$ as it appears that the dataset is underpowered for the selection of $h=1$. In simulations of free throw trajectories, where the number of free throws per game was drawn from a Poisson distribution that approximated the number distribution in the dataset, and outcomes were drawn for the fitted $h=1$ model, $h=1$ was chosen slightly under half the time (Fig.~\ref{fig:freethrows}).
+  
+  However, examining the model parameters in the case of $h=1$, one sees that the hitting probabilities are similar in all cases except after a miss (Fig.~\ref{fig:freethrows}). This observation suggests  a  model with jagged memory: independence of outcome except after a miss. Having one fewer parameter than the full $h=1$ model, this jagged model is favorable to both the $h=0$ and $h=1$ models (Fig.~\ref{fig:fig5}). Hence, at least for this season, the most predictive model of  James' free throw shooting tells a story of error correction rather than a story of hot hands.
+  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+\includegraphics[width=\linewidth]{fig5}
+
+\caption{\textbf{Hybrid jagged memory model} for free throw outcome where shots are independent except immediately after a miss. AIC: $869.40$, WAIC$_1$: $869.45,$ WAIC$_2$: $869.52,$ LOO: $869.52.$ For reference, all selection criteria for the fully independent ($h=0$) model are approximately $871$ (Fig.~\ref{fig:freethrows}).} 
+\label{fig:fig5}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+This Letter has shown that LOO and its approximation, the WAIC, can learn from data the physical reality of the 
+degree of memory in a system. Regardless of the selection criterion used, the determination of $h$ is not truly certain except asymptotically when an unlimited amount of data are available. However, one may use a simulation procedure like the one used in this Letter in order to estimate the degree of uncertainty.  
+
+Importantly,   both the AIC and LPD (Bayes factors) are biased in opposite situations, in opposite directions. For small datasets, the AIC tends to sparsity, which runs counter to the typical situation in linear regression problems where the AIC can favor complexity with too few data, a situation ameliorated by the more-stringent AICc~\cite{claeskens2008model}. Bayes factors with flat model  priors as investigated here, on the other hand, consistently select a higher value of $h$ given more data.
+%
+Notably, alternative Bayes factors methods for selecting the degree of memory also include model-level priors that behave like the penalty term in the AIC~\cite{strelioff2007inferring,singer2014detecting}. Since the upper bound of the LPD is the logarithm of the likelihood found from the MLE procedure, this selection method is more stringent in the low sample-size regime than the pure AIC and hence will suffer from the same bias towards selecting models with less memory.
+
+
+Models of structure similar to Eq.~\ref{eq:factorize} have appeared in limitless contexts such as analysis of text~\cite{melnyk2006memory}, human digital trails~\cite{singer2014detecting}, DNA sequences, protein folding~\cite{yuan1999prediction}, and eye movements~\cite{bettenbuhl2012bayesian}. As we have seen, many methods tend to asymptotically select the correct model. However, studies are seldom in the asymptotic regime and using these methods  to reanalyze data from prior studies may prove fruitful in uncovering previously overlooked memory effects, particularly in systems of a large number of states. 
+
+
+\textbf{Acknowledgements:} I thank the United States Social Security Administration and the Intramural Research Program at the NIH Clinical Center for funding. Additionally, I thank members of the Biostatistics and Rehabilitation Section in the Rehabilitation Medicine Department at NIH, John P. Collins in particular, and also Carson Chow at NIDDK for helpful discussions.
+
+\bibliographystyle{plain}
+\bibliography{markovpaths}
+ 
 
 \end{document}  
