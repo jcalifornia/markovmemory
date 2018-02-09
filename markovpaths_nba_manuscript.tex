@@ -42,7 +42,7 @@
 \thanks{Clinical Center, National Institutes of Health, Bethesda MD 20892}
   
 
-\title{Predictive model selection of multistep Markov chains demonstrated as a method for evaluating hot hands in free throw shooting}
+\title{Selection of multistep Markov chain models for free throw shooting in evaluation of the hot hands effect}
        
 
 \begin{abstract}
@@ -58,7 +58,7 @@ Consider the problem of modeling memory for discrete-state random walks using hi
 
 \section{Introduction}
 
-Write about the utility of this model and the use of it in basketball
+The hot hands effect has received recent academic interest despite decades of chilling
 
 \section{Modeling}
 This Letter concerns selection of factorized probability models for discrete-state stochastic paths, determining observationally whether and how transitions  are  dependent on memory. Assume that a trajectory $\xi$ consists of steps $\xi_l$, where each step takes  a value $x_l$ taken from the set $\{1,2,\ldots,M\}.$ We are interested in representations for the trajectory probability of the  form
@@ -101,20 +101,20 @@ A value $h$ that yields a model that can best predict new unobserved trajectorie
 we may look at possible history vectors $\bx = [x_1,x_2,\ldots,x_h]$ of length $h$ taken from the set $\mathbf{X}_h = \{1,2,\ldots,M \}^h$. For each $\bx$, denote the vector $\mathbf{p}_{\bx} = [p_{\bx,1},p_{\bx,2},\ldots{p}_{\bx,M}],$ where $p_{\bx,m}$ is the probability that a trajectory goes next to state $m$ given that $\bx$ represents its most recent history. For convenience, we denote the collection of all $\bp_\bx$ as $\mathbf{p}$.  
 
 Generally one has available  $J\in\mathbb{N}$ trajectories. Assuming independence, one may write the joint probability, or likelihood, of observing these trajectories as
-%\begin{align}
-%\lefteqn{\Pr(\{\xi^{(j)} \}_{j=1}^J \vert \bp) = \prod_{j=1}^J \Pr(\xi^{(j)}\vert \bp)  } \nonumber\\
-%&= \prod_{j=1}^J \prod_{\bx\in\mathbf{X}_h} \prod_{m=1}^M p_{\bx,m}^{N^{(j)}_{\bx,m}} = \prod_{\bx\in\mathbf{X}_h} \prod_{m=1}^M p_{\bx,m}^{N_{\bx,m}} ,
-%\label{eq:likelihood}
-%\end{align}
+\begin{align}
+\lefteqn{\Pr(\{\xi^{(j)} \}_{j=1}^J \vert \bp) = \prod_{j=1}^J \Pr(\xi^{(j)}\vert \bp)  } \nonumber\\
+&= \prod_{j=1}^J \prod_{\bx\in\mathbf{X}_h} \prod_{m=1}^M p_{\bx,m}^{N^{(j)}_{\bx,m}} = \prod_{\bx\in\mathbf{X}_h} \prod_{m=1}^M p_{\bx,m}^{N_{\bx,m}} ,
+\label{eq:likelihood}
+\end{align}
 %\begin{align}
 %\Pr(\{\xi^{(j)} \}_{j=1}^J \vert \bp) = \prod_{j=1}^J \Pr(\xi^{(j)}\vert \bp)  = \prod_{\bx\in\mathbf{X}_h} \prod_{m=1}^M p_{\bx,m}^{N_{\bx,m}} ,
 %\label{eq:likelihood}
 %\end{align}
 %\begin{align}
-\begin{align}
-\Pr\left(\{\xi^{(j)} \}_{j=1}^J \vert \bp\right) = \smashoperator{\prod_{j=1}^J} \prod_{\bx\in\mathbf{X}_h} \prod_{m=1}^M p_{\bx,m}^{N^{(j)}_{\bx,m}} = \smashoperator{\prod_{\bx\in\mathbf{X}_h} }\ \prod_{m=1}^M p_{\bx,m}^{N_{\bx,m}} ,
-\label{eq:likelihood}
-\end{align}
+%\begin{align}
+%\Pr\left(\{\xi^{(j)} \}_{j=1}^J \vert \bp\right) = \smashoperator{\prod_{j=1}^J} \prod_{\bx\in\mathbf{X}_h} \prod_{m=1}^M p_{\bx,m}^{N^{(j)}_{\bx,m}} = \smashoperator{\prod_{\bx\in\mathbf{X}_h} }\ \prod_{m=1}^M p_{\bx,m}^{N_{\bx,m}} ,
+%\label{eq:likelihood}
+%\end{align}
 where $N^{(j)}_{\bx,m}$ is the number of times that the transition $\bx\to m$ occurs in trajectory $\xi^{(j)}$, and $N_{\bx,m} = \sum_j N^{(j)}_{\bx,m}$ is the total number of times the transition is seen.% Eq.~\ref{eq:likelihood} can be found by grouping like terms of Eq.~\ref{eq:factorize}. 
 
 For convenience,  denote $N_{\bx} =\sum_{m}N_{\bx,m}$,  $\bN_{\bx}= [\bN_{\bx,1},\bN_{\bx,2},\ldots,\bN_{\bx,M}]$, and the collection of all $\bN^{(j)}_{\bx}$ as $\bN$. The sufficient statistics of the likelihood are the counts, so we will refer to the likelihood as $\Pr(\bN\mid\bp)$. The maximum likelihood estimator for each parameter vector $\bp_\bx$ is found by maximizing the probability in Eq.~\ref{eq:likelihood}, and can be written easily as
@@ -135,16 +135,18 @@ on each parameter vector
 $
 \mathbf{p}_{\bx} \sim \mathrm{Dirichlet}(\boldsymbol\alpha),
 $
- hyper-parameterized by $\boldsymbol\alpha$, a vector of size $M$. This Letter assumes that $\boldsymbol\alpha=\mathbf{1}$, corresponding to a uniform prior. This prior, paired with the likelihood of Eq.~\ref{eq:likelihood}, %yields the posterior distribution on the probabilities,
-%\begin{equation}
-%\mathbf{p}_{\bx}  \vert \mathbf{N}_{\bx} \sim \mathrm{Dirichlet}(\boldsymbol\alpha + \mathbf{N}_{\bx} ).
-%\label{eq:posterior}
-%\end{equation}
-%According to this distribution, the posterior expectations for the transition probabilities follow
-%\begin{equation}
-%\mathbb{E}_{\bp_\bx\vert\bN_\bx} [p_{\bx,m}] = \frac{\alpha + N_{\bx,m}}{M\alpha+ N_{\bx}}.
-%\end{equation}
-yields a  Dirichlet posterior distribution with associated expectation,
+ hyper-parameterized by $\boldsymbol\alpha$, a vector of size $M$. This Letter assumes that $\boldsymbol\alpha=\mathbf{1}$, corresponding to a uniform prior. This prior, paired with the likelihood of Eq.~\ref{eq:likelihood}, 
+ %yields the posterior distribution on the probabilities,
+\begin{equation}
+\mathbf{p}_{\bx}  \vert \mathbf{N}_{\bx} \sim \mathrm{Dirichlet}(\boldsymbol\alpha + \mathbf{N}_{\bx} ).
+\label{eq:posterior}
+\end{equation}
+According to this distribution, the posterior expectations for the transition probabilities follow
+\begin{equation}
+\mathbb{E}_{\bp_\bx\vert\bN_\bx} [p_{\bx,m}] = \frac{\alpha + N_{\bx,m}}{M\alpha+ N_{\bx}}.
+\end{equation}
+%yields a  Dirichlet posterior distribution
+ with associated expectation,
 \begin{equation}
 \mathbf{p}_{\bx}  \vert \mathbf{N}_{\bx} \sim \mathrm{Dirichlet}(\boldsymbol\alpha + \mathbf{N}_{\bx} ) \quad \mathbb{E}_{\bp_\bx\vert\bN_\bx} [p_{\bx,m}] = \frac{\alpha + N_{\bx,m}}{M\alpha+ N_{\bx}}.\label{eq:posterior}
 \end{equation}
@@ -316,3 +318,13 @@ Models of structure similar to Eq.~\ref{eq:factorize} have appeared in limitless
  
 
 \end{document}  
+
+http://andrewgelman.com/2017/04/02/gilovich-doubles-hot-hand-denial/
+http://andrewgelman.com/2015/07/09/hey-guess-what-there-really-is-a-hot-hand/
+http://andrewgelman.com/2017/11/06/more-hot-hand/
+http://andrewgelman.com/2017/04/10/33539/
+http://www.econ.pitt.edu/sites/default/files/Miller.%20Gambler%27s%20hot%20hand..pdf
+http://theconversation.com/momentum-isnt-magic-vindicating-the-hot-hand-with-the-mathematics-of-streaks-74786
+https://www.thecut.com/2016/08/how-researchers-discovered-the-basketball-hot-hand.html
+http://nathanieldphillips.com/2015/10/coin-flips-and-the-hot-hand/
+https://www.wsj.com/articles/the-hot-hand-debate-gets-flipped-on-its-head-1443465711
