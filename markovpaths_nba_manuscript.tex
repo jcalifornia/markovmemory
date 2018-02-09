@@ -62,16 +62,16 @@ The hot hands effect has received recent academic interest despite decades of ch
 
 \section{Modeling}
 This Letter concerns selection of factorized probability models for discrete-state stochastic paths, determining observationally whether and how transitions  are  dependent on memory. Assume that a trajectory $\xi$ consists of steps $\xi_l$, where each step takes  a value $x_l$ taken from the set $\{1,2,\ldots,M\}.$ We are interested in representations for the trajectory probability of the  form
-%\begin{align}
-%\Pr(\xi) &=\prod_{l=1}^L \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}, \ldots, \xi_{l-h} = x_{l-h} )  \nonumber\\
-%&= \prod_{l}^L p_{x_{l-h},x_{l-h+1},\cdots,x_l}, 
-%\label{eq:factorize}
-%\end{align}
-%
-\begin{equation}
-\Pr(\xi) = \prod_{l}^L p_{x_{l-h},x_{l-h+1},\cdots,x_{l-1},x_l}, 
+\begin{align}
+\Pr(\xi) &=\prod_{l=1}^L \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}, \ldots, \xi_{l-h} = x_{l-h} )  \nonumber\\
+&= \prod_{l}^L p_{x_{l-h},x_{l-h+1},\cdots,x_l}, 
 \label{eq:factorize}
-\end{equation}
+\end{align}
+%
+%\begin{equation}
+%\Pr(\xi) = \prod_{l}^L p_{x_{l-h},x_{l-h+1},\cdots,x_{l-1},x_l}, 
+%\label{eq:factorize}
+%\end{equation}
 %
 where $p_{x_{l-h},x_{l-h+1},\cdots,x_l} =  \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}, \ldots, \xi_{l-h} = x_{l-h} ),$ and $h\in\mathbb{Z}^+$ represents the number of states worth of memory needed to predict the next state, with appropriate boundary conditions for the beginning of the trajectory. In the case of absolutely no memory ($h=0$), the path probability is simply the product of the probabilities of being in each of the separate states in a path, $p_{x_1}p_{x_2},\ldots p_{x_L},$ and there are essentially $M-1$ free model parameters, where $M$ is the number of states. If $h=1$, the model is single-step Markovian in that only the current state is relevant in determining the next state. These models involve $M(M-1)$ free parameters. Generally, if $h$ states of history are required, then the model is $h$-step Markovian, and $M^h(M-1)$ parameters are needed (see Fig~\ref{fig:fig1}). Hence, the size of the parameter space grows exponentially with memory. Our objective is to determine, based on observational evidence, an appropriate value for $h$. 
 
@@ -90,7 +90,7 @@ where $p_{x_{l-h},x_{l-h+1},\cdots,x_l} =  \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}
 
 The parameter $h$ controls the trade-off between complexity and fitting error. From a statistical viewpoint, complexity results in less-precise determination of model parameters, leading to larger prediction errors (overfitting). Conversely, a simple model may not capture the true probability space where paths reside, and fail to catch patterns in the real process (underfit).
 
-\section{Model selection criterion}
+\section{Probabilistic modeling}
 
 There are many information criterion in common use for solving the model selection problem within the framework of minimization of prediction loss.
 
@@ -119,6 +119,9 @@ where $N^{(j)}_{\bx,m}$ is the number of times that the transition $\bx\to m$ oc
 
 For convenience,  denote $N_{\bx} =\sum_{m}N_{\bx,m}$,  $\bN_{\bx}= [\bN_{\bx,1},\bN_{\bx,2},\ldots,\bN_{\bx,M}]$, and the collection of all $\bN^{(j)}_{\bx}$ as $\bN$. The sufficient statistics of the likelihood are the counts, so we will refer to the likelihood as $\Pr(\bN\mid\bp)$. The maximum likelihood estimator for each parameter vector $\bp_\bx$ is found by maximizing the probability in Eq.~\ref{eq:likelihood}, and can be written easily as
 $\hat{p}^{\textrm{MLE}}_{\bx} = \mathbf{N}_{\bx} / N_{\bx}$. 
+
+
+
 Following this approach, the Akaike Information Criterion (AIC),~\cite{akaike1974new,tong1975determination,katz1981some}  %, $\textrm{AIC}=-2\log\Pr(\bN\vert \hat{p}^{\textrm{MLE}})+2k$,
  may be used as a metric in order to choose a value of $h$.  Rooted in information theory, the AIC is an asymptotic approximation of the information loss in the representation of data by a model~\cite{burnham2003model}. The model with the smallest AIC, and hence with the smallest approximate loss, is chosen.
 
@@ -128,6 +131,8 @@ transitions that have not yet been observed will occur. This Letter's approach t
 
 %Bayesian inference provides a natural way of instilling this property into the problem. Furthermore,
 %after laying the Bayesian fundamentals, one has available a suite of theoretical tools. Most relevantly, Bayesian model comparison provides alternatives to the AIC that one may consider in finding the optimal degree of memory $h$. 
+
+\subsection{Bayesian modeling}
 
 A natural Bayesian formulation of the
 problem of determining the transition probabilities is to use the Dirichlet conjugate prior
@@ -151,6 +156,10 @@ According to this distribution, the posterior expectations for the transition pr
 \mathbf{p}_{\bx}  \vert \mathbf{N}_{\bx} \sim \mathrm{Dirichlet}(\boldsymbol\alpha + \mathbf{N}_{\bx} ) \quad \mathbb{E}_{\bp_\bx\vert\bN_\bx} [p_{\bx,m}] = \frac{\alpha + N_{\bx,m}}{M\alpha+ N_{\bx}}.\label{eq:posterior}
 \end{equation}
 In effect, one is assigning a probability of $\alpha/(M\alpha+N_{\bx})$ to any unobserved transition, where $\alpha$ can be made small if it is expected that the transition matrix should be sparse.   In the large-sample limit, the choice of $\alpha$ is not important as the posterior distribution of Eq.~\ref{eq:posterior}  becomes tightly concentrated about the maximum likelihood estimates.
+
+
+\subsection{Model selection}
+
 
 As pertains to Bayesian model selection,  Bayes factors are often used~\cite{lavine1999bayes,posada2004model}. If using non-informative model priors, they consist of the likelihood of the data, averaged over the posterior distribution of model parameters. The logarithm of this quantity is known as the log predictive density (LPD). Related to the LPD is the log point-wise predictive density (LPPD), where the same expectation is taken separately for each datapoint and logarithms of these expectations are summed. The LPPD features in alternatives to Bayes factors and the AIC~\cite{gelman2014understanding}.
 
@@ -253,6 +262,8 @@ where $\bN^\pm_\bx$ constitute the transition counts of the last $J/2$ trajector
 
 \section{Results}
 
+\subsection{Evaluation of selection criteria}
+
 Simulations provided tests of these methods.
 The test system is composed of $M=8$ states, with designated start and absorbing states.  For each given value of $h$, I generated for each $\bx\in \mathbf{X}_h$ a single set of true transition probabilities drawn from Dirichlet($\mathbf{1}$) distributions. For each of these random networks of a fixed $h$, I randomly sampled trajectories of a given sample size $J$ $10^4$ times, determining from each sample of $J$ trajectories the degree of $h$ chosen by each of the methods.
 
@@ -282,7 +293,8 @@ where $B$ is the multivariate Beta function. LOO performed slightly better than 
 \end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\textbf{The hot-hand phenomenon:} 
+\subsection{The hot-hand phenomenon} 
+
 A  real-world application of these methods is the evaluation of ``hot-hand phenomenon'' (or fallacy) in the context of basketball free-throw shooting. This controversial phenomenon pertains to the belief that recent success (or failure) predicts immediate future success (or failure).  In 1985, the first systematic examination of the phenomenon in basketball based on analysis of shooting streaks yielded negative results~\cite{gilovich1985hot}. Follow-up studies have examined the effects of belief in this phenomenon under the supposition that it is a fallacy~\cite{burns2001hot}. However, recent analyses, using multivariate methods that can account for factors such as shot difficulty~\cite{bocskocsky2014hot,miller2016surprised}, have supported the phenomenon, finding the original study to be underpowered~\cite{arkes2010revisiting,miller2016surprised}.
 
 The methodology of this Letter can be used to evaluate this phenomenon in the controlled context of free throws.
