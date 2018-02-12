@@ -50,11 +50,7 @@
 The hot hands effect in basketball is a simple and seemingly intuitive phenomenon that has proven challenging to detect. For this reason,
 it was considered a fallacy for decades. A key  difficulty in the detection of hot handedness is 
 confounding due to possible changes in shot selection. In the more-limited context of free throw shooting, there are fewer confounding factors. 
-Hence, simply modeling free throw outcome as conditional on past outcome (via multistep Markov chains) is reasonable.
-
-In this paper, we address the general problem of model selection for higher-order Markov chains.
-
-Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a general Bayesian framework under the principle of minimizing prediction error to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the statistical power of these criteria. These methods, when applied to data from the 2016--2017 NBA season, demonstrate evidence of statistical dependencies in LeBron James' free throw shooting. In particular, a model depending on the previous shot (single-step Markovian) is approximately as predictive as a model with independent outcomes. A hybrid jagged model of two parameters, where James shoots a higher percentage after a missed free throw than otherwise, is more predictive than either model.
+Hence, simply modeling the probability of making a free throw as conditional on the outcome of recent free throws (via multistep Markov chains) is reasonable. The detection of hot-handedness then becomes a model selection problem where the job is to evaluate whether the inclusion of this effect makes for a more-predictive model. In this paper, I address the general problem of model selection for multistep Markov chains via comparison of several model selection criteria, each derived as closed-form mathematical formulae.  Using simulations, I evaluate the accuracy of these criteria. These methods, when applied to data from the 2016--2017 NBA season, demonstrate evidence of statistical dependencies in LeBron James' free throw shooting. In particular, a model depending on the previous shot (single-step Markovian) is approximately as predictive as a model with independent outcomes. A hybrid jagged model of two parameters, where James shoots a higher percentage after a missed free throw than otherwise, is more predictive than either model.
 
 
 %\pacs{02.30.Zz, 02.50.Tt, 07.05.Kf}
@@ -65,9 +61,22 @@ Consider the problem of modeling memory for discrete-state random walks using hi
 
 \section{Introduction}
 
-The hot hands effect has received recent academic interest despite decades of chilling
+With 10.6 seconds remaining on the shot clock in game 7 of the 2016 NBA finals, the Cavaliers were up by three points. LeBron James, shaken by a hard foul, went to the free throw line to shoot two free throws. A single make would seal the outcome of the game. James missed the first free throw. That season he was a $73\%$ free throw shooter, slightly off from his career average of $74\%$. In that moment, one might ask whether the probability of making the second free throw was $73\%$, or something different altogether. Ignoring the issues of fatigue and the pressure of the situation, perhaps the fact that he had missed the previous free throw was indicative of a hidden mental or physical state that predicted another miss. Or perhaps the miss precipitated a correction process that would lead to a more-likely make. Or perhaps it did not matter at all. 
 
-\section{Modeling}
+LeBron James would go on to make the second free throw and the Cavaliers would go on to win the championship. The outcome of the second free throw and the entire game crystalized into history, yet our question remained unanswered. Can the outcome of shots already taken predict the outcome of future shots? This is the central question behind the hot hands phenomenon. 
+
+HISTORY 
+
+\section{Quantitative Methods}
+
+\subsection{Probabilistic modeling}
+
+The outcomes of free throws for a player in a particular game can be mathematically represented as string or path consisting of transitions between two
+states (miss or make). For example, free throws for a player in game game where he or she shoots four free throws and 
+
+As a model for free throw outcome, we consider two-state Markovian chains (miss and make) where the probability of making a transition between the states may be conditional on the recent history.
+
+
 This Letter concerns selection of factorized probability models for discrete-state stochastic paths, determining observationally whether and how transitions  are  dependent on memory. Assume that a trajectory $\xi$ consists of steps $\xi_l$, where each step takes  a value $x_l$ taken from the set $\{1,2,\ldots,M\}.$ We are interested in representations for the trajectory probability of the  form
 \begin{align}
 \Pr(\xi) &=\prod_{l=1}^L \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}, \ldots, \xi_{l-h} = x_{l-h} )  \nonumber\\
@@ -90,14 +99,14 @@ where $p_{x_{l-h},x_{l-h+1},\cdots,x_l} =  \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}
 % \end{figure}
  
   \begin{figure}
- \includegraphics[width=\textwidth]{fig1a}
- \caption{\bf{Multi-step Markovian processes}  by degree of memory $h$, demonstrated on a three-state network. For $h=1$, the statistics of the next transition depend solely on the current state, and transition probabilities are indexed by  $2$-tuple. For $h\geq2$, statistics depend on history. For $h=2$, transitions depend on the
+ \includegraphics[width=0.6\textwidth]{fig1a}
+ \caption{\bf{Multi-step Markovian processes}  by degree of memory $h$, demonstrated on a three-state network (free throw shooting would consist of two states: miss and make). For $h=1$, the statistics of the next transition depend solely on the current state, and transition probabilities are indexed by  $2$-tuple. For $h\geq2$, statistics depend on history. For $h=2$, transitions depend on the
  current state and the previous state, and all probabilities are indexed by $3$-tuples.  Shown:  possible single-step transitions from state \bf{b} to state \bf{c}.  } \label{fig:fig1}
  \end{figure}
 
 The parameter $h$ controls the trade-off between complexity and fitting error. From a statistical viewpoint, complexity results in less-precise determination of model parameters, leading to larger prediction errors (overfitting). Conversely, a simple model may not capture the true probability space where paths reside, and fail to catch patterns in the real process (underfit).
 
-\section{Probabilistic modeling}
+
 
 There are many information criterion in common use for solving the model selection problem within the framework of minimization of prediction loss.
 
@@ -128,17 +137,6 @@ For convenience,  denote $N_{\bx} =\sum_{m}N_{\bx,m}$,  $\bN_{\bx}= [\bN_{\bx,1}
 $\hat{p}^{\textrm{MLE}}_{\bx} = \mathbf{N}_{\bx} / N_{\bx}$. 
 
 
-
-Following this approach, the Akaike Information Criterion (AIC),~\cite{akaike1974new,tong1975determination,katz1981some}  %, $\textrm{AIC}=-2\log\Pr(\bN\vert \hat{p}^{\textrm{MLE}})+2k$,
- may be used as a metric in order to choose a value of $h$.  Rooted in information theory, the AIC is an asymptotic approximation of the information loss in the representation of data by a model~\cite{burnham2003model}. The model with the smallest AIC, and hence with the smallest approximate loss, is chosen.
-
-A limitation of the AIC is inaccuracy for small datasets. A correction to the AIC known as the AICc exists~\cite{hurvich1989regression}, however, its exact form is problem specific~\cite{burnham2003model}. Fundamentally, the maximum likelihood estimator precludes the existence of unobserved transitions -- a property that is problematic if  the sample size $J$ is small.
-It is desirable to regularize the problem by allowing a nonzero probability that
-transitions that have not yet been observed will occur. This Letter's approach to rectifying these issues is Bayesian.
-
-%Bayesian inference provides a natural way of instilling this property into the problem. Furthermore,
-%after laying the Bayesian fundamentals, one has available a suite of theoretical tools. Most relevantly, Bayesian model comparison provides alternatives to the AIC that one may consider in finding the optimal degree of memory $h$. 
-
 \subsection{Bayesian modeling}
 
 A natural Bayesian formulation of the
@@ -166,6 +164,19 @@ In effect, one is assigning a probability of $\alpha/(M\alpha+N_{\bx})$ to any u
 
 
 \subsection{Model selection}
+
+
+Following this approach, the Akaike Information Criterion (AIC),~\cite{akaike1974new,tong1975determination,katz1981some}  %, $\textrm{AIC}=-2\log\Pr(\bN\vert \hat{p}^{\textrm{MLE}})+2k$,
+ may be used as a metric in order to choose a value of $h$.  Rooted in information theory, the AIC is an asymptotic approximation of the information loss in the representation of data by a model~\cite{burnham2003model}. The model with the smallest AIC, and hence with the smallest approximate loss, is chosen.
+
+A limitation of the AIC is inaccuracy for small datasets. A correction to the AIC known as the AICc exists~\cite{hurvich1989regression}, however, its exact form is problem specific~\cite{burnham2003model}. Fundamentally, the maximum likelihood estimator precludes the existence of unobserved transitions -- a property that is problematic if  the sample size $J$ is small.
+It is desirable to regularize the problem by allowing a nonzero probability that
+transitions that have not yet been observed will occur. This Letter's approach to rectifying these issues is Bayesian.
+
+%Bayesian inference provides a natural way of instilling this property into the problem. Furthermore,
+%after laying the Bayesian fundamentals, one has available a suite of theoretical tools. Most relevantly, Bayesian model comparison provides alternatives to the AIC that one may consider in finding the optimal degree of memory $h$. 
+
+
 
 
 As pertains to Bayesian model selection,  Bayes factors are often used~\cite{lavine1999bayes,posada2004model}. If using non-informative model priors, they consist of the likelihood of the data, averaged over the posterior distribution of model parameters. The logarithm of this quantity is known as the log predictive density (LPD). Related to the LPD is the log point-wise predictive density (LPPD), where the same expectation is taken separately for each datapoint and logarithms of these expectations are summed. The LPPD features in alternatives to Bayes factors and the AIC~\cite{gelman2014understanding}.
@@ -302,7 +313,7 @@ where $B$ is the multivariate Beta function. LOO performed slightly better than 
 
 \subsection{The hot-hand phenomenon} 
 
-A  real-world application of these methods is the evaluation of ``hot-hand phenomenon'' (or fallacy) in the context of basketball free-throw shooting. This controversial phenomenon pertains to the belief that recent success (or failure) predicts immediate future success (or failure).  In 1985, the first systematic examination of the phenomenon in basketball based on analysis of shooting streaks yielded negative results~\cite{gilovich1985hot}. Follow-up studies have examined the effects of belief in this phenomenon under the supposition that it is a fallacy~\cite{burns2001hot}. However, recent analyses, using multivariate methods that can account for factors such as shot difficulty~\cite{bocskocsky2014hot,miller2016surprised}, have supported the phenomenon, finding the original study to be underpowered~\cite{arkes2010revisiting,miller2016surprised}.
+A  real-world application of these methods is the evaluation of ``hot-hand phenomenon'' (or fallacy) in the context of basketball free-throw shooting. This controversial phenomenon pertains to the belief that recent success (or failure) predicts immediate future success (or failure).  In 1985, the first systematic examination of the phenomenon in basketball based on analysis of shooting streaks yielded negative results~\cite{gilovich1985hot}. Follow-up studies have examined the effects of belief in this phenomenon under the supposition that it is a fallacy~\cite{burns2001hot}. However, recent analyses, using multivariate methods that can account for factors such as shot difficulty~\cite{bocskocsky2014hot,miller2016surprised}, have supported the phenomenon, finding the original study to be underpowered~\cite{arkes2010revisiting,arkes2013misses,miller2016surprised}.
 
 The methodology of this Letter can be used to evaluate this phenomenon in the controlled context of free throws.
   During the 2016-2017 season, in $91$ games, LeBron James attempted at least a single free throw, hitting $471$ of $693$ overall (Fig.~\ref{fig:freethrows}).  Conditioning the hit probabilities by the outcome of the preceding free throw in the same game, James shot a slightly better percentage after missing a free throw than otherwise. However, the $h=0$ model is favored slightly over $h=1$ as it appears that the dataset is underpowered for the selection of $h=1$. In simulations of free throw trajectories, where the number of free throws per game was drawn from a Poisson distribution that approximated the number distribution in the dataset, and outcomes were drawn for the fitted $h=1$ model, $h=1$ was chosen slightly under half the time (Fig.~\ref{fig:freethrows}).
@@ -330,7 +341,7 @@ Notably, alternative Bayes factors methods for selecting the degree of memory al
 Models of structure similar to Eq.~\ref{eq:factorize} have appeared in limitless contexts such as analysis of text~\cite{melnyk2006memory}, human digital trails~\cite{singer2014detecting}, DNA sequences, protein folding~\cite{yuan1999prediction}, and eye movements~\cite{bettenbuhl2012bayesian}. As we have seen, many methods tend to asymptotically select the correct model. However, studies are seldom in the asymptotic regime and using these methods  to reanalyze data from prior studies may prove fruitful in uncovering previously overlooked memory effects, particularly in systems of a large number of states. 
 
 
-\textbf{Acknowledgements:} I thank the United States Social Security Administration and the Intramural Research Program at the NIH Clinical Center for funding. Additionally, I thank members of the Biostatistics and Rehabilitation Section in the Rehabilitation Medicine Department at NIH, John P. Collins in particular, and also Carson Chow at NIDDK for helpful discussions.
+\section{Acknowledgements:} I thank the United States Social Security Administration and the Intramural Research Program at the NIH Clinical Center for funding. Additionally, I thank members of the Biostatistics and Rehabilitation Section in the Rehabilitation Medicine Department at NIH, John P. Collins in particular, and also Carson Chow at NIDDK for helpful discussions.
 
 \bibliographystyle{plain}
 \bibliography{markovpaths}
