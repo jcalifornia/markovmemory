@@ -47,6 +47,13 @@
 
 \begin{abstract}
 
+The hot hands effect in basketball is a simple and seemingly intuitive phenomenon that has proven challenging to detect. For this reason,
+it was considered a fallacy for decades. A key  difficulty in the detection of hot handedness is 
+confounding due to possible changes in shot selection. In the more-limited context of free throw shooting, there are fewer confounding factors. 
+Hence, simply modeling free throw outcome as conditional on past outcome (via multistep Markov chains) is reasonable.
+
+In this paper, we address the general problem of model selection for higher-order Markov chains.
+
 Consider the problem of modeling memory for discrete-state random walks using higher-order Markov chains.  This Letter introduces a general Bayesian framework under the principle of minimizing prediction error to select, from data, the number of prior states of recent history upon which a trajectory is statistically dependent. In this framework, I provide closed-form expressions for several alternative model selection criteria that approximate model prediction error for future data. Using simulations, I evaluate the statistical power of these criteria. These methods, when applied to data from the 2016--2017 NBA season, demonstrate evidence of statistical dependencies in LeBron James' free throw shooting. In particular, a model depending on the previous shot (single-step Markovian) is approximately as predictive as a model with independent outcomes. A hybrid jagged model of two parameters, where James shoots a higher percentage after a missed free throw than otherwise, is more predictive than either model.
 
 
