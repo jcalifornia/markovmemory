@@ -80,13 +80,19 @@ a broad class
 \subsection{Probabilistic modeling}
 
 The outcomes of free throws for a player in a particular game can be  represented as string or trajectory of
-states (miss or make). For example, using ``+'' to denote makes and ``-'' to denote misses, a trajectory of ``++-+'' corresponds
+states (miss or make). For example, using ``$+$'' to denote makes and ``$-$'' to denote misses, a trajectory of ``$++-+$'' corresponds
 to a game where a player makes the first two free throws, misses the third, and makes the fourth.
 In evaluation of the hot hands phenomenon, we seek to model the probability of observing such trajectories
-for any given player. In doing so, 
+for any given player. In doing so, we may conveniently assess for statistical dependencies in shot outcome
+on the outcome of prior shots. A simple probabilistic model for paths, incorporating possible statistical dependencies
+on history, is the multistep Markov chain.
 
-
-This manuscript concerns selection of factorized probability models for discrete-state stochastic paths, determining observationally whether and how transitions  are  dependent on memory. Assume that a trajectory $\xi$ consists of steps $\xi_l$, where each step takes  a value $x_l$ taken from the set $\{1,2,\ldots,M\}.$ We are interested in representations for the trajectory probability of the  form
+Multistep Markov chains are factorized probability models for discrete-state trajectories, where the probability of
+a particular trajectory is the product of conditional transition probabilities between possible states.
+The conditions pertain to the prior locations that a trajectory has visited, or its recent history.
+  For our problem there are
+two states, however, let us consider the more general problem of a model with any number $M$ states.
+Assume that a trajectory $\xi$ consists of steps $\xi_l$, where each step takes  a value $x_l$ taken from the set $\{1,2,\ldots,M\}.$ We are interested in representations for the trajectory probability of the  form
 \begin{align}
 \Pr(\xi) &=\prod \Pr\left( \xi_l = x_l  | \textrm{previous $h$ states} \right) \nonumber\\
 &=\prod_{l=1}^L \Pr(\xi_l = x_l | \xi_{n-1} = x_{l-1}, \ldots, \xi_{l-h} = x_{l-h} )  \nonumber\\
@@ -99,34 +105,31 @@ This manuscript concerns selection of factorized probability models for discrete
 %\label{eq:factorize}
 %\end{equation}
 %
-where $h$, a non-negative counting number, represents the number of states worth of memory needed to predict the next state, with appropriate boundary conditions for the beginning of the trajectory. In the case of absolutely no memory ($h=0$), the path probability is simply the product of the probabilities of being in each of the separate states in a path, $p_{x_1}p_{x_2},\ldots p_{x_L},$ and there are essentially $M-1$ free model parameters, where $M$ is the number of states. If $h=1$, the model is single-step Markovian in that only the current state is relevant in determining the next state. These models involve $M(M-1)$ free parameters. Generally, if $h$ states of history are required, then the model is $h$-step Markovian, and $M^h(M-1)$ parameters are needed (see Fig~\ref{fig:fig1}). Hence, the size of the parameter space grows exponentially with memory. Our objective is to determine, based on observational evidence, an appropriate value for $h$. 
+where $h$, a non-negative counting number, represents the number of states worth of memory needed to predict the next state, with appropriate boundary conditions for the beginning of the trajectory. In the context of the hot hands effect, models with $h\geq1$ encompass statistical dependencies between shot outcomes. Hot hands would correspond to higher
+make probabilities after recent makes and cold hands correspond to lower probabilities after misses.
+
+In the case of absolutely no memory ($h=0$), the path probability is simply the product of the probabilities of being in each of the separate states in a path, $p_{x_1}p_{x_2},\ldots p_{x_L},$ and there are essentially $M-1$ free model parameters, where $M$ is the number of states. A model where $h=0$ implies that the outcome of previous shot attempts does not inform the outcome
+of the next attempt.
+If $h=1$, the model is single-step Markovian in that only the current state is relevant in determining the next state. These models involve $M(M-1)$ free parameters. Generally, if $h$ states of history are required, then the model is $h$-step Markovian, and $M^h(M-1)$ parameters are needed (see Fig~\ref{fig:fig1}). Hence, the size of the parameter space grows exponentially with memory. Our objective is to determine, based on observational evidence, an appropriate value for $h$. 
 
  
-% \begin{figure}
-% \includegraphics[width=\linewidth]{fig1a}
-% \caption{\bf{Multi-step finite state Markovian processes}  parameterized by degree of memory $h$, demonstrated on a three-state network. For $h=1$, the statistics of the next state depend solely on the current state and the stochastic system is parameterized by transition probabilities indexed by a tuple. For $h=2$ and $h=3$ the statistics depend on the history.  Shown are the possible single-step transitions from state \bf{b} to state \bf{c}. For $h=2$, transition probabilities depend on the
-% current state and the previous state, and all transition probabilities are indexed by $3$-tuples. For $h=3$, all transition probabilities depend on the current state and two previous states and are indexed by $4$-tuples. } \label{fig:fig1}
-% \end{figure}
- 
-  \begin{figure}
+ \begin{figure}
  \includegraphics[width=0.6\textwidth]{fig1a}
- \caption{\bf{Multi-step Markovian processes}  by degree of memory $h$, demonstrated on a three-state network (free throw shooting would consist of two states: miss and make). For $h=1$, the statistics of the next transition depend solely on the current state, and transition probabilities are indexed by  $2$-tuple. For $h\geq2$, statistics depend on history. For $h=2$, transitions depend on the
- current state and the previous state, and all probabilities are indexed by $3$-tuples.  Shown:  possible single-step transitions from state \bf{b} to state \bf{c}.  } \label{fig:fig1}
+ \caption{\bf{Multi-step finite state Markovian processes}  parameterized by degree of memory $h$, demonstrated on a three-state network. For $h=1$, the statistics of the next state depend solely on the current state and the stochastic system is parameterized by transition probabilities indexed by a tuple. For $h=2$ and $h=3$ the statistics depend on the history.  Shown are the possible single-step transitions from state \bf{b} to state \bf{c}. For $h=2$, transition probabilities depend on the
+ current state and the previous state, and all transition probabilities are indexed by $3$-tuples. For $h=3$, all transition probabilities depend on the current state and two previous states and are indexed by $4$-tuples. } \label{fig:fig1}
  \end{figure}
+ 
+%  \begin{figure}
+% \includegraphics[width=0.6\textwidth]{fig1a}
+% \caption{\bf{Multi-step Markovian processes}  by degree of memory $h$, demonstrated on a three-state network (free throw shooting would consist of two states: miss and make). For $h=1$, the statistics of the next transition depend solely on the current state, and transition probabilities are indexed by  $2$-tuple. For $h\geq2$, statistics depend on history. For $h=2$, transitions depend on the
+% current state and the previous state, and all probabilities are indexed by $3$-tuples.  Shown:  possible single-step transitions from state \bf{b} to state \bf{c}.  } \label{fig:fig1}
+% \end{figure}
 
-The parameter $h$ controls the trade-off between complexity and fitting error. From a statistical viewpoint, complexity results in less-precise determination of model parameters, leading to larger prediction errors (overfitting). Conversely, a simple model may not capture the true probability space where paths reside, and fail to catch patterns in the real process (underfit).
-
-
-
-There are many information criterion in common use for solving the model selection problem within the framework of minimization of prediction loss.
-
-This manuscript evaluates several statistical criteria for selecting the number of states $h$ worth of memory to retain in the factorization of Eq.~\ref{eq:factorize}, viewing the problem in terms of prediction accuracy. 
-A value $h$ that yields a model that can best predict new unobserved trajectories~\cite{claeskens2008model} is chosen. Using these methods, I evaluate the hot hands phenomenon.
 
  For a fixed degree of memory $h$,
-we may look at possible history vectors $\bx = [x_1,x_2,\ldots,x_h]$ of length $h$ taken from the set $\mathbf{X}_h = \{1,2,\ldots,M \}^h$. For each $\bx$, denote the vector $\mathbf{p}_{\bx} = [p_{\bx,1},p_{\bx,2},\ldots{p}_{\bx,M}],$ where $p_{\bx,m}$ is the probability that a trajectory goes next to state $m$ given that $\bx$ represents its most recent history. For convenience, we denote the collection of all $\bp_\bx$ as $\mathbf{p}$.  
+we may look at possible history vectors $\bx = [x_1,x_2,\ldots,x_h]$ of length $h$ taken from the set $\mathbf{X}_h = \{1,2,\ldots,M \}^h$. For each $\bx$, denote the vector $\mathbf{p}_{\bx} = [p_{\bx,1},p_{\bx,2},\ldots{p}_{\bx,M}],$ where $p_{\bx,m}$ is the probability that a trajectory goes next to state $m$ given that $\bx$ represents its most recent history. For convenience, we denote the collection of all $\bp_\bx$ as $\mathbf{p}$ (see below for an example of the notation).
 
-Generally one has available  $J\in\mathbb{N}$ trajectories. Assuming independence, one may write the joint probability, or likelihood, of observing these trajectories as
+Generally one has available  $J$ trajectories. Assuming independence between trajectories, one may write the joint probability, or likelihood, of observing these trajectories as
 \begin{align}
 \lefteqn{\Pr(\{\xi^{(j)} \}_{j=1}^J \vert \bp) = \prod_{j=1}^J \Pr(\xi^{(j)}\vert \bp)  } \nonumber\\
 &= \prod_{j=1}^J \prod_{\bx\in\mathbf{X}_h} \prod_{m=1}^M p_{\bx,m}^{N^{(j)}_{\bx,m}} = \prod_{\bx\in\mathbf{X}_h} \prod_{m=1}^M p_{\bx,m}^{N_{\bx,m}} ,
@@ -145,6 +148,12 @@ where $N^{(j)}_{\bx,m}$ is the number of times that the transition $\bx\to m$ oc
 
 For convenience,  denote $N_{\bx} =\sum_{m}N_{\bx,m}$,  $\bN_{\bx}= [\bN_{\bx,1},\bN_{\bx,2},\ldots,\bN_{\bx,M}]$, and the collection of all $\bN^{(j)}_{\bx}$ as $\bN$. The sufficient statistics of the likelihood are the counts, so we will refer to the likelihood as $\Pr(\bN\mid\bp)$. The maximum likelihood estimator for each parameter vector $\bp_\bx$ is found by maximizing the probability in Eq.~\ref{eq:likelihood}, and can be written easily as
 $\hat{p}^{\textrm{MLE}}_{\bx} = \mathbf{N}_{\bx} / N_{\bx}$. 
+
+\textbf{Example: }
+As a concrete example, consider a model for free throw shooting informed using $J=2$ observed trajectories given: $\{\boldsymbol\xi^{(1)} = +-++-++, \xi^{(2)} =  +--+-+++++-\}$. Suppose that
+we set $h=1$ in this model. This choice implies that we need counts $N_{++}^{}=6, N_{+-}=5, N_{--}=1, N_{-+}=4$ coinciding to the number of makes following makes, misses following makes, misses following misses and makes following misses respectively for each trajectory. In addition, since the first state in each trajectory is stochastic as well, we add two special states representing the outcome of
+the initial free throw, $N_{\cdot -} = 0$, $N_{\cdot +} = 2$. In the vector notation above, we have $\mathbf{N}_+ = [5,6], \mathbf{N}_-=[1,4], \mathbf{N}_\cdot = [0,2]$, where the indices 
+are all of length one since our model only considers history vectors of length one.
 
 
 \subsection{Bayesian modeling}
@@ -174,6 +183,15 @@ In effect, one is assigning a probability of $\alpha/(M\alpha+N_{\bx})$ to any u
 
 
 \subsection{Model selection}
+
+The parameter $h$ controls the trade-off between complexity and fitting error. From a statistical viewpoint, complexity results in less-precise determination of model parameters, leading to larger prediction errors (overfitting). Conversely, a simple model may not capture the true probability space where paths reside, and fail to catch patterns in the real process (underfit).
+
+
+
+This manuscript evaluates several statistical criteria for selecting the number of states $h$ worth of memory to retain in the factorization of Eq.~\ref{eq:factorize}, viewing the problem in terms of prediction accuracy. 
+A value $h$ that yields a model that can best predict new unobserved trajectories~\cite{claeskens2008model} is chosen. Using these methods, I evaluate the hot hands phenomenon
+with data from LeBron James' 2016--2017 season.
+
 
 Prior statistical analyses of the hot hands effect have been rooted in null hypothesis statistical testing. Rather than follow this
 approach, which requires a subjective choice of a cut off p-value, this manuscript frames this problem as a model selection task.
