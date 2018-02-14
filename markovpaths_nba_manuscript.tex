@@ -2,13 +2,12 @@
 \documentclass{IOS-Book-Article}
 
 \usepackage{mathptmx}
-
-\usepackage{graphicx}
+ \usepackage{graphicx}
 \usepackage{amsmath,amssymb}
 \usepackage{mathtools}
 \usepackage{hyperref}
 \usepackage{epstopdf}
-\usepackage{natbib}
+\usepackage[numbers]{natbib}
 \newcommand{\bX}{\mathbf{X}}
 \newcommand{\bN}{\mathbf{N}}
 \newcommand{\dd}{\mathrm{d}}
@@ -42,7 +41,7 @@
 \thanks{Clinical Center, National Institutes of Health, Bethesda MD 20892}
   
 
-\title{Selection of multistep Markov chain models for free throw shooting in evaluation of the hot hands effect}
+\title{Selection of multistep Markov chain models and evaluation of the hot hands effect in free throw shooting}
        
 
 \begin{abstract}
@@ -61,19 +60,28 @@ Hence, simply modeling the probability of making a free throw as conditional on 
 
 \section{Introduction}
 
-With 10.6 seconds remaining on the shot clock in game 7 of the 2016 NBA finals, the Cleveland Cavaliers were up by three points. LeBron James, shaken by a hard foul, went to the free throw line to shoot two free throws. A single make would seal the outcome of the game. James misses the first free throw. That season he was a $73\%$ free throw shooter, slightly off from his career average of $74\%$. In that moment, one might ask whether the probability of making the second free throw was $73\%$, or something different altogether. Ignoring the issues of fatigue and the pressure of the situation, perhaps the fact that he had just missed a free throw was indicative of a hidden mental or physical state that predicted another miss. Or perhaps the miss precipitated a correction process that would lead to a more-likely make. Or perhaps it did not matter at all. 
+With $10.6$ seconds remaining on the shot clock in game 7 of the 2016 NBA finals, the Cleveland Cavaliers were up by three points. LeBron James, shaken by a hard foul, went to the free throw line to shoot two free throws. A single make would seal the outcome of the game. James misses the first free throw. That season he was a $73\%$ free throw shooter, slightly off from his career average of $74\%$. In that moment, one might ask whether the probability of making the second free throw was $73\%$, or something different altogether. Ignoring the issues of fatigue and the pressure of the situation, perhaps the fact that he had just missed a free throw was indicative of a hidden mental or physical state that predicted another miss. Or perhaps the miss precipitated a correction process that would lead to a more-likely make. Or perhaps it did not matter at all. 
 
 LeBron James would go on to make the second free throw and the Cavaliers would go on to win the championship. The outcome of the game crystalized into history, yet our question remained unanswered. Can the outcome of shots recently taken predict the outcome of future shots? This is the central question behind the hot hands phenomenon. 
 
 While controversial in analytical circles, belief in the hot hands phenomenon is certainly widespread in both the general public and in athletes~\cite{gilovich1985hot,camerer1989does,rao2009experts}.
-Empirically, the phenomenon has proven to be elusive~\cite{bar2006twenty}. In 1980s, examinations of the phenomenon in basketball based on analysis of shooting streaks yielded negative results~\cite{gilovich1985hot,koehler2003hot}, failing to reject  null hypotheses
+Empirically, the phenomenon has proven to be elusive~\cite{bar2006twenty}. In the 1980s, examinations of the phenomenon in basketball based on analysis of shooting streaks yielded negative results~\cite{gilovich1985hot,koehler2003hot}, failing to reject  null hypotheses
  of statistically independent shot outcomes.  Based on these early analyses, some studies have
 explained the widespread belief in hot-handedness by relating it to the Gambler's fallacy~\cite{ayton2004hot}.
  Follow-up studies have examined the effects of belief in this phenomenon under the supposition that it is a fallacy~\cite{burns2001hot}. However, recent analyses, using multivariate methods that can account for factors such as shot difficulty~\cite{bocskocsky2014hot,arkes2010revisiting,miller2016surprised}, have supported the phenomenon, finding the original studies to be underpowered, ~\cite{arkes2010revisiting,arkes2013misses,miller2016surprised} or to suffer from methodological issues regarding the weighting of expectation values~\cite{miller2016surprised}.
 
 
-This manuscript re-examines the phenomenon from a different analytical perspective than in prior studies. Presently, 
-a broad class 
+This manuscript re-examines the phenomenon from a different analytical philosophy. Presently, 
+a broad class of analyses of the phenomenon~\cite{gilovich1985hot,koehler2003hot} have been rooted in null hypothesis statistical testing.
+Rather than follow this approach, which requires a subjective choice of a cut off p-value to assess ``significance,'' this manuscript frames this problem as a model selection task. We are interested in whether a model which encompasses effects like hot-handedness is better at predicting free throw outcomes
+than a model without. 
+
+
+Specifically, this manuscript evaluates several statistical criteria for model selection within a general class of multistep Markov chain models.
+Multistep Markov chains are flexible models. Applied to free throw shooting, they are able to account for many types of statistical
+dependencies between shot outcomes including the hot hands effect.
+Using these methods, I evaluated the hot hands phenomenon on free throw data from LeBron James' 2016--2017 season and found
+evidence of statistical dependencies in shot outcomes.
 
 \section{Quantitative Methods}
 
@@ -146,13 +154,24 @@ Generally one has available  $J$ trajectories. Assuming independence between tra
 where $N^{(j)}_{\bx,m}$ is the number of times that the transition $\bx\to m$ occurs in trajectory $\xi^{(j)}$, and $N_{\bx,m} = \sum_j N^{(j)}_{\bx,m}$ is the total number of times the transition is seen.% Eq.~\ref{eq:likelihood} can be found by grouping like terms of Eq.~\ref{eq:factorize}. 
 
 For convenience,  denote $N_{\bx} =\sum_{m}N_{\bx,m}$,  $\bN_{\bx}= [\bN_{\bx,1},\bN_{\bx,2},\ldots,\bN_{\bx,M}]$, and the collection of all $\bN^{(j)}_{\bx}$ as $\bN$. The sufficient statistics of the likelihood are the counts, so we will refer to the likelihood as $\Pr(\bN\mid\bp)$. The maximum likelihood estimator for each parameter vector $\bp_\bx$ is found by maximizing the probability in Eq.~\ref{eq:likelihood}, and can be written easily as
-$\hat{p}^{\textrm{MLE}}_{\bx} = \mathbf{N}_{\bx} / N_{\bx}$. 
+$\hat{p}^{\textrm{MLE}}_{\bx} = \mathbf{N}_{\bx} / N_{\bx}$. Note that this estimate of the free throw percentages does
+not suffer from the same weighting error as the calculation used in \citet{gilovich1985hot}.
 
 \textbf{Example: }
 To make the notation more clear, consider a model for free throw shooting informed using $J=2$ observed trajectories given: $\{\boldsymbol\xi^{(1)} = +-++-++, \xi^{(2)} =  +--+-+++++-\}$. Suppose that
 we set $h=1$ in this model. This choice implies that we need the counts $N_{++}^{(1)}=2,\ N^{(1)}_{+-}=2,\ N^{(1)}_{--}=0,\  N^{(1)}_{-+}=2,\ N_{++}^{(2)}=4,\ N^{(2)}_{+-}=3,\ N^{(2)}_{--}=1,\ N^{(2)}_{-+}=2$ coinciding to the number of makes following makes, misses following makes, misses following misses and makes following misses respectively for each trajectory. In addition, since the first state in each trajectory is stochastic as well, we add two special states representing the outcome of
-the initial free throw, $N_{\cdot -} = 0$, $N_{\cdot +} = 2$. Aggregating the counts across the trajectories, in the vector notation above, we have $\mathbf{N}_+ = [N_{--}, N_{++}]= [5,6], \mathbf{N}_-=[1,4], \mathbf{N}_\cdot = [0,2]$, where the indices 
-are all of length one since our model only considers history vectors of length one.
+the initial free throw, $N_{\cdot -} = 0$, $N_{\cdot +} = 2$. Aggregating the counts across the trajectories, in the vector notation above, we have $\mathbf{N}_+ = [N_{+-}, N_{++}]= [5,6], \mathbf{N}_-=[1,4], \mathbf{N}_\cdot = [0,2]$, where the indices 
+are all of length one since our choice of $h=1$ means that we only consider history vectors of length one. Using maximum likelihood,
+we arrive at the parameter estimates $\hat{\mathbf{p}}_{-}^{MLE} = [\hat{{p}}_{--}^{MLE} , \hat{{p}}_{-+}^{MLE} ] = [1/5, 4/5],$ $\hat{\mathbf{p}}_{+}^{MLE}   = [5/11, 6/11],$ $\hat{\mathbf{p}}_{\cdot}^{MLE}   = [0, 1].$ 
+
+It is notable that our estimate of the probability of missing the first free throw in a game is null -- this is
+probably an unrealistic inference.
+Fundamentally, the maximum likelihood estimator precludes the existence of unobserved transitions -- a property that is problematic if  the sample size $J$ is small, as already seen in this example. This problem  amplifies when increasing $h$.
+It is desirable to regularize the problem by allowing a nonzero probability that
+transitions that have not yet been observed will occur. This manuscript's approach to rectifying these issues is Bayesian.
+
+%Bayesian inference provides a natural way of instilling this property into the problem. Furthermore,
+%after laying the Bayesian fundamentals, one has available a suite of theoretical tools. Most relevantly, Bayesian model comparison provides alternatives to the AIC that one may consider in finding the optimal degree of memory $h$. 
 
 
 \subsection{Bayesian modeling}
@@ -160,25 +179,16 @@ are all of length one since our model only considers history vectors of length o
 A natural Bayesian formulation of the
 problem of determining the transition probabilities is to use the Dirichlet conjugate prior
 on each parameter vector
-$
+\begin{equation}
 \mathbf{p}_{\bx} \sim \mathrm{Dirichlet}(\boldsymbol\alpha),
-$
+\end{equation}
  hyper-parameterized by $\boldsymbol\alpha$, a vector of size $M$. This manuscript assumes that $\boldsymbol\alpha=\mathbf{1}$, corresponding to a uniform prior. This prior, paired with the likelihood of Eq.~\ref{eq:likelihood}, 
  yields the posterior distribution on the probabilities,
 \begin{equation}
 \mathbf{p}_{\bx}  \vert \mathbf{N}_{\bx} \sim \mathrm{Dirichlet}(\boldsymbol\alpha + \mathbf{N}_{\bx} ).
 \label{eq:posterior}
 \end{equation}
-According to this distribution, the posterior expectations for the transition probabilities follow
-\begin{equation}
-\mathbb{E}_{\bp_\bx\vert\bN_\bx} [p_{\bx,m}] = \frac{\alpha + N_{\bx,m}}{M\alpha+ N_{\bx}}.
-\end{equation}
-yields a  Dirichlet posterior distribution
- with associated expectation,
-\begin{equation}
-\mathbf{p}_{\bx}  \vert \mathbf{N}_{\bx} \sim \mathrm{Dirichlet}(\boldsymbol\alpha + \mathbf{N}_{\bx} ) \quad \mathbb{E}_{\bp_\bx\vert\bN_\bx} [p_{\bx,m}] = \frac{\alpha + N_{\bx,m}}{M\alpha+ N_{\bx}}.\label{eq:posterior}
-\end{equation}
-In effect, one is assigning a probability of $\alpha/(M\alpha+N_{\bx})$ to any unobserved transition, where $\alpha$ can be made small if it is expected that the transition matrix should be sparse.   In the large-sample limit, the choice of $\alpha$ is not important as the posterior distribution of Eq.~\ref{eq:posterior}  becomes tightly concentrated about the maximum likelihood estimates.
+ In effect, one is assigning a mean probability of $\alpha/(M\alpha+N_{\bx})$ to any unobserved transition, where $\alpha$ can be made small if it is expected that the transition matrix should be sparse.   In the large-sample limit, the choice of $\alpha$ is not important as the posterior distribution of Eq.~\ref{eq:posterior}  becomes tightly concentrated about the maximum likelihood estimates.
 
 
 \subsection{Model selection}
@@ -188,79 +198,24 @@ The parameter $h$ controls the trade-off between complexity and fitting error. F
 
 
 This manuscript evaluates several statistical criteria for selecting the number of states $h$ worth of memory to retain in the factorization of Eq.~\ref{eq:factorize}, viewing the problem in terms of prediction accuracy. 
-A value $h$ that yields a model that can best predict new unobserved trajectories~\cite{claeskens2008model} is chosen. Using these methods, I evaluate the hot hands phenomenon
-with data from LeBron James' 2016--2017 season.
+A value $h$ that yields a model that can best predict new unobserved trajectories~\cite{claeskens2008model} is chosen. Using these methods, I evaluate the hot hands phenomenon on free throw data from LeBron James' 2016--2017 season.
 
 
-Prior statistical analyses of the hot hands effect have been rooted in null hypothesis statistical testing. Rather than follow this
-approach, which requires a subjective choice of a cut off p-value, this manuscript frames this problem as a model selection task.
-We are interested in whether a model which encompasses effects like hot-handedness is better at predicting free throw outcomes
-than a model without. There are various existing generalized methods for evaluating how well models predict. To make these
-methods comparable, 
+There are various existing generalized methods for evaluating how well models predict. Each of these methods
+summarizes a model using a single quantity. To facilitate comparison between the methods themselves, this manuscript scales the
+output of all methods to the deviance scale as used in the AIC. The deviance is a measure of information loss when going from a \emph{full model} to an alternative model~\cite{akaike1974new}.
 
-Following this approach, the Akaike Information Criterion (AIC),~\cite{akaike1974new,tong1975determination,katz1981some}, $\textrm{AIC}=-2\log\Pr(\bN\vert \hat{p}^{\textrm{MLE}})+2k$,
- may be used as a metric in order to choose a value of $h$.  Rooted in information theory, the AIC is an asymptotic approximation of the information loss in the representation of data by a model~\cite{burnham2003model}. The model with the smallest AIC, and hence with the smallest approximate loss, is chosen.
-
-A limitation of the AIC is inaccuracy for small datasets. A correction to the AIC known as the AICc exists~\cite{hurvich1989regression}, however, its exact form is problem specific~\cite{burnham2003model}. Fundamentally, the maximum likelihood estimator precludes the existence of unobserved transitions -- a property that is problematic if  the sample size $J$ is small.
-It is desirable to regularize the problem by allowing a nonzero probability that
-transitions that have not yet been observed will occur. This manuscript's approach to rectifying these issues is Bayesian.
-
-%Bayesian inference provides a natural way of instilling this property into the problem. Furthermore,
-%after laying the Bayesian fundamentals, one has available a suite of theoretical tools. Most relevantly, Bayesian model comparison provides alternatives to the AIC that one may consider in finding the optimal degree of memory $h$. 
-
-
-
-
-As pertains to Bayesian model selection,  Bayes factors are often used~\cite{lavine1999bayes,posada2004model}. If using non-informative model priors, they consist of the likelihood of the data, averaged over the posterior distribution of model parameters. The logarithm of this quantity is known as the log predictive density (LPD). Related to the LPD is the log point-wise predictive density (LPPD), where the same expectation is taken separately for each datapoint and logarithms of these expectations are summed. The LPPD features in alternatives to Bayes factors and the AIC~\cite{gelman2014understanding}.
-
-The Widely Applicable Information Criterion~\cite{watanabe2010asymptotic,watanabe2013widely} (WAIC) is a Bayesian information criterion with two variants, each featuring the LPPD but differing in how they compute model complexity.  The WAIC, unlike the AIC, is applicable to singular statistical models and is asymptotically equivalent to Bayesian leave-one-out cross-validation~\cite{watanabe2010asymptotic}. The commonly used Deviance Information Criterion (DIC) also resembles the WAIC,  consisting of two variants. Both variants use point estimates of the posterior parameters rather than expectations as used in the WAIC.
-However, the BIC~\cite{narlikar2013one} does not measure prediction fit for new data~\cite{gelman2014understanding}.
-
-Finally Bayesian variants of cross-validation have recently been proposed as alternatives to information criterion~\cite{gelman2014understanding}.  In our problem, $k$-fold CV, where data is divided into $k$ partitions, can be evaluated in closed form without repeated model fitting. Using $-2\times \textrm{LPPD}$ as a metric, this manuscript also evaluates two variants of $k$-fold CV:
-two-fold cross validation (LPPDCV$_2$) and leave-one-out cross validation (LOO).  Closed-form formulae for computing each model selection criterion are available as \textsc{Supplemental material}. 
-  %%%%%%%%%%%%%%%%%%%
-
-\begin{figure*}[!ht]
-\includegraphics[width=\textwidth]{fig2}
-\caption{\textbf{Chosen degree of memory $h$} in simulations for varying true degrees of memory  $h_{\textrm{true}}$ and number of observed trajectories $J$. Rows correspond to model selection under a given degree of memory. Columns correspond to the number of trajectories. Depicted are the percent of simulations in which each degree of memory is selected using the different model evaluation criteria (percents of at least $20$ are labeled). Colors coded based on degree of memory: ({\color{Set1_5_red} 1: red}, {\color{Set1_5_blue} 2: blue}, {\color{Set1_5_green}3: green}, {\color{Set1_5_purple}4: purple}, {\color{Set1_5_orange}5: orange}). \emph{Example:} For $h_{\textrm{true}}=1$ and $J=4$, the WAIC$_1$ criteria selected $h=1$ approximately $65\%$ of the time. }
-\label{fig:fig2}
-\end{figure*}
-
-
-
-The Akaike information criterion (AIC) is defined through the formula $\textrm{AIC}  = -2 \sum_{\bx}\log \Pr(\bN_\bx \vert \hat{\bp}_{\textrm{MLE}}) + 2k$ and can be computed exactly as
+The Akaike Information Criterion (AIC),~\cite{akaike1974new,tong1975determination,katz1981some}, 
+ defined through the formula $\textrm{AIC}  = -2 \sum_{\bx}\log \Pr(\bN_\bx \vert \hat{\bp}_{\textrm{MLE}}) + 2k,$ where
+ $k$ is the number of parameters in the model,
+ is an estimate of deviance between an unknown true model and a given model.
+  For the selection of $h$, it may be computed exactly in closed form
 \begin{align}
-\textrm{AIC}  &= -2\sum_{\bx}\sum_{m=1}^M N_{\bx,m}\log \left( \frac{N_{\bx,m}}{N_\bx} \right)+ 2M^{q+1},
+\textrm{AIC}  &= -2\sum_{\bx}\sum_{m=1}^M N_{\bx,m}\log \left( \frac{N_{\bx,m}}{N_\bx} \right)+ 2M^{h}(M-1),
 \end{align}
-where in this context we define $0\times\log(0)=0$.
+where in this context we define $0\times\log(0)\equiv0$.  Rooted in information theory, the AIC is an asymptotic approximation of the deviance~\cite{burnham2003model}. The model with the smallest AIC is chosen. A limitation of the AIC is inaccuracy for small datasets. A correction to the AIC known as the AICc exists~\cite{hurvich1989regression}, however, its exact form is problem specific~\cite{burnham2003model}. 
 
-
- The deviance information criterion (DIC) is similar to the AIC and defined as 
-$\textrm{DIC} = -2\sum_{\bx}\log p\left(\bN_{\bx} \mid \bp_{\bx} = \mathbb{E}_{\bp_{\bx}\vert \bN_\bx}  \bp_{\bx}   \right) + 2k_{\textrm{DIC}}.$ It may also be computed by evaluating the closed form expression
-\begin{equation}
-\textrm{DIC} =-2\sum_{\bx}\sum_{m=1}^M N_{\bx,m}\log \left( \frac{N_{\bx,m} +\alpha}{N_\bx+ M\alpha}  \right)+  2k_{\textrm{DIC}},
-\end{equation}
-where we are assuming that one uses the posterior mean as the point estimate of the model parameters, and also where the effective model complexity $k_{DIC}$ has two variants
- \begin{align}
-\lefteqn{ k_{\textrm{DIC1}}= -2\Bigg\{ \sum_{\bx}\sum_{m=1}^M N_{\bx,m}\log \left( \frac{N_{\bx,m} +\alpha}{N_\bx+ M\alpha}  \right)   } \nonumber\\
- & -\sum_j \sum_\bx \mathbb{E}_{\bp_\bx\vert\bN}\log\bp_\bx^{\bN_{\bx}^{(j)}} \Bigg\} \nonumber\\
- &=2\Bigg\{ \sum_{\bx}\sum_{m=1}^M N_{\bx,m}\log \left( \frac{N_{\bx,m} +\alpha}{N_\bx+ M\alpha}  \right)   \nonumber\\
- & -\sum_j \sum_\bx \sum_{m=1}^M {\bN_{\bx,m}^{(j)}}  \left[ \psi(\alpha+N_{\bx,m}) - \psi(M\alpha+N_{\bx}) \right] \Bigg\} \nonumber\\
-  &=2\Bigg\{ \sum_{\bx}\sum_{m=1}^M N_{\bx,m}\log \left( \frac{N_{\bx,m} +\alpha}{N_\bx+ M\alpha}  \right)   \nonumber\\
- & - \sum_\bx \sum_{m=1}^M {N_{\bx,m} }  \left[ \psi(\alpha+N_{\bx,m}) - \psi(M\alpha+N_{\bx}) \right] \Bigg\} ,\nonumber\\
-  \end{align}
-  %
-  and $k_{\textrm{DIC2}} = 2\textrm{var}_{\bp\mid\bN}\left[ \log \Pr\left( \bN\mid \bp\right) \right] ,$ which may be computed
-  %
- \begin{align}
-\lefteqn{k_{\textrm{DIC2}} =2 \var_{\bp_\bx}\left[ \sum_{\bx}\sum_{m} N_{\bx,m} \log p_{\bx,m}  \right] }\nonumber \\
-&=2\sum_{\bx} \var_{\bp_\bx}\left( \sum_{m} N_{\bx,m} \log p_{\bx,m} \right) \nonumber\\
-&=2\sum_{\bx} \sum_{m}\sum_{n} N_{x,m}N_{x,n} \cov(\log p_{\bx,m},\log p_{\bx,n}) \nonumber\\
-&=2\sum_{\bx} \sum_m\sum_n N_{x,m}N_{x,n} \nonumber\\
-&\qquad\qquad\qquad\times\left[ \psi^\prime(\alpha+N_{\bx,m})\delta_{mn} - \psi^\prime(M\alpha+N_{\bx})  \right] \nonumber\\
-&=2\sum_{\bx} \left(\sum_m N_{\bx,m}^2 \psi^\prime(\alpha+N_{\bx,m})  - (N_{\bx})^2  \psi^\prime(M\alpha+N_{\bx}) \right)
-\end{align}
-Bayes factors are ratios of the probability of the dataset given two models and their corresponding posterior parameter distributions. In the case of this application, the likelihood completely factorizes into  a product of transition probabilities and each model's corresponding term in a Bayes factor is the exponential of its log predictive density (LPD). The LPD can be computed exactly
+Bayes factors are ratios of the probability of the dataset given two models averaged over their corresponding posterior parameter distributions~\cite{lavine1999bayes,posada2004model}. In the case of this application, the likelihood completely factorizes into  a product of transition probabilities and each model's corresponding term in a Bayes factor is the exponential of its log predictive density (LPD). The LPD can be computed exactly
 \begin{align}
 \lefteqn{\textrm{LPD} = \log\mathbb{E}_{\bp\vert\bN}  \left[     \Pr\left(\mathbf{N}  \mid \bp \right) \right] } \nonumber\\
 &=  \log \mathbb{E}_{\bp\vert\bN} \left( \prod_\bx  \prod_{m=1}^{M} p_{\bx,m}^{N_{\bx,m}} \right) \nonumber \\
@@ -276,8 +231,13 @@ points and write the LPPD as
  \prod_{m=1}^{M} p_{\bx,m}^{N^{(j)}_{\bx,m}} \right) \nonumber\\
 &=\sum_j \sum_{\bx}  \log\left(  \frac{B(\bN_\bx +\bN_{\bx}^{(j)} +\balpha)}{B(\bN_\bx +\balpha)} \right).
 \end{align}
+ The LPPD features in alternatives to Bayes factors and the AIC~\cite{gelman2014understanding}.
 
-The WAIC is defined as $\textrm{WAIC} = -2\textrm{LPPD}+2k_{\textrm{WAIC}}$, where the effective model sizes are computed exactly as
+The Widely Applicable Information Criterion~\cite{watanabe2010asymptotic,watanabe2013widely} (WAIC) is a Bayesian information criterion with two variants, each featuring the LPPD but differing in how they compute model complexity.  
+The WAIC is defined as 
+\begin{equation}\textrm{WAIC} = -2\textrm{LPPD}+2k_{\textrm{WAIC}},
+\end{equation}
+ where the effective model sizes are computed exactly as
 \begin{align}
 \lefteqn{k_{\textrm{WAIC1}} = 2\textrm{LPPD}-2\sum_j \sum_\bx \mathbb{E}_{\bp_\bx\vert\bN}\log\bp_\bx^{\bN_{\bx}^{(j)}}  }\nonumber \\
 &= 2 \textrm{LPPD} -  \sum_j\sum_{\bx}\sum_{m=1}^M N_{\bx,m}^{(j)} \mathbb{E}_{\bp_\bx\vert \bN_\bx} \left(\log p_{\bx,m} \right) \nonumber\\
@@ -298,21 +258,58 @@ and
 &=\sum_j \sum_\bx \Bigg[\sum_{m=1}^M [N^{(j)}_{\bx,m}]^2\psi^\prime(\alpha+N_{\bx,m}) \nonumber\\
 &\qquad\qquad\qquad-[N^{(j)}_{\bx}]^2\psi^\prime(M\alpha+N_\bx)  \Bigg].
 \end{align}
-Finally, as an alternative to information criterion, we may use cross-validation. In particular, the log posterior predictive density under leave-one-out cross validation (LOO)
-has a particularly simple form,
+%
+The WAIC, unlike the AIC, is applicable to singular statistical models and is asymptotically equivalent to Bayesian leave-one-out cross-validation~\cite{watanabe2010asymptotic}. 
+
+The commonly used Deviance Information Criterion (DIC) 
 \begin{equation}
-\textrm{LOO} = -2\sum_j \sum_{\bx}  \log\left(  \frac{B(\bN_\bx  +\balpha)}{B(\bN_\bx -\bN_{\bx}^{(j)} +\balpha)} \right) .
+\textrm{DIC} = -2\sum_{\bx}\log p\left(\bN_{\bx} \mid \bp_{\bx} = \mathbb{E}_{\bp_{\bx}\vert \bN_\bx}  \bp_{\bx}   \right) + 2k_{\textrm{DIC}}
 \end{equation}
-The leave-one-out version of cross validation is a specific case of $k$-fold cross validation, where $k$ is precisely the number of data points. At the other extreme of this type of cross validation is $2$-fold cross validation, which can be computed exactly as
+also resembles the WAIC,  consisting of two variants in the computation of model complexity,
+ \begin{align}
+\lefteqn{ k_{\textrm{DIC1}}= -2\Bigg\{ \sum_{\bx}\sum_{m=1}^M N_{\bx,m}\log \left( \frac{N_{\bx,m} +\alpha}{N_\bx+ M\alpha}  \right)   } \nonumber\\
+ & -\sum_j \sum_\bx \mathbb{E}_{\bp_\bx\vert\bN}\log\bp_\bx^{\bN_{\bx}^{(j)}} \Bigg\} \nonumber\\
+ &=2\Bigg\{ \sum_{\bx}\sum_{m=1}^M N_{\bx,m}\log \left( \frac{N_{\bx,m} +\alpha}{N_\bx+ M\alpha}  \right)   \nonumber\\
+ & -\sum_j \sum_\bx \sum_{m=1}^M {\bN_{\bx,m}^{(j)}}  \left[ \psi(\alpha+N_{\bx,m}) - \psi(M\alpha+N_{\bx}) \right] \Bigg\} \nonumber\\
+  &=2\Bigg\{ \sum_{\bx}\sum_{m=1}^M N_{\bx,m}\log \left( \frac{N_{\bx,m} +\alpha}{N_\bx+ M\alpha}  \right)   \nonumber\\
+ & - \sum_\bx \sum_{m=1}^M {N_{\bx,m} }  \left[ \psi(\alpha+N_{\bx,m}) - \psi(M\alpha+N_{\bx}) \right] \Bigg\} ,\nonumber\\
+  \end{align}
+  %
+  and $k_{\textrm{DIC2}} = 2\textrm{var}_{\bp\mid\bN}\left[ \log \Pr\left( \bN\mid \bp\right) \right] ,$ which may be computed
+  %
+ \begin{align}
+\lefteqn{k_{\textrm{DIC2}} =2 \var_{\bp_\bx}\left[ \sum_{\bx}\sum_{m} N_{\bx,m} \log p_{\bx,m}  \right] }\nonumber \\
+&=2\sum_{\bx} \var_{\bp_\bx}\left( \sum_{m} N_{\bx,m} \log p_{\bx,m} \right) \nonumber\\
+&=2\sum_{\bx} \sum_{m}\sum_{n} N_{x,m}N_{x,n} \cov(\log p_{\bx,m},\log p_{\bx,n}) \nonumber\\
+&=2\sum_{\bx} \sum_m\sum_n N_{x,m}N_{x,n} \nonumber\\
+&\qquad\qquad\qquad\times\left[ \psi^\prime(\alpha+N_{\bx,m})\delta_{mn} - \psi^\prime(M\alpha+N_{\bx})  \right] \nonumber\\
+&=2\sum_{\bx} \left(\sum_m N_{\bx,m}^2 \psi^\prime(\alpha+N_{\bx,m})  - (N_{\bx})^2  \psi^\prime(M\alpha+N_{\bx}) \right).
+\end{align}
+Both variants plug in point estimates of the posterior parameters rather than average over the posterior as used in the WAIC.
+
+Finally Bayesian variants of cross-validation have recently been proposed as alternatives to information criterion~\cite{gelman2014understanding}.  In our problem, $k$-fold CV, where data is divided into $k$ partitions, can be evaluated in closed form without repeated model fitting. Using $-2\times \textrm{LPPD}$ as a metric, this manuscript also evaluates two variants of $k$-fold CV:
+ leave-one-out cross validation (LOO)
+\begin{equation}
+\textrm{LOO} = -2\sum_j \sum_{\bx}  \log\left(  \frac{B(\bN_\bx  +\balpha)}{B(\bN_\bx -\bN_{\bx}^{(j)} +\balpha)} \right),\label{eq:loo}
+\end{equation}
+and two-fold cross validation (LPPDCV$_2$)
 \begin{align}
 \textrm{LPPD}\textrm{CV}_2 &= -2\sum_{j=1}^{J/2} \sum_{\bx}  \log\left(  \frac{B(\bN^+_\bx +\bN_{\bx}^{(j)} +\balpha)}{B(\bN^+_\bx+\balpha)} \right)  \nonumber\\
-& -2 \sum_{j=J/2}^{J} \sum_{\bx} \log\left(  \frac{B( \bN^-_\bx +\bN_{\bx}^{(j)} +\balpha)}{B( \bN^-_\bx +\balpha)} \right),
+& -2 \sum_{j=J/2}^{J} \sum_{\bx} \log\left(  \frac{B( \bN^-_\bx +\bN_{\bx}^{(j)} +\balpha)}{B( \bN^-_\bx +\balpha)} \right).
 \end{align}
 where $\bN^\pm_\bx$ constitute the transition counts of the last $J/2$ trajectories or the first $J/2$ trajectories respectively, so that $\bN^-_\bx + \bN^+_\bx = \bN_\bx$.
 
+
+ 
 \section{Results}
 
 \subsection{Evaluation of selection criteria}
+
+\begin{figure*}[!ht]
+\includegraphics[width=\textwidth]{fig2}
+\caption{\textbf{Chosen degree of memory $h$} in simulations for varying true degrees of memory  $h_{\textrm{true}}$ and number of observed trajectories $J$. Rows correspond to model selection under a given degree of memory. Columns correspond to the number of trajectories. Depicted are the percent of simulations in which each degree of memory is selected using the different model evaluation criteria (percents of at least $20$ are labeled). Colors coded based on degree of memory: ({\color{Set1_5_red} 1: red}, {\color{Set1_5_blue} 2: blue}, {\color{Set1_5_green}3: green}, {\color{Set1_5_purple}4: purple}, {\color{Set1_5_orange}5: orange}). \emph{Example:} For $h_{\textrm{true}}=1$ and $J=4$, the WAIC$_1$ criteria selected $h=1$ approximately $65\%$ of the time. }
+\label{fig:fig2}
+\end{figure*}
 
 Simulations provided tests of these methods.
 The test system is composed of $M=8$ states, with designated start and absorbing states.  For each given value of $h$, I generated for each $\bx\in \mathbf{X}_h$ a single set of true transition probabilities drawn from Dirichlet($\mathbf{1}$) distributions. For each of these random networks of a fixed $h$, I randomly sampled trajectories of a given sample size $J$ $10^4$ times, determining from each sample of $J$ trajectories the degree of $h$ chosen by each of the methods.
@@ -328,12 +325,7 @@ Fig.~\ref{fig:fig2} provides the frequency that each of five models ($h=1,\ldots
 LOO, the two variants of the WAIC,  and DIC$_1$ perform roughly on par. Since each criterion selects the model with the lowest value, it is desirable that $\Delta\textrm{Criterion}(h)=\textrm{Criterion}(h)-\textrm{Criterion}(h_{\textrm{true}})>0$, for $h\neq h_{\textrm{true}}$. Fig.~\ref{fig:fig3} explores the distributions of these quantities in the case where $h_{\textrm{true}}=2$.  As sample size $J$ increases, there is clearer separation of these quantities from zero. By $J=64$, no models where $h=1$ are selected using any of the criteria. The WAIC$_2$ and LOO criteria perform about the same whereas the WAIC$_1$ criteria and the DIC$_1$ criteria lag behind in separating themselves from zero.
 
 
-Informed by these tests, this manuscript recommends the LOO criterion:
-\begin{equation}
-\textrm{LOO} = -2\sum_j \sum_{\bx}  \log\left(  \frac{B(\bN_\bx  +\balpha)}{B(\bN_\bx -\bN_{\bx}^{(j)} +\balpha)} \right),
-\label{eq:loo}
-\end{equation}
-where $B$ is the multivariate Beta function. LOO performed slightly better than WAIC$_2$ in the included tests, while being somewhat simpler to compute. Eq.~\ref{eq:loo} decomposes completely into a sum of logarithms of Gamma functions, and is hence easy to implement in standard scientific software packages.
+Informed by these tests, this manuscript recommends the use of leave-one-out cross validation (LOO). LOO performed slightly better than WAIC$_2$ in the included tests, while being somewhat simpler to compute. Eq.~\ref{eq:loo} decomposes completely into a sum of logarithms of Gamma functions, and is hence easy to implement in standard scientific software packages.
 
 %%%%%%%%%%%%%%%%%%%%%%%%
 \begin{figure}
@@ -345,8 +337,10 @@ where $B$ is the multivariate Beta function. LOO performed slightly better than 
 
 \subsection{The hot-hand phenomenon} 
 
-The methodology of this manuscript can be used to evaluate this hot-hands effect in the controlled context of free throws.
-  During the 2016-2017 season, in $91$ games, LeBron James attempted at least a single free throw, hitting $471$ of $693$ overall (Fig.~\ref{fig:freethrows}).  Conditioning the hit probabilities by the outcome of the preceding free throw in the same game, James shot a slightly better percentage after missing a free throw than otherwise. However, the $h=0$ model is favored slightly over $h=1$ as it appears that the dataset is underpowered for the selection of $h=1$. In simulations of free throw trajectories, where the number of free throws per game was drawn from a Poisson distribution that approximated the number distribution in the dataset, and outcomes were drawn for the fitted $h=1$ model, $h=1$ was chosen slightly under half the time (Fig.~\ref{fig:freethrows}).
+I used the methodology in this manuscript to evaluate the hot-hands effect in the controlled context of free throws.
+  During the 2016-2017 season, in $91$ games, LeBron James attempted at least a single free throw, hitting $471$ of $693$ overall (Fig.~\ref{fig:freethrows}).  Conditioning the hit probabilities by the outcome of the preceding free throw in the same game, James shot a slightly better percentage after missing a free throw than otherwise. However, the $h=0$ model is favored slightly over $h=1$  (Model selection pane of Fig~\ref{fig:freethrows}). 
+  
+   In simulations of that season of James' free throw trajectories, where the number of free throws per game was drawn from a Poisson distribution that approximated the  distribution in the dataset, the overall hitting percentage was matched to $73\%$, and outcomes were drawn from the fitted $h=1$ model, $h=1$ was chosen slightly under half the time (Fig.~\ref{fig:freethrows}). 
   
   However, examining the model parameters in the case of $h=1$, one sees that the hitting probabilities are similar in all cases except after a miss (Fig.~\ref{fig:freethrows}). This observation suggests  a  model with jagged memory: independence of outcome except after a miss. Having one fewer parameter than the full $h=1$ model, this jagged model is favorable to both the $h=0$ and $h=1$ models (Fig.~\ref{fig:fig5}). Hence, at least for this season, the most predictive model of  James' free throw shooting tells a story of error correction rather than a story of hot hands.
   
@@ -362,20 +356,43 @@ The methodology of this manuscript can be used to evaluate this hot-hands effect
 
 \section{Discussion}
 
-This manuscript has shown that LOO and its approximation, the WAIC, can learn from data the physical reality of the 
-degree of memory in a system. Regardless of the selection criterion used, the determination of $h$ is not truly certain except asymptotically when an unlimited amount of data are available. However, one may use a simulation procedure like the one used in this manuscript in order to estimate the degree of uncertainty.  
+From the modeling perspective, there are large fluctuations in free throw shooting percentage between seasons.
+Hence, one either needs to model non-stationarity in the percentages or restrict the time interval of the applicability
+of any given model. In this manuscript I have chosen to restrict modeling to the interval of a single season, ignoring
+non-stationarity within the season, a trade-off common to other analyses~\cite{gilovich1985hot}. The downside 
+of such restrictions is that they limit the data than may be used in detecting effects. LeBron James, a volume free throw
+shooter who does not miss many games and plays well into the playoffs, is perhaps a best-case scenario for detection
+of statistical dependencies in free throws using such models.
 
+Even for James, the detection of these effects proves difficult.
+Judging from simulations (Fig~\ref{fig:freethrows}), it appears that the dataset is underpowered for the selection of a pure model where $h=1$.   On the other hand, in simulations where $h_{\textrm{true}}=0$, $h=0$ is correctly chosen approximately $85\%$ of the time. The $h=0$ and $h=1$ models are both approximately as predictive. In fact, from the model averaging perspective, they would be weighted approximately the same as weights are exponential in the gap between the selection criteria~\cite{gelman2014understanding}.
+
+The hybrid model (Fig~\ref{fig:fig5}) is more predictive than either of the pure $h=0$ and $h=1$ models. Hence, based
+on finding the model with the best prediction, one would predict that LeBron James is more likely to make a free
+throw after a miss than otherwise. A demonstration of this particular error-correcting phenomenon is apparent in the pair of free throws
+that he shot to ensure a win in Game 7 of the proceeding finals.
+
+
+\subsection{General model selection}
+
+Multistep Markov chains are flexible models that are useful for modeling any discrete-state discrete-time phenomenon. 
+Models of structure similar to Eq.~\ref{eq:factorize} have appeared in limitless contexts such as analysis of text~\cite{melnyk2006memory}, human digital trails~\cite{singer2014detecting}, DNA sequences, protein folding~\cite{yuan1999prediction}, and eye movements~\cite{bettenbuhl2012bayesian}. 
+
+This manuscript
+addressed the general method of degree selection for such models.
 Importantly, both the AIC and LPD (Bayes factors) are biased in opposite situations, in opposite directions. For small datasets, the AIC tends to sparsity, which runs counter to the typical situation in linear regression problems where the AIC can favor complexity with too few data, a situation ameliorated by the more-stringent AICc~\cite{claeskens2008model}. Bayes factors with flat model  priors as investigated here, on the other hand, consistently select a higher value of $h$ given more data.
 %
 Notably, alternative Bayes factors methods for selecting the degree of memory also include model-level priors that behave like the penalty term in the AIC~\cite{strelioff2007inferring,singer2014detecting}. Since the upper bound of the LPD is the logarithm of the likelihood found from the MLE procedure, this selection method is more stringent in the low sample-size regime than the pure AIC and hence will suffer from the same bias towards selecting models with less memory.
 
 
-Models of structure similar to Eq.~\ref{eq:factorize} have appeared in limitless contexts such as analysis of text~\cite{melnyk2006memory}, human digital trails~\cite{singer2014detecting}, DNA sequences, protein folding~\cite{yuan1999prediction}, and eye movements~\cite{bettenbuhl2012bayesian}. As we have seen, many methods tend to asymptotically select the correct model. However, studies are seldom in the asymptotic regime and using these methods  to reanalyze data from prior studies may prove fruitful in uncovering previously overlooked memory effects, particularly in systems of a large number of states. 
+As we have seen, many methods tend to asymptotically select the correct model. However, studies are seldom in the asymptotic regime and using these methods  to reanalyze data from prior studies may prove fruitful in uncovering previously overlooked memory effects, particularly in systems of a large number of states. 
 
+This manuscript has shown that LOO and its approximation, the WAIC, can learn from data the physical reality of the 
+degree of memory in a system. Regardless of the selection criterion used, the determination of $h$ is not truly certain except asymptotically when an unlimited amount of data are available. However, one may use a simulation procedure like the one used in this manuscript in order to estimate the degree of uncertainty.  
 
 \section{Acknowledgements:} I thank the United States Social Security Administration and the Intramural Research Program at the NIH Clinical Center for funding. Additionally, I thank members of the Biostatistics and Rehabilitation Section in the Rehabilitation Medicine Department at NIH, John P. Collins in particular, and also Carson Chow at NIDDK for helpful discussions.
 
-\bibliographystyle{plain}
+\bibliographystyle{plainnat}
 \bibliography{markovpaths}
  
 
