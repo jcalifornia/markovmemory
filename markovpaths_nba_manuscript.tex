@@ -108,8 +108,7 @@ Assume that a trajectory $\xi$ consists of steps $\xi_l$, where each step takes 
 where $h$, a non-negative counting number, represents the number of states worth of memory needed to predict the next state, with appropriate boundary conditions for the beginning of the trajectory. In the context of the hot hands effect, models with $h\geq1$ encompass statistical dependencies between shot outcomes. Hot hands would correspond to higher
 make probabilities after recent makes and cold hands correspond to lower probabilities after misses.
 
-In the case of absolutely no memory ($h=0$), the path probability is simply the product of the probabilities of being in each of the separate states in a path, $p_{x_1}p_{x_2},\ldots p_{x_L},$ and there are essentially $M-1$ free model parameters, where $M$ is the number of states. A model where $h=0$ implies that the outcome of previous shot attempts does not inform the outcome
-of the next attempt.
+In the case of absolutely no memory ($h=0$), the path probability is simply the product of the probabilities of being in each of the separate states in a path, $p_{x_1}p_{x_2},\ldots p_{x_L},$ and there are essentially $M-1$ free model parameters, where $M$ is the number of states. A model where $h=0$ implies that the outcomes of previous shot attempts do not inform the outcome of the next attempt.
 If $h=1$, the model is single-step Markovian in that only the current state is relevant in determining the next state. These models involve $M(M-1)$ free parameters. Generally, if $h$ states of history are required, then the model is $h$-step Markovian, and $M^h(M-1)$ parameters are needed (see Fig~\ref{fig:fig1}). Hence, the size of the parameter space grows exponentially with memory. Our objective is to determine, based on observational evidence, an appropriate value for $h$. 
 
  
@@ -150,9 +149,9 @@ For convenience,  denote $N_{\bx} =\sum_{m}N_{\bx,m}$,  $\bN_{\bx}= [\bN_{\bx,1}
 $\hat{p}^{\textrm{MLE}}_{\bx} = \mathbf{N}_{\bx} / N_{\bx}$. 
 
 \textbf{Example: }
-As a concrete example, consider a model for free throw shooting informed using $J=2$ observed trajectories given: $\{\boldsymbol\xi^{(1)} = +-++-++, \xi^{(2)} =  +--+-+++++-\}$. Suppose that
-we set $h=1$ in this model. This choice implies that we need counts $N_{++}^{}=6, N_{+-}=5, N_{--}=1, N_{-+}=4$ coinciding to the number of makes following makes, misses following makes, misses following misses and makes following misses respectively for each trajectory. In addition, since the first state in each trajectory is stochastic as well, we add two special states representing the outcome of
-the initial free throw, $N_{\cdot -} = 0$, $N_{\cdot +} = 2$. In the vector notation above, we have $\mathbf{N}_+ = [5,6], \mathbf{N}_-=[1,4], \mathbf{N}_\cdot = [0,2]$, where the indices 
+To make the notation more clear, consider a model for free throw shooting informed using $J=2$ observed trajectories given: $\{\boldsymbol\xi^{(1)} = +-++-++, \xi^{(2)} =  +--+-+++++-\}$. Suppose that
+we set $h=1$ in this model. This choice implies that we need the counts $N_{++}^{(1)}=2,\ N^{(1)}_{+-}=2,\ N^{(1)}_{--}=0,\  N^{(1)}_{-+}=2,\ N_{++}^{(2)}=4,\ N^{(2)}_{+-}=3,\ N^{(2)}_{--}=1,\ N^{(2)}_{-+}=2$ coinciding to the number of makes following makes, misses following makes, misses following misses and makes following misses respectively for each trajectory. In addition, since the first state in each trajectory is stochastic as well, we add two special states representing the outcome of
+the initial free throw, $N_{\cdot -} = 0$, $N_{\cdot +} = 2$. Aggregating the counts across the trajectories, in the vector notation above, we have $\mathbf{N}_+ = [N_{--}, N_{++}]= [5,6], \mathbf{N}_-=[1,4], \mathbf{N}_\cdot = [0,2]$, where the indices 
 are all of length one since our model only considers history vectors of length one.
 
 
