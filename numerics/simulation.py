@@ -10,7 +10,7 @@ from string import ascii_uppercase
 from collections import defaultdict
 from functools import partial
 from scipy.special import gammaln, polygamma
-from numpy.random import poisson
+from numpy.random import poisson, negative_binomial
 
 import re
 
@@ -32,7 +32,17 @@ def simulate(num_states, q, alpha, num_trajectories = 100, max_length = 100):
     # simulates trajectories up to a maximum size
     
     states = [m for m in ascii_uppercase[:num_states]]
-
+    if q == 0:
+        X = list(states)
+        p = dirichlet(alpha*np.ones(num_states),1)
+        trajectories = []
+        sizes = negative_binomial(1,p[0][-1],num_trajectories)
+        for j in range(num_trajectories):
+            trajectories +=  ["A" + "".join(choice(X[:-1],sizes[j],p=p[0][:-1]/sum(p[0][:-1]))) ]
+            trajectories[-1] = trajectories[-1][:-1] + X[-1]       
+        
+        return trajectories, states
+        
     X0 = ["".join(x) for x in product(states,repeat=q) if states[-1] not in x[:-1] ]
 
     pad_states = set()
@@ -373,7 +383,12 @@ def evaluate_models(trajectories, states, alpha=1, qbounds=(1, 8)):
             "kWAIC1": kWAIC1, "kWAIC2": kWAIC2, "kDIC1": kDIC1, "kDIC2": kDIC2}
 
 
-def process_q(q=2,J=100, M = 8, L=100,qbounds = (1,6)):
+def process_q(q=2,J=100, M = 8, L=100,qbounds = (0,6)):
+    X, X0 = simulate(num_states=M, q=q, alpha=1, num_trajectories=J, max_length=L)
+    info = evaluate_models(X, X0, qbounds= qbounds)
+    return info
+
+def process_M(M = 8,q=2,J=100,  L=100,qbounds = (0,6)):
     X, X0 = simulate(num_states=M, q=q, alpha=1, num_trajectories=J, max_length=L)
     info = evaluate_models(X, X0, qbounds= qbounds)
     return info
