@@ -38,7 +38,7 @@ def simulate(num_states, q, alpha, num_trajectories = 100, max_length = 100):
         trajectories = []
         sizes = negative_binomial(1,p[0][-1],num_trajectories)
         for j in range(num_trajectories):
-            trajectories +=  ["A" + "".join(choice(X[:-1],sizes[j],p=p[0][:-1]/sum(p[0][:-1]))) ]
+            trajectories +=  ["".join(choice(X[:-1],sizes[j],p=p[0][:-1]/sum(p[0][:-1]))) ]
             trajectories[-1] = trajectories[-1][:-1] + X[-1]       
         
         return trajectories, states
@@ -211,7 +211,7 @@ def hybrid_info(trajectories, alpha):
 
     return {"AIC": AIC, "WAIC1": WAIC1, "WAIC2": WAIC2, "LOO": LOO}
 
-def evaluate_models(trajectories, states, alpha=1, qbounds=(1, 8)):
+def evaluate_models(trajectories, states, alpha=1, qbounds=(0, 8)):
     WAIC1 = {}
     WAIC2 = {}
     DIC1 = {}
