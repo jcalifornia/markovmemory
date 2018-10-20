@@ -213,7 +213,7 @@ def hybrid_info(trajectories, alpha):
 
     return {"AIC": AIC, "WAIC1": WAIC1, "WAIC2": WAIC2, "LOO": LOO}
 
-def evaluate_models(trajectories, states, alpha=1, qbounds=(1, 8)):
+def evaluate_models(trajectories, states, alpha=1, qbounds=(0, 8)):
     WAIC1 = {}
     WAIC2 = {}
     DIC1 = {}
