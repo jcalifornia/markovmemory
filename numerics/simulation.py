@@ -6,7 +6,7 @@ if sys.version_info[0] != 3 or sys.version_info[1] < 6:
 
 from numpy.random import dirichlet, choice
 from itertools import product
-from string import ascii_uppercase
+from string import ascii_uppercase, ascii_lowercase
 from collections import defaultdict
 from functools import partial
 from scipy.special import gammaln, polygamma
@@ -23,6 +23,8 @@ import argparse
 
 np.seterr(divide='ignore')
 
+state_syms = ascii_uppercase + ascii_lowercase
+
 
 def dict_to_mat(dictdata):
     return np.array([val for val in dictdata.values()])
@@ -31,14 +33,14 @@ def dict_to_mat(dictdata):
 def simulate(num_states, q, alpha, num_trajectories = 100, max_length = 100):
     # simulates trajectories up to a maximum size
     
-    states = [m for m in ascii_uppercase[:num_states]]
+    states = [m for m in state_syms[:num_states]]
     if q == 0:
         X = list(states)
         p = dirichlet(alpha*np.ones(num_states),1)
         trajectories = []
         sizes = negative_binomial(1,p[0][-1],num_trajectories)
         for j in range(num_trajectories):
-            trajectories +=  ["A" + "".join(choice(X[:-1],sizes[j],p=p[0][:-1]/sum(p[0][:-1]))) ]
+            trajectories +=  ["".join(choice(X[:-1],sizes[j],p=p[0][:-1]/sum(p[0][:-1]))) ]
             trajectories[-1] = trajectories[-1][:-1] + X[-1]       
         
         return trajectories, states
@@ -55,7 +57,7 @@ def simulate(num_states, q, alpha, num_trajectories = 100, max_length = 100):
     X = list(pad_states)
     X.extend(X0)
     p = dirichlet(alpha*np.ones(num_states),len(X)) # also pad with boundary conditions
-    states = [m for m in ascii_uppercase[:num_states]]
+    states = [m for m in state_syms[:num_states]]
     trajectories = []
     for j in range(num_trajectories):
         trajectories += ["".join(["0"]*(q-1)+["A"])]
@@ -217,6 +219,7 @@ def evaluate_models(trajectories, states, alpha=1, qbounds=(1, 8)):
     DIC1 = {}
     DIC2 = {}
     AIC = {}
+    BIC = {}
 
     kWAIC1 = {}
     kWAIC2 = {}
@@ -366,6 +369,7 @@ def evaluate_models(trajectories, states, alpha=1, qbounds=(1, 8)):
         WAIC1[q] = -2 * (cumulative_lppd - kWAIC1[q])
         WAIC2[q] = -2 * (cumulative_lppd - kWAIC2[q])
         kAIC = totalcountmatrix.shape[0] * (totalcountmatrix.shape[1] - 1)
+        BIC[q] = -2 * Nlogp_MLE + np.log(np.sum(totalcountmatrix))*kAIC
         AIC[q] = -2 * Nlogp_MLE + 2 * kAIC
         LPPD[q] = -2 * (cumulative_lppd)
         LOO[q] = -2 * (cumulative_loo)
@@ -379,7 +383,7 @@ def evaluate_models(trajectories, states, alpha=1, qbounds=(1, 8)):
         LPPDCV2[q] = -2 * (cumulative_cv2)
 
     return {"WAIC1": WAIC1, "WAIC2": WAIC2, "LOO": LOO, "LPPDCV2": LPPDCV2,
-            "DIC1": DIC1, "DIC2": DIC2, "AIC": AIC, "LPPD": LPPD, "LPD": LPD,
+        "DIC1": DIC1, "DIC2": DIC2, "AIC": AIC, "BIC": BIC, "LPPD": LPPD, "LPD": LPD,
             "kWAIC1": kWAIC1, "kWAIC2": kWAIC2, "kDIC1": kDIC1, "kDIC2": kDIC2}
 
 
