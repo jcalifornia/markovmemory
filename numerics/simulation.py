@@ -275,7 +275,7 @@ def evaluate_models(trajectories, states, alpha=1, qbounds=(0, 8)):
             #        # if x[-1] == '0' and len(x)>1: continue
             #    m = states.index(trajectory[l])
 
-
+        Nj = defaultdict(partial(np.zeros, len(states)))
         for j, trajectory in enumerate(trajectories):
             traj = "".join(['0'] * (q)) + trajectory
             qgrams = ngrams(traj,q+1)
@@ -285,7 +285,7 @@ def evaluate_models(trajectories, states, alpha=1, qbounds=(0, 8)):
                 m = key[q]
                 Nj[x][states.index(m)] += val
 
-            #Nj = defaultdict(partial(np.zeros, len(states)))
+            #
             #for l in range(q, len(trajectory)):
             #    if q == 0:
             #        x = ''
