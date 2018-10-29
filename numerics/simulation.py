@@ -15,11 +15,13 @@ from numpy.random import poisson, negative_binomial
 import re
 
 import numpy as np
-from numpy import log 
+from numpy import log
 from numpy import inf
 from joblib import Parallel, delayed
 import multiprocessing
 import argparse
+from nltk.util import ngrams
+import collections
 
 np.seterr(divide='ignore')
 
@@ -32,7 +34,7 @@ def dict_to_mat(dictdata):
 
 def simulate(num_states, q, alpha, num_trajectories = 100, max_length = 100):
     # simulates trajectories up to a maximum size
-    
+
     states = [m for m in state_syms[:num_states]]
     if q == 0:
         X = list(states)
@@ -41,19 +43,19 @@ def simulate(num_states, q, alpha, num_trajectories = 100, max_length = 100):
         sizes = negative_binomial(1,p[0][-1],num_trajectories)
         for j in range(num_trajectories):
             trajectories +=  ["".join(choice(X[:-1],sizes[j],p=p[0][:-1]/sum(p[0][:-1]))) ]
-            trajectories[-1] = trajectories[-1][:-1] + X[-1]       
-        
+            trajectories[-1] = trajectories[-1][:-1] + X[-1]
+
         return trajectories, states
-        
+
     X0 = ["".join(x) for x in product(states,repeat=q) if states[-1] not in x[:-1] ]
 
     pad_states = set()
-    
+
     for j in range(q-2):
         pad_states |= set(["".join(["0"]*(j+1) + ["A"] +[x[:-(j+2)]]) for x in X0])
 
     pad_states.add("".join(["0"]*(q-1)+["A"]))
-    
+
     X = list(pad_states)
     X.extend(X0)
     p = dirichlet(alpha*np.ones(num_states),len(X)) # also pad with boundary conditions
@@ -69,7 +71,7 @@ def simulate(num_states, q, alpha, num_trajectories = 100, max_length = 100):
             current_state = r[0]
         # de-pad the trajectories
         trajectories[j] = trajectories[j][(q-1):]
-            
+
     return trajectories,states
 
 def simulate_freethrows(model, poisson_rate, n_games):
@@ -98,18 +100,26 @@ def infer_model(trajectories,states,alpha,q):
     J = len(trajectories)
     for trajectory in trajectories:
         traj = "".join(['0']*(q) ) +trajectory
-        for l in range(q,len(traj)):
-            if q==0: x = ''
-            else:
-                x = traj[(l-q):(l)]
-            m = states.index(traj[l])
-            N[x][m] += 1
-            
+        # count n-grams for n = q + 1
+        qgrams = ngrams(traj,q+1)
+        gramcounts = collections.Counter(qgrams)
+        for key, val in gramcounts.items():
+            x = "".join(key[:q])
+            m = key[q]
+            N[x][m] += val
+
+        #for l in range(q,len(traj)):
+        #    if q==0: x = ''
+        #    else:
+        #        x = traj[(l-q):(l)]
+        #    m = states.index(traj[l])
+        #    N[x][m] += 1
+
     probs = defaultdict(partial(np.zeros,len(states)))
     for key, val in N.items():
         if sum(N[key])>0:
             probs[key] = (N[key]+alpha)/(np.sum(N[key]) + alpha*len(states))
-        
+
     return probs, N
 
 
@@ -247,28 +257,42 @@ def evaluate_models(trajectories, states, alpha=1, qbounds=(0, 8)):
         J = len(trajectories)
 
         for j, trajectory in enumerate(trajectories):
-            trajectory = "".join(['0'] * (q)) + trajectory
-            for l in range(q, len(trajectory)):
-                if q == 0:
-                    x = ''
-                else:
-                    x = trajectory[(l - q):(l)]
-                    # if x[-1] == '0' and len(x)>1: continue
-                m = states.index(trajectory[l])
-                N[q][x][m] += 1
+            traj = "".join(['0'] * (q)) + trajectory
+            qgrams = ngrams(traj,q+1)
+            gramcounts = collections.Counter(qgrams)
+            for key, val in gramcounts.items():
+                x = "".join(key[:q])
+                m = key[q]
+                N[q][x][states.index(m)] += val
                 if j < J / 2:
-                    N2[q][x][m] += 1
+                    N2[q][x][states.index(m)] += val
+
+            #for l in range(q, len(trajectory)):
+            #    if q == 0:
+            #        x = ''
+            #    else:
+            #        x = trajectory[(l - q):(l)]
+            #        # if x[-1] == '0' and len(x)>1: continue
+            #    m = states.index(trajectory[l])
+
 
         for j, trajectory in enumerate(trajectories):
-            trajectory = "".join(['0'] * (q)) + trajectory
-            Nj = defaultdict(partial(np.zeros, len(states)))
-            for l in range(q, len(trajectory)):
-                if q == 0:
-                    x = ''
-                else:
-                    x = trajectory[(l - q):(l)]
-                    # if x[-1] == '0' and len(x)>1: continue
-                Nj[x][states.index(trajectory[l])] += 1
+            traj = "".join(['0'] * (q)) + trajectory
+            qgrams = ngrams(traj,q+1)
+            gramcounts = collections.Counter(qgrams)
+            for key, val in gramcounts.items():
+                x = "".join(key[:q])
+                m = key[q]
+                Nj[x][states.index(m)] += val
+
+            #Nj = defaultdict(partial(np.zeros, len(states)))
+            #for l in range(q, len(trajectory)):
+            #    if q == 0:
+            #        x = ''
+            #    else:
+            #        x = trajectory[(l - q):(l)]
+            #        # if x[-1] == '0' and len(x)>1: continue
+            #    Nj[x][states.index(trajectory[l])] += 1
 
             thiscountmatrix = []
             globalcountmatrix = []
