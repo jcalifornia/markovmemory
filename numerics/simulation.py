@@ -15,7 +15,7 @@ from numpy.random import poisson, negative_binomial
 import re
 
 import numpy as np
-from numpy import log 
+from numpy import log
 from numpy import inf
 from joblib import Parallel, delayed
 import multiprocessing
@@ -32,7 +32,7 @@ def dict_to_mat(dictdata):
 
 def simulate(num_states, q, alpha, num_trajectories = 100, max_length = 100):
     # simulates trajectories up to a maximum size
-    
+
     states = [m for m in state_syms[:num_states]]
     if q == 0:
         X = list(states)
@@ -41,19 +41,19 @@ def simulate(num_states, q, alpha, num_trajectories = 100, max_length = 100):
         sizes = negative_binomial(1,p[0][-1],num_trajectories)
         for j in range(num_trajectories):
             trajectories +=  ["".join(choice(X[:-1],sizes[j],p=p[0][:-1]/sum(p[0][:-1]))) ]
-            trajectories[-1] = trajectories[-1][:-1] + X[-1]       
-        
+            trajectories[-1] = trajectories[-1][:] + X[-1]       
+
         return trajectories, states
-        
+
     X0 = ["".join(x) for x in product(states,repeat=q) if states[-1] not in x[:-1] ]
 
     pad_states = set()
-    
+
     for j in range(q-2):
         pad_states |= set(["".join(["0"]*(j+1) + ["A"] +[x[:-(j+2)]]) for x in X0])
 
     pad_states.add("".join(["0"]*(q-1)+["A"]))
-    
+
     X = list(pad_states)
     X.extend(X0)
     p = dirichlet(alpha*np.ones(num_states),len(X)) # also pad with boundary conditions
@@ -69,7 +69,7 @@ def simulate(num_states, q, alpha, num_trajectories = 100, max_length = 100):
             current_state = r[0]
         # de-pad the trajectories
         trajectories[j] = trajectories[j][(q-1):]
-            
+
     return trajectories,states
 
 def simulate_freethrows(model, poisson_rate, n_games):
@@ -104,12 +104,12 @@ def infer_model(trajectories,states,alpha,q):
                 x = traj[(l-q):(l)]
             m = states.index(traj[l])
             N[x][m] += 1
-            
+
     probs = defaultdict(partial(np.zeros,len(states)))
     for key, val in N.items():
         if sum(N[key])>0:
             probs[key] = (N[key]+alpha)/(np.sum(N[key]) + alpha*len(states))
-        
+
     return probs, N
 
 
@@ -209,9 +209,10 @@ def hybrid_info(trajectories, alpha):
     WAIC1 = -2 * (cumulative_lppd - kWAIC1)
     WAIC2 = -2 * (cumulative_lppd - kWAIC2)
     AIC = -2 * Nlogp_MLE + 2 * kAIC
+    BIC = -2 * Nlogp_MLE + np.log(np.sum(globalcounts)) * kAIC
     LOO = -2 * (cumulative_loo)
 
-    return {"AIC": AIC, "WAIC1": WAIC1, "WAIC2": WAIC2, "LOO": LOO}
+    return {"AIC": AIC, "BIC": BIC, "WAIC1": WAIC1, "WAIC2": WAIC2, "LOO": LOO}
 
 def evaluate_models(trajectories, states, alpha=1, qbounds=(0, 8)):
     WAIC1 = {}
@@ -405,11 +406,11 @@ def main():
             sys.exit(2)
 
     parser = MyParser()
-    parser.add_argument("-q", "--hysteresis", dest="q",
+    parser.add_argument("-h", "--hysteresis", dest="h",
                         help="Real hysteresis", metavar="HYST")
 
     results = parser.parse_args()
-    hysteresis = results.q if results.q is not None else 2
+    hysteresis = results.h if results.h is not None else 2
 
     num_cores = multiprocessing.cpu_count()
     results = Parallel(n_jobs=num_cores)(delayed(process_q)() for q in range(10000))
